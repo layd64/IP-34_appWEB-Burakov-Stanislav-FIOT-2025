@@ -1,0 +1,699 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FFF6E8;
+    color: #000000;
+    line-height: 1.6;
+}
+
+/* Improve default text sizing on small screens */
+@media (max-width: 375px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+/* Container for centering content */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header styles */
+header {
+    background-color: #FFF6E8;
+    padding: 20px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #000000;
+    font-family: 'Inria Serif', serif;
+}
+
+/* Make the logo behave like a link */
+.logo a {
+    text-decoration: none;
+}
+
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 60px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: normal;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #F7A823;
+}
+
+/* Hero section */
+.hero {
+    padding: 50px 0;
+    background-color: #FFF6E8;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    gap: 60px;
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.hero-text h2 {
+    font-size: 128px;
+    font-weight: bold;
+    color: #000000;
+    font-family: 'Inria Serif', serif;
+}
+
+.hero-text h3 {
+    font-size: 20px;
+    color: #000000;
+    font-weight: normal;
+}
+
+.hero-text p {
+    font-size: 18px;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.button-container {
+    position: relative;
+    display: inline-block;
+}
+
+.button-container::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: -8px;
+    bottom: -8px;
+    background-color: #CC7A29;
+    z-index: 1;
+}
+
+.hero-content button {
+    background-color: #F7A823;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content button:hover {
+    background-color: #e6951f;
+}
+
+.hero-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image {
+    max-width: 100%;
+    height: auto;
+    height: 500px;
+    object-fit: cover;
+}
+
+/* Featured books section */
+.featured-books {
+    padding: 30px 0;
+    background-color: #FFF6E8;
+}
+
+.featured-books h2 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 50px;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(24px, 5vw, 100px);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.book-card {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+}
+
+.book-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.book-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.book-card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.book-author {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.book-card button {
+    background-color: #F7A823;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.book-card button:hover {
+    background-color: #e6951f;
+}
+
+/* Categories section */
+.categories {
+    padding: 30px 0;
+    background-color: #FFF6E8;
+}
+
+.categories h2 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 50px;
+}
+
+.categories-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.categories-list h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.categories-list ul {
+    list-style: none;
+}
+
+.categories-list li {
+    padding: 8px 0;
+    color: #000000;
+    font-size: 16px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.categories-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #000000;
+    font-weight: bold;
+}
+
+/* Make genre items look like links with hover effect */
+.categories-list li a {
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.categories-list li a:hover {
+    color: #F7A823;
+    transform: translateX(2px);
+}
+
+.bestsellers-table {
+    background-color: white;
+    padding: 30px 50px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.bestsellers-table h3 {
+    font-size: 24px;
+    font-weight: 300;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.bestsellers-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.bestsellers-table th {
+    background-color: #F7A823;
+    color: white;
+    padding: 15px 10px;
+    font-weight: 300;
+    font-size: 18px;
+}
+
+.bestsellers-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #000000;
+    font-size: 14px;
+}
+
+.bestsellers-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Reading statistics section */
+.reading-stats {
+    padding: 30px 0;
+    background-color: #FFF6E8;
+}
+
+.reading-stats h2 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 30px;
+}
+
+.stats-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px 50px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.stats-content h3 {
+    font-size: 24px;
+    font-weight: 300;
+    color: #000000;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.reading-stats table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.reading-stats td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #000000;
+    font-size: 16px;
+}
+
+.reading-stats tr:last-child td {
+    border-bottom: none;
+}
+
+/* Newsletter section */
+.newsletter {
+    background-color: #FFF6E8;
+    padding: 30px 0 90px 0;
+    text-align: center;
+}
+
+.newsletter h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.newsletter h3 {
+    font-size: 20px;
+    color: white;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.newsletter-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.newsletter-container::before {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    right: -14px;
+    bottom: -14px;
+    background-color: #CC7A29;
+    z-index: 1;
+}
+
+.newsletter-form {
+    padding: 40px 130px;
+    background-color: #F7A823;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    color: white;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    background-color: white;
+    color: #000000;
+}
+
+.form-group input::placeholder {
+    color: #F7A823;
+}
+
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+}
+
+.form-group label:has(input[type="checkbox"]) {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 14px;
+}
+
+.newsletter button {
+    background-color: #2A1C06;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.newsletter button:hover {
+    background-color: #1d1304;
+}
+
+/* Footer */
+footer {
+    background-color: #382D21;
+    color: white;
+    padding: 60px 0 40px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.footer-section p {
+    opacity: 60%;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    opacity: 60%;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    opacity: 100%;
+}
+
+
+
+
+
+
+
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .books-grid {
+        gap: 60px;
+    }
+    .categories-content {
+        gap: 40px;
+    }
+    .reading-stats {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* Tablets landscape/portrait */
+@media (max-width: 992px) {
+    nav {
+        padding: 0 16px;
+    }
+    .nav-links {
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+    .hero-text h1 {
+        font-size: 72px;
+    }
+    .hero-content {
+        gap: 32px;
+    }
+    .books-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        padding: 0 50px;
+    }
+    .book-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 4;
+    }
+    .categories-content {
+        grid-template-columns: 1fr;
+    }
+    .categories-list {
+        text-align: center;
+    }
+    .categories-list ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+    }
+    /* Make category arrows sit next to the text when centered */
+    .categories-list li {
+        padding-left: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    .categories-list li::before {
+        position: static;
+        margin-right: 0;
+    }
+    .stats-content {
+        overflow-x: auto;
+    }
+
+    .newsletter-form {
+        padding: 32px 48px;
+    }
+}
+
+/* Phones */
+@media (max-width: 768px) {
+    header {
+        border-bottom: 1px solid #757575;
+    }
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    .logo h1 {
+        font-size: 28px;
+    }
+    .nav-links {
+        gap: 12px;
+        flex-wrap: wrap;
+        font-size: 16px;
+    }
+    .hero {
+        padding: 0;
+    }
+    .hero-content {
+        padding: 0;
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-text h1 {
+        font-size: 42px;
+    }
+    .hero-image {
+        height: 300px;
+    }
+    .books-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    .book-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 4;
+    }
+    .bestsellers-table {
+        padding: 20px;
+        overflow-x: auto;
+    }
+    .reading-stats td {
+        padding: 12px 10px;
+        font-size: 14px;
+
+    }
+    .newsletter-container{
+        padding: 0 20px;
+    }
+    .newsletter-container::before{
+        top: 10px;
+        left: 30px;
+        right: 10px;
+        bottom: -10px;
+    }
+    .newsletter h2 {
+        font-size: 28px;
+    }
+    .newsletter h3 {
+        font-size: 16px;
+    }
+    .newsletter-form {
+        padding: 24px;
+    }
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .hero-text h3 { font-size: 16px; }
+    .hero-text p { font-size: 16px; }
+    .book-price { font-size: 20px; }
+    .book-card h3 { font-size: 16px; }
+    .button-container::before {
+        top: 6px; left: 6px; right: -6px; bottom: -6px;
+    }
+}

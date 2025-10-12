@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookStore Pro - Ваша цифрова бібліотека</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <nav>
             <div class="logo">
-                <h1>BookStore Pro</h1>
+                <a href="#" aria-label="Go to home">
+                    <h1>BookStore Pro</h1>
+                </a>
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Головна</a></li>
@@ -24,13 +31,15 @@
         <section id="home" class="hero">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Welcome!</h1>
+                    <h2>Welcome!</h2>
                     <h3>Ласкаво просимо до BookStore Pro!</h3>
                     <p>Ваш найкращий цифровий досвід читання.</p>
+                    <div class="button-container">
+                        <button type="catalogue">Перейти до каталогу</button>
+                    </div>
                 </div>
-                <button type="catalogue">Перейти до каталогу</button>
                 <div class="hero-image-container">
-                    <img src="assets/stackOfBooks.png" alt="Modern Library Interior" class="hero-image">
+                    <img src="assets/stackOfBooks2.png" alt="Modern Library Interior" class="hero-image">
                 </div>
             </div>
         </section>
@@ -39,28 +48,25 @@
             <h2>Рекомендовані книги</h2>
             <div class="books-grid">
                 <div class="book-card">
-                    <img src="assets/book1.webp" alt="Book Cover 1" class="book-image">
+                    <img src="assets/kobzar.png" alt="Book Cover 1" class="book-image">
+                    <p class="book-price">300 грн</p>
                     <h3>Кобзар</h3>
-                    <div class="book-details">
-                        <p class="book-author">Т.Шевченко</p>
-                        <p class="book-price">300 грн</p>
-                    </div>
+                    <p class="book-author">Т. Шевченко</p>
+                    <button>В КОРЗИНУ</button>
                 </div>
                 <div class="book-card">
                     <img src="assets/book2.png" alt="Book Cover 2" class="book-image">
+                    <p class="book-price">450 грн</p>
                     <h3>Кайдашева сім'я</h3>
-                    <div class="book-details">
-                        <p class="book-author">І. Нечуй-Левицький</p>
-                        <p class="book-price">450 грн</p>
-                    </div>
+                    <p class="book-author">І. Нечуй-Левицький</p>
+                    <button>В КОРЗИНУ</button>
                 </div>
                 <div class="book-card">
                     <img src="assets/book3.png" alt="Book Cover 3" class="book-image">
+                    <p class="book-price">249 грн</p>
                     <h3>Енеїда</h3>
-                    <div class="book-details">
-                        <p class="book-author">І. Котляревський</p>
-                        <p class="book-price">249 грн</p>
-                    </div>
+                    <p class="book-author">І. Котляревський</p>
+                    <button>В КОРЗИНУ</button>
                 </div>
             </div>
         </section>
@@ -71,12 +77,12 @@
                 <div class="categories-list">
                     <h3>Популярні жанри</h3>
                     <ul>
-                        <li>Художня література</li>
-                        <li>Наукова фантастика</li>
-                        <li>Детективи та трилери</li>
-                        <li>Романтика</li>
-                        <li>Біографії</li>
-                        <li>Саморозвиток</li>
+                        <li><a href="#">Художня література</a></li>
+                        <li><a href="#">Наукова фантастика</a></li>
+                        <li><a href="#">Детективи та трилери</a></li>
+                        <li><a href="#">Романтика</a></li>
+                        <li><a href="#">Біографії</a></li>
+                        <li><a href="#">Саморозвиток</a></li>
                     </ul>
                 </div>
                 
@@ -85,10 +91,10 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Рейтинг</th>
-                                <th>Назва</th>
-                                <th>Автор</th>
-                                <th>Оцінка</th>
+                                <th>РЕЙТИНГ</th>
+                                <th>НАЗВА</th>
+                                <th>АВТОР</th>
+                                <th>ОЦІНКА</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -102,7 +108,7 @@
                                 <td>2</td>
                                 <td>Таємниця океану</td>
                                 <td>Майкл Чен</td>
-                                <td>⭐⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐</td>
                             </tr>
                             <tr>
                                 <td>3</td>
@@ -166,21 +172,22 @@
         </section>
 
         <section class="newsletter">
-            <h2>Залишайтесь в курсі</h2>
-            <h3>Підпишіться на нашу розсилку</h3>
-            <form class="newsletter-form" action="#" method="POST">
+            <div class="newsletter-container">
+                <form class="newsletter-form" action="#" method="POST">
+                <h2>Залишайтеся в курсі</h2>
+                <h3>Підпишіться на нашу розсилку</h3>
                 <div class="form-group">
-                    <label for="name">Повне ім'я:</label>
+                    <label for="name">Повне ім'я</label>
                     <input type="text" id="name" name="name" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">Адреса електронної пошти:</label>
+                    <label for="email">Електрона пошта</label>
                     <input type="email" id="email" name="email" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="interests">Інтереси читання:</label>
+                    <label for="interests">Інтереси читання</label>
                     <select id="interests" name="interests">
                         <option value="fiction">Художня література</option>
                         <option value="non-fiction">Нехудожня література</option>
@@ -207,7 +214,8 @@
                 </div>
                 
                 <button type="submit">Підписатися зараз!</button>
-            </form>
+                </form>
+            </div>
         </section>
 
     </main>

@@ -534,7 +534,9 @@ footer {
     opacity: 100%;
 }
 
-
+.about-content {
+    padding: 0 50px;
+}
 
 
 
@@ -564,7 +566,7 @@ footer {
         gap: 24px;
         flex-wrap: wrap;
     }
-    .hero-text h1 {
+    .hero-text h2 {
         font-size: 72px;
     }
     .hero-content {

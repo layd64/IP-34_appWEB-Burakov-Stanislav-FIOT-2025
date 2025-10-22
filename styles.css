@@ -644,8 +644,8 @@ footer {
     }
 }
 
-/* Tablets landscape/portrait */
-@media (max-width: 992px) {
+/* Tablets */
+@media (max-width: 992px), (orientation: landscape) {
     nav {
         padding: 0 1rem;
     }

@@ -789,7 +789,7 @@ footer {
 }
 
 /* Small phones */
-@media (max-width: 480px) {
+@media (max-width: 321px) {
     .hero-text h3 { font-size: 1rem; }
     .hero-text p { font-size: 1rem; }
     .book-price { font-size: 1.25rem; }

@@ -25,30 +25,27 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // ============================================
-    // Делегування подій для модального вікна
-    // ============================================
-
+    // Event delegation for modal window
     const modal = document.getElementById('bookModal');
     const modalBackdrop = document.querySelector('.modal-backdrop');
     const modalClose = document.querySelector('.modal-close');
     const booksGrid = document.querySelector('.books-grid');
 
-    // Отримання елементів модального вікна для заповнення даними
+    // Get modal window elements for populating with data
     const modalImage = document.getElementById('modalImage');
     const modalPrice = document.getElementById('modalPrice');
     const modalTitle = document.getElementById('modalTitle');
     const modalAuthor = document.getElementById('modalAuthor');
     const modalDescription = document.getElementById('modalDescription');
 
-    // Делегування події click на батьківському елементі .books-grid
+    // Delegate click event on parent element .books-grid
     booksGrid.addEventListener('click', function (event) {
-        // Знаходимо найближчу book-card, якщо клік відбувся всередині неї
+        // Find the closest book-card if click happened inside it
         const bookCard = event.target.closest('.book-card');
 
-        // Перевіряємо, що клік був на book-card і не на кнопці "В КОРЗИНУ"
+        // Check that click was on book-card and not on the "ADD TO CART" button
         if (bookCard && !event.target.closest('button')) {
-            // Отримуємо дані з книжкової картки
+            // Get data from book card
             const image = bookCard.querySelector('.book-image').src;
             const imageAlt = bookCard.querySelector('.book-image').alt;
             const price = bookCard.querySelector('.book-price').textContent;
@@ -56,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const author = bookCard.querySelector('.book-author').textContent;
             const description = bookCard.getAttribute('data-description');
 
-            // Заповнюємо модальне вікно даними
+            // Populate modal window with data
             modalImage.src = image;
             modalImage.alt = imageAlt;
             modalPrice.textContent = price;
@@ -64,27 +61,27 @@ document.addEventListener('DOMContentLoaded', function () {
             modalAuthor.textContent = author;
             modalDescription.textContent = description;
 
-            // Відкриваємо модальне вікно
+            // Open modal window
             modal.classList.add('active');
-            // Блокуємо прокрутку body коли модалка відкрита
+            // Block body scroll when modal is open
             document.body.style.overflow = 'hidden';
         }
     });
 
-    // Функція закриття модального вікна
+    // Function to close modal window
     function closeModal() {
         modal.classList.remove('active');
-        // Відновлюємо прокрутку body
+        // Restore body scroll
         document.body.style.overflow = '';
     }
 
-    // Закриття модалки при кліку на кнопку закриття
+    // Close modal on close button click
     modalClose.addEventListener('click', closeModal);
 
-    // Закриття модалки при кліку на backdrop (темний фон)
+    // Close modal on backdrop click (dark background)
     modalBackdrop.addEventListener('click', closeModal);
 
-    // Закриття модалки при натисканні клавіші Escape
+    // Close modal when pressing Escape key
     document.addEventListener('keydown', function (event) {
         if (event.key === 'Escape' && modal.classList.contains('active')) {
             closeModal();

@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="uk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookStore Pro - Ваша цифрова бібліотека</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
         <nav>
@@ -64,21 +68,24 @@
         <section id="books" class="featured-books">
             <h2>Рекомендовані книги</h2>
             <div class="books-grid">
-                <div class="book-card">
+                <div class="book-card"
+                    data-description="Збірка віршів видатного українського поета Тараса Шевченка. 'Кобзар' є символом боротьби українського народу за свободу і незалежність, втіленням народної мудрості та духовності.">
                     <img src="assets/kobzar.png" alt="Book Cover 1" class="book-image">
                     <p class="book-price">300 грн</p>
                     <h3>Кобзар</h3>
                     <p class="book-author">Т. Шевченко</p>
                     <button>В КОРЗИНУ</button>
                 </div>
-                <div class="book-card">
+                <div class="book-card"
+                    data-description="Соціально-побутова повість Івана Нечуя-Левицького про непросте життя селянської родини. Гумористичний та водночас драматичний твір, що розкриває традиції та звичаї українського села XIX століття.">
                     <img src="assets/book2.png" alt="Book Cover 2" class="book-image">
                     <p class="book-price">450 грн</p>
                     <h3>Кайдашева сім'я</h3>
                     <p class="book-author">І. Нечуй-Левицький</p>
                     <button>В КОРЗИНУ</button>
                 </div>
-                <div class="book-card">
+                <div class="book-card"
+                    data-description="Іван Котляревський створив травестійну поему на основі 'Енеїди' Вергілія. Це перший твір написаний живою українською мовою, що поклав початок новій українській літературі. Гумористичний твір про пригоди троянців.">
                     <img src="assets/book3.png" alt="Book Cover 3" class="book-image">
                     <p class="book-price">249 грн</p>
                     <h3>Енеїда</h3>
@@ -102,7 +109,7 @@
                         <li><a href="#">Саморозвиток</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="bestsellers-table">
                     <h3>Бестселери цього місяця</h3>
                     <table>
@@ -155,7 +162,7 @@
             <h2>Статистика читання</h2>
             <div class="stats-content">
                 <h3>Країни-лідери за читанням</h3>
-                
+
                 <table>
                     <tbody>
                         <tr>
@@ -191,51 +198,69 @@
         <section class="newsletter">
             <div class="newsletter-container">
                 <form class="newsletter-form" action="#" method="POST">
-                <h2>Залишайтеся в курсі</h2>
-                <h3>Підпишіться на нашу розсилку</h3>
-                <div class="form-group">
-                    <label for="name">Повне ім'я</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Електрона пошта</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="interests">Інтереси читання</label>
-                    <select id="interests" name="interests">
-                        <option value="fiction">Художня література</option>
-                        <option value="non-fiction">Нехудожня література</option>
-                        <option value="sci-fi">Наукова фантастика</option>
-                        <option value="mystery">Детективи</option>
-                        <option value="romance">Романтика</option>
-                        <option value="biography">Біографії</option>
-                        <option value="all">Всі жанри</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" name="notifications" value="yes">
-                        Я хочу отримувати сповіщення про нові видання
-                    </label>
-                </div>
-                
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" name="promotions" value="yes">
-                        Я хочу отримувати рекламні пропозиції
-                    </label>
-                </div>
-                
-                <button type="submit">Підписатися зараз!</button>
+                    <h2>Залишайтеся в курсі</h2>
+                    <h3>Підпишіться на нашу розсилку</h3>
+                    <div class="form-group">
+                        <label for="name">Повне ім'я</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Електрона пошта</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interests">Інтереси читання</label>
+                        <select id="interests" name="interests">
+                            <option value="fiction">Художня література</option>
+                            <option value="non-fiction">Нехудожня література</option>
+                            <option value="sci-fi">Наукова фантастика</option>
+                            <option value="mystery">Детективи</option>
+                            <option value="romance">Романтика</option>
+                            <option value="biography">Біографії</option>
+                            <option value="all">Всі жанри</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="notifications" value="yes">
+                            Я хочу отримувати сповіщення про нові видання
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="promotions" value="yes">
+                            Я хочу отримувати рекламні пропозиції
+                        </label>
+                    </div>
+
+                    <button type="submit">Підписатися зараз!</button>
                 </form>
             </div>
         </section>
 
     </main>
+
+    <!-- Modal Window -->
+    <div id="bookModal" class="modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Book Cover" class="modal-image">
+                <div class="modal-info">
+                    <p id="modalPrice" class="modal-price"></p>
+                    <h2 id="modalTitle" class="modal-title"></h2>
+                    <p id="modalAuthor" class="modal-author"></p>
+                    <p id="modalDescription" class="modal-description"></p>
+                    <button class="modal-cart-btn">В КОРЗИНУ</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-content">
@@ -262,4 +287,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

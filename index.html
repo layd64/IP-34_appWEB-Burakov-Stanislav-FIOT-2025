@@ -28,6 +28,11 @@
                 <li><a href="#categories">Категорії</a></li>
                 <li><a href="about.html">Опис</a></li>
                 <li><a href="prak4.html">Прак. 4</a></li>
+                <li>
+                    <a href="#" id="cartBtn" class="cart-btn">
+                        Кошик <span id="cartCount" class="cart-count">0</span>
+                    </a>
+                </li>
             </ul>
             <div class="burger-menu">
                 <div class="burger-icon">
@@ -44,6 +49,7 @@
                 <li><a href="#categories">Категорії</a></li>
                 <li><a href="about.html">Опис</a></li>
                 <li><a href="prak4.html">Прак 4</a></li>
+                <li><a href="#" id="mobileCartBtn">Кошик <span id="mobileCartCount">(0)</span></a></li>
             </ul>
         </div>
     </header>
@@ -74,7 +80,7 @@
                     <p class="book-price">300 грн</p>
                     <h3>Кобзар</h3>
                     <p class="book-author">Т. Шевченко</p>
-                    <button>В КОРЗИНУ</button>
+                    <button>В КОШИК</button>
                 </div>
                 <div class="book-card"
                     data-description="Соціально-побутова повість Івана Нечуя-Левицького про непросте життя селянської родини. Гумористичний та водночас драматичний твір, що розкриває традиції та звичаї українського села XIX століття.">
@@ -82,7 +88,7 @@
                     <p class="book-price">450 грн</p>
                     <h3>Кайдашева сім'я</h3>
                     <p class="book-author">І. Нечуй-Левицький</p>
-                    <button>В КОРЗИНУ</button>
+                    <button>В КОШИК</button>
                 </div>
                 <div class="book-card"
                     data-description="Іван Котляревський створив травестійну поему на основі 'Енеїди' Вергілія. Це перший твір написаний живою українською мовою, що поклав початок новій українській літературі. Гумористичний твір про пригоди троянців.">
@@ -90,7 +96,7 @@
                     <p class="book-price">249 грн</p>
                     <h3>Енеїда</h3>
                     <p class="book-author">І. Котляревський</p>
-                    <button>В КОРЗИНУ</button>
+                    <button>В КОШИК</button>
                 </div>
             </div>
         </section>
@@ -255,7 +261,29 @@
                     <h2 id="modalTitle" class="modal-title"></h2>
                     <p id="modalAuthor" class="modal-author"></p>
                     <p id="modalDescription" class="modal-description"></p>
-                    <button class="modal-cart-btn">В КОРЗИНУ</button>
+                    <button class="modal-cart-btn">В КОШИК</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content cart-modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="cart-modal-body">
+                <h2>Ваш Кошик</h2>
+                <div class="cart-items-container">
+                    <!-- Cart items will be populated here -->
+                    <p class="empty-cart-message">Ваш кошик порожній</p>
+                </div>
+                <div class="cart-pagination"></div>
+                <div class="cart-footer">
+                    <div class="cart-total">
+                        <span>Разом:</span>
+                        <span id="cartTotalAmount">0 грн</span>
+                    </div>
+                    <button class="checkout-btn">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
                 </div>
             </div>
         </div>

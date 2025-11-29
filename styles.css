@@ -1163,6 +1163,8 @@ footer {
     justify-content: space-between;
     align-items: center;
     padding-bottom: 0.5rem;
+    position: relative;
+    z-index: 10;
 }
 
 .slideshow-header h3 {
@@ -1198,6 +1200,8 @@ footer {
     padding: 1rem;
     background-color: #f5f5f5;
     border-radius: 0.5rem;
+    position: relative;
+    z-index: 10;
 }
 
 .control-group {
@@ -1236,7 +1240,7 @@ footer {
     align-items: center;
     min-height: 20rem;
     max-height: 40rem;
-    overflow: visible;
+    overflow: hidden;
 }
 
 .slideshow-content img {

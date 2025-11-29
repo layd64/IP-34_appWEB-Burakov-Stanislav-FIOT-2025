@@ -1,19 +1,19 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const buttons = document.querySelectorAll('.prak4-button');
-    
+
     // Завдання 1
-    buttons[0].addEventListener('click', function() {
+    buttons[0].addEventListener('click', function () {
         const value = prompt('Введіть число:');
-        
+
         if (value === null) {
             console.log('Введення скасовано');
             return;
         }
-        
+
         console.log(`Введене значення: ${value}`);
-        
+
         const numValue = Number(value);
-        
+
         if (isNaN(numValue)) {
             alert('Введено не числове значення');
         } else if (numValue < 0) {
@@ -24,13 +24,13 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Число дорівнює нулю');
         }
     });
-    
+
     // Завдання 2
-    buttons[1].addEventListener('click', function() {
+    buttons[1].addEventListener('click', function () {
         const number = prompt('Введіть число від 1 до 4:');
         let result;
-        
-        switch(number) {
+
+        switch (number) {
             case '1':
                 result = 'зима';
                 break;
@@ -46,29 +46,29 @@ document.addEventListener('DOMContentLoaded', function() {
             default:
                 result = 'невідомий місяць';
         }
-        
+
         console.log(`Результат: ${result}`);
         alert(`Результат: ${result}`);
     });
-    
+
     // Завдання 3
-    buttons[2].addEventListener('click', function() {
+    buttons[2].addEventListener('click', function () {
         const adminLogin = 'Admin';
         const adminPassword = 'admin123';
         const userLogin = 'User';
         const userPassword = 'user123';
-        
+
         const login = prompt('Введіть логін:');
-        
+
         console.log(`Введений логін: ${login}`);
-        
+
         if (login === null || login === '') {
             alert('Cancelled');
             return;
         }
-        
+
         const trimmedLogin = login.trim();
-        
+
         if (trimmedLogin === 'Admin') {
             const password = prompt('Введіть пароль:');
             if (password === adminPassword) {
@@ -91,110 +91,110 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('I don\'t know you');
         }
     });
-    
+
     // Завдання 4
-    buttons[3].addEventListener('click', function() {
+    buttons[3].addEventListener('click', function () {
         function makeTransaction(quantity, pricePerDroid) {
             const totalPrice = quantity * pricePerDroid;
             return `You ordered ${quantity} droids worth ${totalPrice} credits!`;
         }
-        
+
         const quantityInput = prompt('Введіть кількість дроїдів:');
         if (quantityInput === null) {
             alert('Операцію скасовано');
             return;
         }
-        
+
         const priceInput = prompt('Введіть ціну одного дроїда:');
         if (priceInput === null) {
             alert('Операцію скасовано');
             return;
         }
-        
+
         const quantity = Number(quantityInput);
         const pricePerDroid = Number(priceInput);
-        
+
         if (isNaN(quantity) || isNaN(pricePerDroid)) {
             alert('Будь ласка, введіть числові значення');
             return;
         }
-        
+
         const result = makeTransaction(quantity, pricePerDroid);
         console.log(result);
         alert(result);
     });
-    
+
     // Завдання 5
-    buttons[4].addEventListener('click', function() {
+    buttons[4].addEventListener('click', function () {
         function checkForSpam(message) {
             const lowerMessage = message.toLowerCase();
             return lowerMessage.includes('spam') || lowerMessage.includes('sale');
         }
-        
+
         const message = prompt('Введіть повідомлення для перевірки:');
-        
+
         if (message === null) {
             alert('Операцію скасовано');
             return;
         }
-        
+
         const hasSpam = checkForSpam(message);
         const result = hasSpam ? 'Знайдено заборонені слова (spam або sale)' : 'Заборонених слів не знайдено';
-        
+
         console.log(`Повідомлення: "${message}"`);
         console.log(`Результат перевірки: ${hasSpam}`);
         alert(result);
     });
-    
+
     // Завдання 6
-    buttons[5].addEventListener('click', function() {
+    buttons[5].addEventListener('click', function () {
         function filterArray(numbers, value) {
             const filteredArray = [];
-            
+
             for (let i = 0; i < numbers.length; i++) {
                 if (numbers[i] > value) {
                     filteredArray.push(numbers[i]);
                 }
             }
-            
+
             return filteredArray;
         }
-        
+
         const numbersInput = prompt('Введіть числа через кому (наприклад: 1, 2, 3, 4, 5):');
         if (numbersInput === null) {
             alert('Операцію скасовано');
             return;
         }
-        
+
         const valueInput = prompt('Введіть значення для фільтрації:');
         if (valueInput === null) {
             alert('Операцію скасовано');
             return;
         }
-        
+
         const numbersStrings = numbersInput.split(',').map(item => item.trim());
         const numbers = numbersStrings.map(Number);
         const value = Number(valueInput);
-        
+
         if (numbers.some(isNaN) || isNaN(value)) {
             alert('Будь ласка, введіть правильні числові значення');
             return;
         }
-        
+
         const filtered = filterArray(numbers, value);
         console.log('Початковий масив:', numbers);
         console.log('Значення для фільтрації:', value);
         console.log('Відфільтрований масив:', filtered);
         alert(`Результат: [${filtered.join(', ')}]`);
     });
-    
+
     // Завдання 7
-    buttons[6].addEventListener('click', function() {
+    buttons[6].addEventListener('click', function () {
         // Функція для знаходження мін/макс для парних/непарних індексів
         function findMinMaxForIndices(arr) {
             const evenValues = [];
             const oddValues = [];
-            
+
             for (let i = 0; i < arr.length; i++) {
                 if (i % 2 === 0) {
                     evenValues.push(arr[i]);
@@ -202,48 +202,48 @@ document.addEventListener('DOMContentLoaded', function() {
                     oddValues.push(arr[i]);
                 }
             }
-            
+
             const evenMax = evenValues.length > 0 ? Math.max(...evenValues) : null;
             const evenMin = evenValues.length > 0 ? Math.min(...evenValues) : null;
             const oddMax = oddValues.length > 0 ? Math.max(...oddValues) : null;
             const oddMin = oddValues.length > 0 ? Math.min(...oddValues) : null;
-            
+
             return { evenMax, evenMin, oddMax, oddMin };
         }
-        
+
         // Функція для сортування масиву в порядку спадання методом вибору
         function selectionSortDesc(arr) {
             const sortedArr = [...arr];
-            
+
             for (let i = 0; i < sortedArr.length - 1; i++) {
                 let maxIndex = i;
-                
+
                 for (let j = i + 1; j < sortedArr.length; j++) {
                     if (sortedArr[j] > sortedArr[maxIndex]) {
                         maxIndex = j;
                     }
                 }
-                
+
                 if (maxIndex !== i) {
                     [sortedArr[i], sortedArr[maxIndex]] = [sortedArr[maxIndex], sortedArr[i]];
                 }
             }
-            
+
             return sortedArr;
         }
-        
+
         const sizeInput = prompt('Введіть кількість елементів масиву:');
         if (sizeInput === null) {
             alert('Операцію скасовано');
             return;
         }
-        
+
         const size = Number(sizeInput);
         if (isNaN(size) || size <= 0) {
             alert('Будь ласка, введіть додатнє число');
             return;
         }
-        
+
         const arr = [];
         for (let i = 0; i < size; i++) {
             const elementInput = prompt(`Введіть елемент ${i + 1}:`);
@@ -258,28 +258,28 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             arr.push(element);
         }
-        
+
         console.log('Вхідний масив:', arr);
-        
+
         const { evenMax, evenMin, oddMax, oddMin } = findMinMaxForIndices(arr);
         console.log('Максимум серед парних індексів:', evenMax);
         console.log('Мінімум серед парних індексів:', evenMin);
         console.log('Максимум серед непарних індексів:', oddMax);
         console.log('Мінімум серед непарних індексів:', oddMin);
-        
+
         const sortedArr = selectionSortDesc(arr);
         console.log('Вихідний масив (відсортований):', sortedArr);
-        
+
         alert(`Вхідний масив: [${arr.join(', ')}]\nВихідний масив: [${sortedArr.join(', ')}]\n\nПеревірте консоль для деталей!`);
     });
-    
+
     // Завдання 8
-    buttons[7].addEventListener('click', function() {
+    buttons[7].addEventListener('click', function () {
         // Створити двовимірний масив додатніх та від'ємних чисел
         const rows = 3;
         const cols = 4;
         const twoDArray = [];
-        
+
         for (let i = 0; i < rows; i++) {
             twoDArray[i] = [];
             for (let j = 0; j < cols; j++) {
@@ -287,13 +287,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 twoDArray[i][j] = Math.floor(Math.random() * 101) - 50;
             }
         }
-        
+
         console.log('Двовимірний масив:', twoDArray);
-        
+
         // Створити масиви додатніх та від'ємних чисел
         const positiveArray = [];
         const negativeArray = [];
-        
+
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
                 if (twoDArray[i][j] > 0) {
@@ -303,12 +303,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
-        
+
         console.log('Масив додатніх чисел:', positiveArray);
         console.log('Масив від\'ємних чисел:', negativeArray);
-        
+
         alert('Двовимірний масив створено!\n\nПеревірте консоль для деталей!');
-        
+
         // Замінити третій елемент додатнього масиву на від'ємне значення з prompt
         if (positiveArray.length >= 3) {
             const replacementInput = prompt('Введіть від\'ємне число для заміни третього елемента додатнього масиву:');
@@ -326,9 +326,9 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Недостатньо додатніх чисел у масиві для заміни');
         }
     });
-    
+
     // Завдання 9
-    buttons[8].addEventListener('click', function() {
+    buttons[8].addEventListener('click', function () {
         // Створити вікно слайд-шоу
         const modal = document.createElement('div');
         modal.className = 'slideshow-modal';
@@ -354,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
                 <div class="slideshow-content">
-                    <img id="slideshow-image" src="assets/kobzar.png" alt="Slideshow image">
+                    <img id="slideshow-image" src="assets/slideshow/kobzar1.png" alt="Slideshow image">
                 </div>
                 <div class="slideshow-nav">
                     <button class="prev-btn">‹</button>
@@ -363,23 +363,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `;
-        
+
         document.body.appendChild(modal);
-        
+
         const images = [
-            'assets/kobzar.png',
-            'assets/book1.webp',
-            'assets/book2.png',
-            'assets/book3.png',
-            'assets/stackOfBooks.png',
-            'assets/stackOfBooks2.png'
+            'assets/slideshow/books.png',
+            'assets/slideshow/eneida.png',
+            'assets/slideshow/kaidash.png',
+            'assets/slideshow/kobzar1.png',
+            'assets/slideshow/kobzar2.png'
         ];
-        
+
         let currentIndex = 0;
         let isPlaying = true;
         let slideshowInterval;
         let slideDuration = 3;
-        
+
         const imgElement = document.getElementById('slideshow-image');
         const speedInput = document.getElementById('slideshow-speed');
         const sizeInput = document.getElementById('slideshow-size');
@@ -388,26 +387,26 @@ document.addEventListener('DOMContentLoaded', function() {
         const prevBtn = modal.querySelector('.prev-btn');
         const nextBtn = modal.querySelector('.next-btn');
         const closeBtn = modal.querySelector('.close-slideshow');
-        
+
         // Зберігаємо натуральний розмір зображення
         let naturalWidth = 0;
         let naturalHeight = 0;
-        
+
         function updateImage() {
             imgElement.src = images[currentIndex];
             // Чекаємо, поки зображення завантажиться перед оновленням розміру
-            imgElement.onload = function() {
+            imgElement.onload = function () {
                 naturalWidth = imgElement.naturalWidth;
                 naturalHeight = imgElement.naturalHeight;
                 updateSize();
             };
         }
-        
+
         function startSlideshow() {
             if (slideshowInterval) {
                 clearInterval(slideshowInterval);
             }
-            
+
             slideshowInterval = setInterval(() => {
                 if (isPlaying) {
                     currentIndex++;
@@ -424,14 +423,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }, slideDuration * 1000);
         }
-        
+
         function updateSize() {
             const size = parseInt(sizeInput.value);
             // Видаляємо всі обмеження та transform
             imgElement.style.maxWidth = 'none';
             imgElement.style.maxHeight = 'none';
             imgElement.style.transform = 'none';
-            
+
             if (naturalWidth > 0 && naturalHeight > 0) {
                 // Використовуємо натуральні розміри для обчислення
                 const scale = size / 100;
@@ -444,20 +443,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 imgElement.style.transformOrigin = 'center center';
             }
         }
-        
+
         function updateSpeed() {
             slideDuration = parseInt(speedInput.value);
             if (isPlaying) {
                 startSlideshow();
             }
         }
-        
+
         // Обробники подій
         playPauseBtn.addEventListener('click', () => {
             isPlaying = !isPlaying;
             playPauseBtn.textContent = isPlaying ? 'Пауза' : 'Відтворити';
         });
-        
+
         prevBtn.addEventListener('click', () => {
             currentIndex--;
             if (currentIndex < 0) {
@@ -465,7 +464,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             updateImage();
         });
-        
+
         nextBtn.addEventListener('click', () => {
             currentIndex++;
             if (currentIndex >= images.length) {
@@ -473,16 +472,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             updateImage();
         });
-        
+
         closeBtn.addEventListener('click', () => {
             clearInterval(slideshowInterval);
             modal.remove();
         });
-        
+
         speedInput.addEventListener('change', updateSpeed);
         sizeInput.addEventListener('change', updateSize);
         sizeInput.addEventListener('input', updateSize); // Оновлення в реальному часі
-        
+
         // Ініціалізація
         // Перевіряємо, чи зображення вже завантажено
         if (imgElement.complete && imgElement.naturalWidth > 0) {

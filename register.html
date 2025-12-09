@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєстрація - BookStore Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html" aria-label="Go to home">
+                    <h1>BookStore Pro</h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="index.html#categories">Категорії</a></li>
+                <li id="authNavItem">
+                    <a href="login.html" id="loginLink">Вхід</a>
+                </li>
+            </ul>
+            <div class="burger-menu">
+                <div class="burger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+        <div class="mobile-menu">
+            <ul class="mobile-nav-links">
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="index.html#categories">Категорії</a></li>
+                <li id="mobileAuthNavItem">
+                    <a href="login.html" id="mobileLoginLink">Вхід</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section class="auth-section">
+            <div class="auth-container">
+                <h2>Реєстрація</h2>
+                <p class="auth-subtitle">Створіть обліковий запис для доступу до всіх функцій</p>
+                
+                <form id="registerForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="fullName">Повне ім'я *</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Електронна пошта *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+380XXXXXXXXX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Адреса</label>
+                        <input type="text" id="address" name="address" placeholder="Місто, вулиця, будинок">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Пароль *</label>
+                        <input type="password" id="password" name="password" required minlength="6">
+                        <small>Мінімум 6 символів</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Підтвердження пароля *</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+
+                    <div id="errorMessage" class="error-message" style="display: none;"></div>
+                    <div id="successMessage" class="success-message" style="display: none;"></div>
+
+                    <button type="submit" class="auth-btn">Зареєструватися</button>
+                </form>
+
+                <p class="auth-footer">
+                    Вже маєте обліковий запис? <a href="login.html">Увійти</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BookStore Pro</h3>
+                <p>Ваша цифрова бібліотека сучасного світу</p>
+            </div>
+            <div class="footer-section">
+                <h4>Швидкі посилання</h4>
+                <ul>
+                    <li><a href="index.html">Головна</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="index.html#categories">Категорії</a></li>
+                    <li><a href="about.html">Про проєкт</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Контактна інформація</h4>
+                <p>Бураков Станіслав ІП-34</p>
+                <p>Телефон: +1 (555) 111-1111</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('registerForm');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (password !== confirmPassword) {
+                    errorMessage.textContent = 'Паролі не співпадають';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+
+                const userData = {
+                    fullName: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value,
+                    password: password
+                };
+
+                const result = authSystem.register(userData);
+
+                if (result.success) {
+                    successMessage.textContent = result.message;
+                    successMessage.style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = 'profile.html';
+                    }, 1500);
+                } else {
+                    errorMessage.textContent = result.message;
+                    errorMessage.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
+

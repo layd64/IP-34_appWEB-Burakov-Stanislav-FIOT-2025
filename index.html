@@ -24,10 +24,11 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Головна</a></li>
-                <li><a href="#books">Книги</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
                 <li><a href="#categories">Категорії</a></li>
-                <li><a href="about.html">Опис</a></li>
-                <li><a href="prak4.html">Прак. 4</a></li>
+                <li id="authNavItem">
+                    <a href="login.html" id="loginLink">Вхід</a>
+                </li>
                 <li>
                     <a href="#" id="cartBtn" class="cart-btn">
                         Кошик <span id="cartCount" class="cart-count">0</span>
@@ -46,9 +47,13 @@
             <ul class="mobile-nav-links">
                 <li><a href="#home">Головна</a></li>
                 <li><a href="#books">Книги</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
                 <li><a href="#categories">Категорії</a></li>
                 <li><a href="about.html">Опис</a></li>
                 <li><a href="prak4.html">Прак 4</a></li>
+                <li id="mobileAuthNavItem">
+                    <a href="login.html" id="mobileLoginLink">Вхід</a>
+                </li>
                 <li><a href="#" id="mobileCartBtn">Кошик <span id="mobileCartCount">(0)</span></a></li>
             </ul>
         </div>
@@ -62,7 +67,7 @@
                     <h3>Ласкаво просимо до BookStore Pro!</h3>
                     <p>Ваш найкращий цифровий досвід читання.</p>
                     <div class="button-container">
-                        <button type="catalogue">Перейти до каталогу</button>
+                        <a href="catalog.html"><button type="button">Перейти до каталогу</button></a>
                     </div>
                 </div>
                 <div class="hero-image-container">
@@ -75,27 +80,48 @@
             <h2>Рекомендовані книги</h2>
             <div class="books-grid">
                 <div class="book-card"
-                    data-description="Збірка віршів видатного українського поета Тараса Шевченка. 'Кобзар' є символом боротьби українського народу за свободу і незалежність, втіленням народної мудрості та духовності.">
-                    <img src="assets/kobzar.png" alt="Book Cover 1" class="book-image">
-                    <p class="book-price">300 грн</p>
-                    <h3>Кобзар</h3>
-                    <p class="book-author">Т. Шевченко</p>
+                    data-description="Збірка віршів видатного українського поета Тараса Шевченка. 'Кобзар' є символом боротьби українського народу за свободу і незалежність, втіленням народної мудрості та духовності."
+                    data-book-id="1">
+                    <a href="book.html?id=1" class="book-card-link">
+                        <img src="assets/kobzar.png" alt="Book Cover 1" class="book-image">
+                        <p class="book-price">300 грн</p>
+                        <div class="book-rating-card">
+                            <span class="book-rating-stars">⭐⭐⭐⭐⭐</span>
+                            <span class="book-rating-value">5.0</span>
+                        </div>
+                        <h3>Кобзар</h3>
+                        <p class="book-author">Т. Шевченко</p>
+                    </a>
                     <button>В КОШИК</button>
                 </div>
                 <div class="book-card"
-                    data-description="Соціально-побутова повість Івана Нечуя-Левицького про непросте життя селянської родини. Гумористичний та водночас драматичний твір, що розкриває традиції та звичаї українського села XIX століття.">
-                    <img src="assets/book2.png" alt="Book Cover 2" class="book-image">
-                    <p class="book-price">450 грн</p>
-                    <h3>Кайдашева сім'я</h3>
-                    <p class="book-author">І. Нечуй-Левицький</p>
+                    data-description="Соціально-побутова повість Івана Нечуя-Левицького про непросте життя селянської родини. Гумористичний та водночас драматичний твір, що розкриває традиції та звичаї українського села XIX століття."
+                    data-book-id="2">
+                    <a href="book.html?id=2" class="book-card-link">
+                        <img src="assets/book2.png" alt="Book Cover 2" class="book-image">
+                        <p class="book-price">450 грн</p>
+                        <div class="book-rating-card">
+                            <span class="book-rating-stars">⭐⭐⭐⭐</span>
+                            <span class="book-rating-value">4.0</span>
+                        </div>
+                        <h3>Кайдашева сім'я</h3>
+                        <p class="book-author">І. Нечуй-Левицький</p>
+                    </a>
                     <button>В КОШИК</button>
                 </div>
                 <div class="book-card"
-                    data-description="Іван Котляревський створив травестійну поему на основі 'Енеїди' Вергілія. Це перший твір написаний живою українською мовою, що поклав початок новій українській літературі. Гумористичний твір про пригоди троянців.">
-                    <img src="assets/book3.png" alt="Book Cover 3" class="book-image">
-                    <p class="book-price">249 грн</p>
-                    <h3>Енеїда</h3>
-                    <p class="book-author">І. Котляревський</p>
+                    data-description="Іван Котляревський створив травестійну поему на основі 'Енеїди' Вергілія. Це перший твір написаний живою українською мовою, що поклав початок новій українській літературі. Гумористичний твір про пригоди троянців."
+                    data-book-id="3">
+                    <a href="book.html?id=3" class="book-card-link">
+                        <img src="assets/book3.png" alt="Book Cover 3" class="book-image">
+                        <p class="book-price">249 грн</p>
+                        <div class="book-rating-card">
+                            <span class="book-rating-stars">⭐⭐⭐⭐⭐</span>
+                            <span class="book-rating-value">5.0</span>
+                        </div>
+                        <h3>Енеїда</h3>
+                        <p class="book-author">І. Котляревський</p>
+                    </a>
                     <button>В КОШИК</button>
                 </div>
             </div>
@@ -298,9 +324,10 @@
             <div class="footer-section">
                 <h4>Швидкі посилання</h4>
                 <ul>
-                    <li><a href="#home">Головна</a></li>
-                    <li><a href="#books">Книги</a></li>
-                    <li><a href="#categories">Категорії</a></li>
+                    <li><a href="index.html">Головна</a></li>
+                    <li><a href="index.html#books">Книги</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="index.html#categories">Категорії</a></li>
                     <li><a href="about.html">Про проєкт</a></li>
                 </ul>
             </div>
@@ -312,6 +339,7 @@
         </div>
     </footer>
 
+    <script src="auth.js"></script>
     <script src="script.js"></script>
 </body>
 

@@ -229,7 +229,8 @@ main {
     z-index: 1;
 }
 
-.hero-content button {
+.hero-content button,
+.hero-content .button-container a {
     background-color: #F7A823;
     color: white;
     border: none;
@@ -240,6 +241,14 @@ main {
     transition: background-color 0.3s ease;
     position: relative;
     z-index: 2;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.hero-content .button-container a button {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
 }
 
 .hero-content button:hover {
@@ -275,11 +284,16 @@ main {
 
 .books-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16.25rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(16.25rem, 1fr));
     gap: clamp(1.5rem, 5vw, 6.25rem);
     max-width: min(75rem, 95vw);
     margin: 0 auto;
     padding: 0 clamp(1rem, 3vw, 1.25rem);
+}
+
+.books-grid:has(.book-card:only-child) {
+    grid-template-columns: minmax(16.25rem, 20rem);
+    justify-content: center;
 }
 
 .book-card {
@@ -318,6 +332,25 @@ main {
     font-size: 0.875rem;
     color: #666;
     margin-bottom: 1.25rem;
+}
+
+.book-rating-card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    justify-content: flex-start;
+}
+
+.book-rating-stars {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.book-rating-value {
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #F7A823;
 }
 
 .book-card button {
@@ -1124,6 +1157,18 @@ footer {
         font-size: 1rem;
     }
 
+    .book-rating-card {
+        margin-bottom: 0.375rem;
+    }
+
+    .book-rating-stars {
+        font-size: 0.875rem;
+    }
+
+    .book-rating-value {
+        font-size: 0.75rem;
+    }
+
     .button-container::before {
         top: 0.375rem;
         left: 0.375rem;
@@ -1488,4 +1533,933 @@ footer {
     opacity: 0.5;
     cursor: not-allowed;
     background-color: #f5f5f5;
+}
+
+/* Authentication Styles */
+.auth-section {
+    padding: 3.125rem 0;
+    background-color: #FFF6E8;
+    min-height: calc(100vh - 20rem);
+}
+
+.auth-container {
+    max-width: 31.25rem;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+}
+
+.auth-container h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 0.875rem;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.auth-form .form-group {
+    margin-bottom: 0;
+}
+
+.auth-form .form-group label {
+    display: block;
+    color: #000000;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.auth-form .form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 0.0625rem solid #ddd;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    background-color: white;
+    color: #000000;
+    transition: border-color 0.3s ease;
+}
+
+.auth-form .form-group input:focus {
+    outline: none;
+    border-color: #F7A823;
+}
+
+.auth-form .form-group input[readonly] {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.auth-form .form-group small {
+    display: block;
+    color: #666;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.auth-btn {
+    background-color: #F7A823;
+    color: white;
+    border: none;
+    padding: 0.9375rem 1.875rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 0.25rem;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.auth-btn:hover {
+    background-color: #e6951f;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.auth-footer a {
+    color: #F7A823;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    border: 0.0625rem solid #ef5350;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.success-message {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    border: 0.0625rem solid #4caf50;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+/* Profile Styles */
+.profile-section {
+    padding: 3.125rem 0;
+    background-color: #FFF6E8;
+    min-height: calc(100vh - 20rem);
+}
+
+.profile-container {
+    max-width: 56.25rem;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+.profile-container h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.profile-info {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.0625rem solid #eee;
+}
+
+.profile-header h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000000;
+    margin: 0;
+}
+
+.edit-btn {
+    background-color: #F7A823;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: #e6951f;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.profile-form .form-group {
+    margin-bottom: 0;
+}
+
+.profile-form .form-group label {
+    display: block;
+    color: #000000;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.profile-form .form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 0.0625rem solid #ddd;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    background-color: white;
+    color: #000000;
+    transition: border-color 0.3s ease;
+}
+
+.profile-form .form-group input:focus {
+    outline: none;
+    border-color: #F7A823;
+}
+
+.profile-form .form-group input[readonly] {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+#saveButtons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.cancel-btn {
+    background-color: #666;
+    color: white;
+    border: none;
+    padding: 0.9375rem 1.875rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 0.25rem;
+    flex: 1;
+}
+
+.cancel-btn:hover {
+    background-color: #555;
+}
+
+.profile-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 2rem;
+}
+
+.action-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.action-card h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.0625rem solid #eee;
+}
+
+.account-info {
+    color: #666;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+.logout-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.logout-btn:hover {
+    background-color: #cc0000;
+}
+
+/* Responsive for auth */
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 1.5rem;
+    }
+
+    .profile-actions {
+        grid-template-columns: 1fr;
+    }
+
+    #saveButtons {
+        flex-direction: column;
+    }
+}
+
+/* Catalog Section Styles */
+.catalog-section {
+    padding: 3.125rem 0;
+    background-color: #FFF6E8;
+}
+
+.catalog-section h2 {
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 3.125rem;
+}
+
+.catalog-container {
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+.catalog-filters {
+    background-color: white;
+    padding: 1.875rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.5rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
+    gap: 1.25rem;
+    align-items: end;
+}
+
+.search-box {
+    grid-column: 1;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 0.0625rem solid #ddd;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    background-color: white;
+    color: #000000;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #F7A823;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #000000;
+}
+
+.filter-group select {
+    padding: 0.75rem;
+    border: 0.0625rem solid #ddd;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    background-color: white;
+    color: #000000;
+    cursor: pointer;
+}
+
+.filter-group select:focus {
+    outline: none;
+    border-color: #F7A823;
+}
+
+.reset-btn {
+    background-color: #666;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.reset-btn:hover {
+    background-color: #555;
+}
+
+.catalog-content {
+    min-height: 20rem;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16.25rem, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.catalog-book-card {
+    background-color: white;
+    padding: 1.25rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.catalog-book-card:hover {
+    transform: translateY(-0.3125rem);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+}
+
+.catalog-book-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 0.9375rem;
+}
+
+.catalog-book-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #F7A823;
+    margin-bottom: 0.5rem;
+}
+
+.catalog-book-title {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.catalog-book-author {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.catalog-book-genre {
+    font-size: 0.75rem;
+    color: #999;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background-color: #f5f5f5;
+    border-radius: 0.25rem;
+    display: inline-block;
+}
+
+.catalog-book-rating {
+    font-size: 0.875rem;
+    color: #F7A823;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.catalog-book-description {
+    font-size: 0.875rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.catalog-book-card button {
+    background-color: #F7A823;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    border-radius: 0.25rem;
+    margin-top: auto;
+}
+
+.catalog-book-card button:hover {
+    background-color: #e6951f;
+}
+
+.no-results {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+    font-size: 1.125rem;
+}
+
+/* Responsive for catalog */
+@media (max-width: 768px) {
+    .catalog-filters {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .search-box {
+        grid-column: 1;
+    }
+
+    .catalog-grid {
+        grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .catalog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .catalog-filters {
+        padding: 1.25rem;
+    }
+}
+
+/* Book Card Link Styles */
+.book-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    cursor: pointer;
+}
+
+.book-card-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.book-card-link h3,
+.book-card-link p {
+    pointer-events: none;
+}
+
+/* Book Details Page Styles */
+.book-details-section {
+    padding: 3.125rem 0;
+    background-color: #FFF6E8;
+    min-height: calc(100vh - 20rem);
+}
+
+.book-details-container {
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+.back-link {
+    display: inline-block;
+    color: #F7A823;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: #e6951f;
+    text-decoration: underline;
+}
+
+.book-details-content {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.book-details-main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.book-details-image {
+    position: sticky;
+    top: 2rem;
+}
+
+.book-details-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+}
+
+.book-details-info h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 0.5rem;
+    font-family: 'Inria Serif', serif;
+}
+
+.book-details-author {
+    font-size: 1.25rem;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+
+.book-details-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.book-genre-badge {
+    background-color: #f5f5f5;
+    color: #000;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.book-rating-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rating-stars {
+    font-size: 1.25rem;
+}
+
+.rating-value {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #F7A823;
+}
+
+.rating-count {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.book-details-price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #F7A823;
+    margin-bottom: 1.5rem;
+}
+
+.book-details-description {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #000;
+    margin-bottom: 2rem;
+}
+
+.add-to-cart-btn {
+    background-color: #F7A823;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 20rem;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #e6951f;
+}
+
+/* Reviews Section */
+.reviews-section {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+}
+
+.reviews-section h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 1.5rem;
+}
+
+.average-rating {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 0.0625rem solid #eee;
+}
+
+.average-rating-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.average-rating-value {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #F7A823;
+}
+
+.average-rating-stars {
+    font-size: 2rem;
+}
+
+.average-rating-text {
+    font-size: 1rem;
+    color: #666;
+}
+
+.no-rating {
+    color: #666;
+    font-style: italic;
+}
+
+.reviews-list {
+    margin-bottom: 2rem;
+}
+
+.no-reviews {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 2rem;
+}
+
+.review-item {
+    padding: 1.5rem;
+    border-bottom: 0.0625rem solid #eee;
+    margin-bottom: 1rem;
+}
+
+.review-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.review-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.review-user-info strong {
+    color: #000;
+    font-size: 1rem;
+}
+
+.review-date {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.review-rating {
+    font-size: 1.125rem;
+}
+
+.review-text {
+    color: #000;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.delete-review-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+}
+
+.delete-review-btn:hover {
+    background-color: #cc0000;
+}
+
+.add-review-form {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 0.0625rem solid #eee;
+}
+
+.add-review-form h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 1.5rem;
+}
+
+.rating-input {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.rating-input input[type="radio"] {
+    display: none;
+}
+
+.rating-input label {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+    color: #ddd;
+    order: -1;
+    user-select: none;
+}
+
+.rating-input label:hover {
+    transform: scale(1.1);
+}
+
+.add-review-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 0.0625rem solid #ddd;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    resize: vertical;
+    min-height: 6rem;
+}
+
+.add-review-form textarea:focus {
+    outline: none;
+    border-color: #F7A823;
+}
+
+/* Responsive for book details */
+@media (max-width: 768px) {
+    .book-details-main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .book-details-image {
+        position: static;
+        max-width: 20rem;
+        margin: 0 auto;
+    }
+
+    .book-details-info h2 {
+        font-size: 2rem;
+    }
+
+    .average-rating-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .average-rating-value {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .book-details-content,
+    .reviews-section {
+        padding: 1.5rem;
+    }
+
+    .book-details-info h2 {
+        font-size: 1.75rem;
+    }
+
+    .book-details-price {
+        font-size: 1.5rem;
+    }
 }

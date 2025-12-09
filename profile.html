@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профіль - BookStore Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html" aria-label="Go to home">
+                    <h1>BookStore Pro</h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="index.html#categories">Категорії</a></li>
+                <li id="authNavItem">
+                    <a href="profile.html" id="profileLink">Профіль</a>
+                </li>
+                <li>
+                    <a href="#" id="cartBtn" class="cart-btn">
+                        Кошик <span id="cartCount" class="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="burger-menu">
+                <div class="burger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+        <div class="mobile-menu">
+            <ul class="mobile-nav-links">
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="index.html#categories">Категорії</a></li>
+                <li id="mobileAuthNavItem">
+                    <a href="profile.html" id="mobileProfileLink">Профіль</a>
+                </li>
+                <li><a href="#" id="mobileCartBtn">Кошик <span id="mobileCartCount">(0)</span></a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section class="profile-section">
+            <div class="profile-container">
+                <h2>Мій профіль</h2>
+                
+                <div id="profileContent">
+                    <div class="profile-info">
+                        <div class="profile-header">
+                            <h3>Особиста інформація</h3>
+                            <button id="editBtn" class="edit-btn">Редагувати</button>
+                        </div>
+
+                        <form id="profileForm" class="profile-form">
+                            <div class="form-group">
+                                <label for="fullName">Повне ім'я</label>
+                                <input type="text" id="fullName" name="fullName" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Електронна пошта</label>
+                                <input type="email" id="email" name="email" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Телефон</label>
+                                <input type="tel" id="phone" name="phone" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">Адреса</label>
+                                <input type="text" id="address" name="address" readonly>
+                            </div>
+
+                            <div id="errorMessage" class="error-message" style="display: none;"></div>
+                            <div id="successMessage" class="success-message" style="display: none;"></div>
+
+                            <div id="saveButtons" style="display: none;">
+                                <button type="submit" class="auth-btn">Зберегти зміни</button>
+                                <button type="button" id="cancelBtn" class="cancel-btn">Скасувати</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="profile-actions">
+                        <div class="action-card">
+                            <h3>Змінити пароль</h3>
+                            <form id="passwordForm" class="profile-form">
+                                <div class="form-group">
+                                    <label for="oldPassword">Поточний пароль</label>
+                                    <input type="password" id="oldPassword" name="oldPassword" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="newPassword">Новий пароль</label>
+                                    <input type="password" id="newPassword" name="newPassword" required minlength="6">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="confirmNewPassword">Підтвердження нового пароля</label>
+                                    <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+                                </div>
+
+                                <div id="passwordErrorMessage" class="error-message" style="display: none;"></div>
+                                <div id="passwordSuccessMessage" class="success-message" style="display: none;"></div>
+
+                                <button type="submit" class="auth-btn">Змінити пароль</button>
+                            </form>
+                        </div>
+
+                        <div class="action-card">
+                            <h3>Обліковий запис</h3>
+                            <p class="account-info">Дата реєстрації: <span id="createdAt"></span></p>
+                            <button id="logoutBtn" class="logout-btn">Вийти з облікового запису</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="notAuthenticated" style="display: none;">
+                    <p>Будь ласка, увійдіть до свого облікового запису.</p>
+                    <a href="login.html" class="auth-btn">Увійти</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content cart-modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="cart-modal-body">
+                <h2>Ваш Кошик</h2>
+                <div class="cart-items-container">
+                    <!-- Cart items will be populated here -->
+                    <p class="empty-cart-message">Ваш кошик порожній</p>
+                </div>
+                <div class="cart-pagination"></div>
+                <div class="cart-footer">
+                    <div class="cart-total">
+                        <span>Разом:</span>
+                        <span id="cartTotalAmount">0 грн</span>
+                    </div>
+                    <button class="checkout-btn">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BookStore Pro</h3>
+                <p>Ваша цифрова бібліотека сучасного світу</p>
+            </div>
+            <div class="footer-section">
+                <h4>Швидкі посилання</h4>
+                <ul>
+                    <li><a href="index.html">Головна</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="index.html#categories">Категорії</a></li>
+                    <li><a href="about.html">Про проєкт</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Контактна інформація</h4>
+                <p>Бураков Станіслав ІП-34</p>
+                <p>Телефон: +1 (555) 111-1111</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = authSystem.getCurrentUser();
+            
+            if (!currentUser) {
+                document.getElementById('profileContent').style.display = 'none';
+                document.getElementById('notAuthenticated').style.display = 'block';
+                return;
+            }
+
+            // Load user data
+            document.getElementById('fullName').value = currentUser.fullName || '';
+            document.getElementById('email').value = currentUser.email || '';
+            document.getElementById('phone').value = currentUser.phone || '';
+            document.getElementById('address').value = currentUser.address || '';
+            
+            if (currentUser.createdAt) {
+                const date = new Date(currentUser.createdAt);
+                document.getElementById('createdAt').textContent = date.toLocaleDateString('uk-UA');
+            }
+
+            // Edit profile
+            let isEditing = false;
+            const editBtn = document.getElementById('editBtn');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const profileForm = document.getElementById('profileForm');
+            const saveButtons = document.getElementById('saveButtons');
+            const inputs = profileForm.querySelectorAll('input[type="text"], input[type="tel"]');
+
+            editBtn.addEventListener('click', function() {
+                isEditing = !isEditing;
+                inputs.forEach(input => {
+                    input.readOnly = !isEditing;
+                });
+                saveButtons.style.display = isEditing ? 'flex' : 'none';
+                editBtn.textContent = isEditing ? 'Скасувати' : 'Редагувати';
+            });
+
+            cancelBtn.addEventListener('click', function() {
+                isEditing = false;
+                inputs.forEach(input => {
+                    input.readOnly = true;
+                });
+                saveButtons.style.display = 'none';
+                editBtn.textContent = 'Редагувати';
+                
+                // Reset values
+                document.getElementById('fullName').value = currentUser.fullName || '';
+                document.getElementById('phone').value = currentUser.phone || '';
+                document.getElementById('address').value = currentUser.address || '';
+            });
+
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const errorMessage = document.getElementById('errorMessage');
+                const successMessage = document.getElementById('successMessage');
+                
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+
+                const updatedData = {
+                    fullName: document.getElementById('fullName').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value
+                };
+
+                const result = authSystem.updateProfile(updatedData);
+
+                if (result.success) {
+                    successMessage.textContent = result.message;
+                    successMessage.style.display = 'block';
+                    isEditing = false;
+                    inputs.forEach(input => {
+                        input.readOnly = true;
+                    });
+                    saveButtons.style.display = 'none';
+                    editBtn.textContent = 'Редагувати';
+                    
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
+                } else {
+                    errorMessage.textContent = result.message;
+                    errorMessage.style.display = 'block';
+                }
+            });
+
+            // Change password
+            const passwordForm = document.getElementById('passwordForm');
+            passwordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const errorMessage = document.getElementById('passwordErrorMessage');
+                const successMessage = document.getElementById('passwordSuccessMessage');
+                
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+
+                const oldPassword = document.getElementById('oldPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmNewPassword').value;
+
+                if (newPassword !== confirmPassword) {
+                    errorMessage.textContent = 'Паролі не співпадають';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+
+                const result = authSystem.changePassword(oldPassword, newPassword);
+
+                if (result.success) {
+                    successMessage.textContent = result.message;
+                    successMessage.style.display = 'block';
+                    passwordForm.reset();
+                } else {
+                    errorMessage.textContent = result.message;
+                    errorMessage.style.display = 'block';
+                }
+            });
+
+            // Logout
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                if (confirm('Ви впевнені, що хочете вийти?')) {
+                    authSystem.logout();
+                    window.location.href = 'index.html';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
+

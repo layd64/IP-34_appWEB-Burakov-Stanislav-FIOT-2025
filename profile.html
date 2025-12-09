@@ -60,7 +60,7 @@
         <section class="profile-section">
             <div class="profile-container">
                 <h2>Мій профіль</h2>
-                
+
                 <div id="profileContent">
                     <div class="profile-info">
                         <div class="profile-header">
@@ -189,9 +189,9 @@
     <script src="auth.js"></script>
     <script src="script.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const currentUser = authSystem.getCurrentUser();
-            
+
             if (!currentUser) {
                 document.getElementById('profileContent').style.display = 'none';
                 document.getElementById('notAuthenticated').style.display = 'block';
@@ -203,7 +203,7 @@
             document.getElementById('email').value = currentUser.email || '';
             document.getElementById('phone').value = currentUser.phone || '';
             document.getElementById('address').value = currentUser.address || '';
-            
+
             if (currentUser.createdAt) {
                 const date = new Date(currentUser.createdAt);
                 document.getElementById('createdAt').textContent = date.toLocaleDateString('uk-UA');
@@ -217,7 +217,7 @@
             const saveButtons = document.getElementById('saveButtons');
             const inputs = profileForm.querySelectorAll('input[type="text"], input[type="tel"]');
 
-            editBtn.addEventListener('click', function() {
+            editBtn.addEventListener('click', function () {
                 isEditing = !isEditing;
                 inputs.forEach(input => {
                     input.readOnly = !isEditing;
@@ -226,26 +226,26 @@
                 editBtn.textContent = isEditing ? 'Скасувати' : 'Редагувати';
             });
 
-            cancelBtn.addEventListener('click', function() {
+            cancelBtn.addEventListener('click', function () {
                 isEditing = false;
                 inputs.forEach(input => {
                     input.readOnly = true;
                 });
                 saveButtons.style.display = 'none';
                 editBtn.textContent = 'Редагувати';
-                
+
                 // Reset values
                 document.getElementById('fullName').value = currentUser.fullName || '';
                 document.getElementById('phone').value = currentUser.phone || '';
                 document.getElementById('address').value = currentUser.address || '';
             });
 
-            profileForm.addEventListener('submit', function(e) {
+            profileForm.addEventListener('submit', function (e) {
                 e.preventDefault();
-                
+
                 const errorMessage = document.getElementById('errorMessage');
                 const successMessage = document.getElementById('successMessage');
-                
+
                 errorMessage.style.display = 'none';
                 successMessage.style.display = 'none';
 
@@ -266,7 +266,7 @@
                     });
                     saveButtons.style.display = 'none';
                     editBtn.textContent = 'Редагувати';
-                    
+
                     setTimeout(() => {
                         location.reload();
                     }, 1500);
@@ -278,12 +278,12 @@
 
             // Change password
             const passwordForm = document.getElementById('passwordForm');
-            passwordForm.addEventListener('submit', function(e) {
+            passwordForm.addEventListener('submit', function (e) {
                 e.preventDefault();
-                
+
                 const errorMessage = document.getElementById('passwordErrorMessage');
                 const successMessage = document.getElementById('passwordSuccessMessage');
-                
+
                 errorMessage.style.display = 'none';
                 successMessage.style.display = 'none';
 
@@ -310,7 +310,7 @@
             });
 
             // Logout
-            document.getElementById('logoutBtn').addEventListener('click', function() {
+            document.getElementById('logoutBtn').addEventListener('click', function () {
                 if (confirm('Ви впевнені, що хочете вийти?')) {
                     authSystem.logout();
                     window.location.href = 'index.html';
@@ -321,4 +321,3 @@
 </body>
 
 </html>
-

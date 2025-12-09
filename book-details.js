@@ -12,7 +12,7 @@ class BookDetailsSystem {
         if (typeof window !== 'undefined' && window.catalogBooks) {
             return window.catalogBooks;
         }
-        
+
         // Fallback book list (same as in script.js)
         return [
             {
@@ -342,7 +342,7 @@ class BookDetailsSystem {
 let bookDetailsSystem;
 
 // Initialize book details page
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Initialize system after DOM is ready
     bookDetailsSystem = new BookDetailsSystem();
     const urlParams = new URLSearchParams(window.location.search);
@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add to cart button
     const addToCartBtn = document.getElementById('addToCartBtn');
     if (addToCartBtn && typeof addToCart !== 'undefined') {
-        addToCartBtn.addEventListener('click', function() {
+        addToCartBtn.addEventListener('click', function () {
             const bookData = {
                 image: book.image,
                 price: `${book.price} грн`,
@@ -416,58 +416,61 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add rating input handlers for visual feedback
         const ratingInputs = document.querySelectorAll('input[name="rating"]');
         const ratingLabels = document.querySelectorAll('.rating-input label');
-        
+
         // Get all labels in visual order (row-reverse means they appear 1,2,3,4,5 left to right)
         // But in DOM they are: label5, label4, label3, label2, label1
         // So we need to reverse the array to get visual order
         const labelsArray = Array.from(ratingLabels).reverse();
-        
+
         function updateRatingDisplay(selectedValue) {
             labelsArray.forEach((label, index) => {
                 const ratingValue = index + 1; // 1, 2, 3, 4, 5
                 if (ratingValue <= selectedValue) {
+                    label.textContent = '★';
                     label.style.color = '#F7A823';
                 } else {
+                    label.textContent = '☆';
                     label.style.color = '#ddd';
                 }
             });
         }
-        
+
         ratingInputs.forEach(input => {
             const value = parseInt(input.value);
             const label = input.nextElementSibling;
-            
-            input.addEventListener('change', function() {
+
+            input.addEventListener('change', function () {
                 updateRatingDisplay(value);
             });
-            
+
             if (label && label.tagName === 'LABEL') {
-                label.addEventListener('mouseenter', function() {
+                label.addEventListener('mouseenter', function () {
                     updateRatingDisplay(value);
                 });
             }
         });
-        
+
         const ratingInputContainer = document.querySelector('.rating-input');
         if (ratingInputContainer) {
-            ratingInputContainer.addEventListener('mouseleave', function() {
+            ratingInputContainer.addEventListener('mouseleave', function () {
                 const checkedInput = document.querySelector('input[name="rating"]:checked');
                 if (checkedInput) {
                     updateRatingDisplay(parseInt(checkedInput.value));
                 } else {
                     labelsArray.forEach(label => {
+                        label.textContent = '☆';
                         label.style.color = '#ddd';
                     });
                 }
             });
         }
-        
-        reviewForm.addEventListener('submit', function(e) {
+
+        reviewForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
             const errorMessage = document.getElementById('reviewErrorMessage');
             const successMessage = document.getElementById('reviewSuccessMessage');
-            
+
             errorMessage.style.display = 'none';
             successMessage.style.display = 'none';
 
@@ -494,7 +497,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 reviewForm.reset();
                 renderReviews(bookId);
                 renderAverageRating(bookId, bookDetailsSystem.calculateAverageRating(bookId), bookDetailsSystem.getReviews(bookId).length);
-                
+
                 // Update rating in book details
                 const newAverageRating = bookDetailsSystem.calculateAverageRating(bookId);
                 const displayRating = newAverageRating ? parseFloat(newAverageRating) : book.rating;
@@ -533,7 +536,7 @@ function renderReviews(bookId) {
     reviewsList.innerHTML = reviews.map(review => {
         const date = new Date(review.createdAt);
         const canDelete = currentUser && currentUser.id === review.userId;
-        
+
         return `
             <div class="review-item">
                 <div class="review-header">
@@ -552,7 +555,7 @@ function renderReviews(bookId) {
     // Add delete handlers
     const deleteButtons = document.querySelectorAll('.delete-review-btn');
     deleteButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             const reviewId = this.getAttribute('data-review-id');
             if (confirm('Ви впевнені, що хочете видалити цей відгук?')) {
                 const result = bookDetailsSystem.deleteReview(reviewId);
@@ -562,7 +565,7 @@ function renderReviews(bookId) {
                     renderReviews(bookId);
                     const reviews = bookDetailsSystem.getReviews(bookId);
                     renderAverageRating(bookId, bookDetailsSystem.calculateAverageRating(bookId), reviews.length);
-                    
+
                     // Update rating in book details
                     const book = bookDetailsSystem.getBookById(bookId);
                     const newAverageRating = bookDetailsSystem.calculateAverageRating(bookId);

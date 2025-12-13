@@ -370,252 +370,252 @@ document.addEventListener('DOMContentLoaded', function () {
     const resetFiltersBtn = document.getElementById('resetFilters');
     const noResults = document.getElementById('noResults');
 
-    // Only initialize catalog if elements exist (catalog page)
+    // Make catalogBooks globally available (for profile, book details, etc.)
+    window.catalogBooks = [
+        {
+            id: 1,
+            title: 'Кобзар',
+            author: 'Тарас Шевченко',
+            genre: 'Поезія',
+            price: 300,
+            rating: 5,
+            image: 'assets/kobzar.png',
+            description: 'Збірка віршів видатного українського поета Тараса Шевченка. "Кобзар" є символом боротьби українського народу за свободу і незалежність, втіленням народної мудрості та духовності.'
+        },
+        {
+            id: 2,
+            title: 'Кайдашева сім\'я',
+            author: 'Іван Нечуй-Левицький',
+            genre: 'Художня література',
+            price: 450,
+            rating: 4,
+            image: 'assets/book2.png',
+            description: 'Соціально-побутова повість Івана Нечуя-Левицького про непросте життя селянської родини. Гумористичний та водночас драматичний твір, що розкриває традиції та звичаї українського села XIX століття.'
+        },
+        {
+            id: 3,
+            title: 'Енеїда',
+            author: 'Іван Котляревський',
+            genre: 'Поезія',
+            price: 249,
+            rating: 5,
+            image: 'assets/book3.png',
+            description: 'Іван Котляревський створив травестійну поему на основі "Енеїди" Вергілія. Це перший твір написаний живою українською мовою, що поклав початок новій українській літературі. Гумористичний твір про пригоди троянців.'
+        },
+        {
+            id: 4,
+            title: 'Лісова пісня',
+            author: 'Леся Українка',
+            genre: 'Драма',
+            price: 320,
+            rating: 5,
+            image: 'assets/book1.webp',
+            description: 'Поетична драма-феєрія Лесі Українки, яка поєднує фольклорні мотиви з глибокою філософією. Твір про кохання, природу та вічну боротьбу добра зі злом.'
+        },
+        {
+            id: 5,
+            title: 'Код майбутнього',
+            author: 'Сара Джонсон',
+            genre: 'Наукова фантастика',
+            price: 550,
+            rating: 4,
+            image: 'assets/slideshow/books.png',
+            description: 'Захоплюючий роман про штучний інтелект та майбутнє технологій. Головний герой намагається розгадати таємницю коду, який може змінити світ.'
+        },
+        {
+            id: 6,
+            title: 'Таємниця океану',
+            author: 'Майкл Чен',
+            genre: 'Детектив',
+            price: 480,
+            rating: 4,
+            image: 'assets/slideshow/books.png',
+            description: 'Загадковий детектив про зникнення корабля та таємниці глибин океану. Детектив намагається розкрити правду про загадкову подію.'
+        },
+        {
+            id: 7,
+            title: 'Цифрова революція',
+            author: 'Емма Девіс',
+            genre: 'Наукова фантастика',
+            price: 520,
+            rating: 5,
+            image: 'assets/slideshow/books.png',
+            description: 'Футуристичний роман про технологічну революцію, яка змінює суспільство. Автор досліджує етичні питання майбутнього.'
+        },
+        {
+            id: 8,
+            title: 'Космічна одіссея',
+            author: 'Роберт Вілсон',
+            genre: 'Наукова фантастика',
+            price: 600,
+            rating: 4,
+            image: 'assets/slideshow/books.png',
+            description: 'Епічна космічна сага про подорож до далеких галактик. Герої стикаються з невідомими цивілізаціями та викликами космосу.'
+        },
+        {
+            id: 9,
+            title: 'Загадка старого замку',
+            author: 'Олена Петренко',
+            genre: 'Детектив',
+            price: 380,
+            rating: 4,
+            image: 'assets/slideshow/books.png',
+            description: 'Детективна історія про таємниці старого замку та зниклі скарби. Читач разом з героями розгадує загадки минулого.'
+        },
+        {
+            id: 10,
+            title: 'Шлях до успіху',
+            author: 'Андрій Коваленко',
+            genre: 'Саморозвиток',
+            price: 350,
+            rating: 3,
+            image: 'assets/slideshow/books.png',
+            description: 'Практичний посібник з саморозвитку та досягнення цілей. Автор ділиться досвідом та ефективними стратегіями успіху.'
+        },
+        {
+            id: 11,
+            title: 'Життя видатних людей',
+            author: 'Марія Іваненко',
+            genre: 'Біографія',
+            price: 420,
+            rating: 4,
+            image: 'assets/slideshow/books.png',
+            description: 'Збірка біографій видатних особистостей, які змінили світ. Натхненні історії про досягнення та подолання перешкод.'
+        },
+        {
+            id: 12,
+            title: 'Романтика вічності',
+            author: 'Софія Мороз',
+            genre: 'Романтика',
+            price: 290,
+            rating: 3,
+            image: 'assets/slideshow/books.png',
+            description: 'Романтична історія про кохання, яке долає всі перешкоди. Емоційний твір про вічні почуття та пристрасть.'
+        },
+        {
+            id: 13,
+            title: 'Захар Беркут',
+            author: 'Іван Франко',
+            genre: 'Художня література',
+            price: 380,
+            rating: 5,
+            image: 'assets/slideshow/books.png',
+            description: 'Історична повість про боротьбу українського народу за незалежність. Епічний твір про мужність та патріотизм.'
+        },
+        {
+            id: 14,
+            title: 'Тіні забутих предків',
+            author: 'Михайло Коцюбинський',
+            genre: 'Художня література',
+            price: 340,
+            rating: 5,
+            image: 'assets/slideshow/books.png',
+            description: 'Поетична повість про життя гуцулів, їхні традиції та звичаї. Твір про кохання, смерть та вічність.'
+        },
+        {
+            id: 15,
+            title: 'Майстер і Маргарита',
+            author: 'Михайло Булгаков',
+            genre: 'Художня література',
+            price: 520,
+            rating: 5,
+            image: 'assets/slideshow/books.png',
+            description: 'Філософський роман про добро і зло, кохання та жертву. Один з найвизначніших творів світової літератури.'
+        },
+        {
+            id: 16,
+            title: '1984',
+            author: 'Джордж Орвелл',
+            genre: 'Антиутопія',
+            price: 450,
+            rating: 5,
+            image: 'assets/slideshow/books.png',
+            description: 'Класичний роман-антиутопія про тоталітарне суспільство та боротьбу за свободу думки.'
+        },
+        {
+            id: 17,
+            title: 'Гаррі Поттер і філософський камінь',
+            author: 'Дж. К. Роулінг',
+            genre: 'Фентезі',
+            price: 480,
+            rating: 5,
+            image: 'assets/slideshow/books.png',
+            description: 'Перша книга про пригоди юного чарівника Гаррі Поттера у світі магії та чарівництва.'
+        },
+        {
+            id: 18,
+            title: 'Володар перснів',
+            author: 'Дж. Р. Р. Толкін',
+            genre: 'Фентезі',
+            price: 550,
+            rating: 5,
+            image: 'assets/slideshow/books.png',
+            description: 'Епічна трилогія про боротьбу добра зі злом у вигаданому світі Середзем\'я.'
+        },
+        {
+            id: 19,
+            title: 'Шерлок Холмс',
+            author: 'Артур Конан Дойл',
+            genre: 'Детектив',
+            price: 420,
+            rating: 5,
+            image: 'assets/slideshow/books.png',
+            description: 'Збірка детективних оповідань про знаменитого детектива Шерлока Холмса та його друга доктора Ватсона.'
+        },
+        {
+            id: 20,
+            title: 'Анна Кареніна',
+            author: 'Лев Толстой',
+            genre: 'Художня література',
+            price: 490,
+            rating: 5,
+            image: 'assets/slideshow/books.png',
+            description: 'Класичний роман про кохання, зраду та суспільні норми в Росії XIX століття.'
+        },
+        {
+            id: 21,
+            title: 'Війна і мир',
+            author: 'Лев Толстой',
+            genre: 'Художня література',
+            price: 680,
+            rating: 5,
+            image: 'assets/slideshow/books.png',
+            description: 'Епічний роман про російське суспільство під час наполеонівських воєн. Один з найбільших творів світової літератури.'
+        },
+        {
+            id: 22,
+            title: 'Пригоди Тома Сойєра',
+            author: 'Марк Твен',
+            genre: 'Пригоди',
+            price: 320,
+            rating: 4,
+            image: 'assets/slideshow/books.png',
+            description: 'Захоплюючі пригоди хлопчика Тома Сойєра та його друга Гекльберрі Фінна на Міссісіпі.'
+        },
+        {
+            id: 23,
+            title: 'Гра престолів',
+            author: 'Джордж Р. Р. Мартін',
+            genre: 'Фентезі',
+            price: 560,
+            rating: 5,
+            image: 'assets/slideshow/books.png',
+            description: 'Перша книга серії "Пісня льоду та полум\'я" про боротьбу за залізний трон у вигаданому світі Вестеросу.'
+        },
+        {
+            id: 24,
+            title: 'Дюна',
+            author: 'Френк Герберт',
+            genre: 'Наукова фантастика',
+            price: 540,
+            rating: 5,
+            image: 'assets/slideshow/books.png',
+            description: 'Епічний науково-фантастичний роман про пустельну планету Арракіс та боротьбу за контроль над спецією.'
+        }
+    ];
+
+    // Only initialize catalog UI if elements exist (catalog page)
     if (catalogGrid && searchInput && genreFilter && ratingFilter && priceFilter && sortBy && resetFiltersBtn && noResults) {
-        // Book catalog data with detailed information
-        // Make it globally available for book-details.js
-        window.catalogBooks = [
-            {
-                id: 1,
-                title: 'Кобзар',
-                author: 'Тарас Шевченко',
-                genre: 'Поезія',
-                price: 300,
-                rating: 5,
-                image: 'assets/kobzar.png',
-                description: 'Збірка віршів видатного українського поета Тараса Шевченка. "Кобзар" є символом боротьби українського народу за свободу і незалежність, втіленням народної мудрості та духовності.'
-            },
-            {
-                id: 2,
-                title: 'Кайдашева сім\'я',
-                author: 'Іван Нечуй-Левицький',
-                genre: 'Художня література',
-                price: 450,
-                rating: 4,
-                image: 'assets/book2.png',
-                description: 'Соціально-побутова повість Івана Нечуя-Левицького про непросте життя селянської родини. Гумористичний та водночас драматичний твір, що розкриває традиції та звичаї українського села XIX століття.'
-            },
-            {
-                id: 3,
-                title: 'Енеїда',
-                author: 'Іван Котляревський',
-                genre: 'Поезія',
-                price: 249,
-                rating: 5,
-                image: 'assets/book3.png',
-                description: 'Іван Котляревський створив травестійну поему на основі "Енеїди" Вергілія. Це перший твір написаний живою українською мовою, що поклав початок новій українській літературі. Гумористичний твір про пригоди троянців.'
-            },
-            {
-                id: 4,
-                title: 'Лісова пісня',
-                author: 'Леся Українка',
-                genre: 'Драма',
-                price: 320,
-                rating: 5,
-                image: 'assets/book1.webp',
-                description: 'Поетична драма-феєрія Лесі Українки, яка поєднує фольклорні мотиви з глибокою філософією. Твір про кохання, природу та вічну боротьбу добра зі злом.'
-            },
-            {
-                id: 5,
-                title: 'Код майбутнього',
-                author: 'Сара Джонсон',
-                genre: 'Наукова фантастика',
-                price: 550,
-                rating: 4,
-                image: 'assets/slideshow/books.png',
-                description: 'Захоплюючий роман про штучний інтелект та майбутнє технологій. Головний герой намагається розгадати таємницю коду, який може змінити світ.'
-            },
-            {
-                id: 6,
-                title: 'Таємниця океану',
-                author: 'Майкл Чен',
-                genre: 'Детектив',
-                price: 480,
-                rating: 4,
-                image: 'assets/slideshow/books.png',
-                description: 'Загадковий детектив про зникнення корабля та таємниці глибин океану. Детектив намагається розкрити правду про загадкову подію.'
-            },
-            {
-                id: 7,
-                title: 'Цифрова революція',
-                author: 'Емма Девіс',
-                genre: 'Наукова фантастика',
-                price: 520,
-                rating: 5,
-                image: 'assets/slideshow/books.png',
-                description: 'Футуристичний роман про технологічну революцію, яка змінює суспільство. Автор досліджує етичні питання майбутнього.'
-            },
-            {
-                id: 8,
-                title: 'Космічна одіссея',
-                author: 'Роберт Вілсон',
-                genre: 'Наукова фантастика',
-                price: 600,
-                rating: 4,
-                image: 'assets/slideshow/books.png',
-                description: 'Епічна космічна сага про подорож до далеких галактик. Герої стикаються з невідомими цивілізаціями та викликами космосу.'
-            },
-            {
-                id: 9,
-                title: 'Загадка старого замку',
-                author: 'Олена Петренко',
-                genre: 'Детектив',
-                price: 380,
-                rating: 4,
-                image: 'assets/slideshow/books.png',
-                description: 'Детективна історія про таємниці старого замку та зниклі скарби. Читач разом з героями розгадує загадки минулого.'
-            },
-            {
-                id: 10,
-                title: 'Шлях до успіху',
-                author: 'Андрій Коваленко',
-                genre: 'Саморозвиток',
-                price: 350,
-                rating: 3,
-                image: 'assets/slideshow/books.png',
-                description: 'Практичний посібник з саморозвитку та досягнення цілей. Автор ділиться досвідом та ефективними стратегіями успіху.'
-            },
-            {
-                id: 11,
-                title: 'Життя видатних людей',
-                author: 'Марія Іваненко',
-                genre: 'Біографія',
-                price: 420,
-                rating: 4,
-                image: 'assets/slideshow/books.png',
-                description: 'Збірка біографій видатних особистостей, які змінили світ. Натхненні історії про досягнення та подолання перешкод.'
-            },
-            {
-                id: 12,
-                title: 'Романтика вічності',
-                author: 'Софія Мороз',
-                genre: 'Романтика',
-                price: 290,
-                rating: 3,
-                image: 'assets/slideshow/books.png',
-                description: 'Романтична історія про кохання, яке долає всі перешкоди. Емоційний твір про вічні почуття та пристрасть.'
-            },
-            {
-                id: 13,
-                title: 'Захар Беркут',
-                author: 'Іван Франко',
-                genre: 'Художня література',
-                price: 380,
-                rating: 5,
-                image: 'assets/slideshow/books.png',
-                description: 'Історична повість про боротьбу українського народу за незалежність. Епічний твір про мужність та патріотизм.'
-            },
-            {
-                id: 14,
-                title: 'Тіні забутих предків',
-                author: 'Михайло Коцюбинський',
-                genre: 'Художня література',
-                price: 340,
-                rating: 5,
-                image: 'assets/slideshow/books.png',
-                description: 'Поетична повість про життя гуцулів, їхні традиції та звичаї. Твір про кохання, смерть та вічність.'
-            },
-            {
-                id: 15,
-                title: 'Майстер і Маргарита',
-                author: 'Михайло Булгаков',
-                genre: 'Художня література',
-                price: 520,
-                rating: 5,
-                image: 'assets/slideshow/books.png',
-                description: 'Філософський роман про добро і зло, кохання та жертву. Один з найвизначніших творів світової літератури.'
-            },
-            {
-                id: 16,
-                title: '1984',
-                author: 'Джордж Орвелл',
-                genre: 'Антиутопія',
-                price: 450,
-                rating: 5,
-                image: 'assets/slideshow/books.png',
-                description: 'Класичний роман-антиутопія про тоталітарне суспільство та боротьбу за свободу думки.'
-            },
-            {
-                id: 17,
-                title: 'Гаррі Поттер і філософський камінь',
-                author: 'Дж. К. Роулінг',
-                genre: 'Фентезі',
-                price: 480,
-                rating: 5,
-                image: 'assets/slideshow/books.png',
-                description: 'Перша книга про пригоди юного чарівника Гаррі Поттера у світі магії та чарівництва.'
-            },
-            {
-                id: 18,
-                title: 'Володар перснів',
-                author: 'Дж. Р. Р. Толкін',
-                genre: 'Фентезі',
-                price: 550,
-                rating: 5,
-                image: 'assets/slideshow/books.png',
-                description: 'Епічна трилогія про боротьбу добра зі злом у вигаданому світі Середзем\'я.'
-            },
-            {
-                id: 19,
-                title: 'Шерлок Холмс',
-                author: 'Артур Конан Дойл',
-                genre: 'Детектив',
-                price: 420,
-                rating: 5,
-                image: 'assets/slideshow/books.png',
-                description: 'Збірка детективних оповідань про знаменитого детектива Шерлока Холмса та його друга доктора Ватсона.'
-            },
-            {
-                id: 20,
-                title: 'Анна Кареніна',
-                author: 'Лев Толстой',
-                genre: 'Художня література',
-                price: 490,
-                rating: 5,
-                image: 'assets/slideshow/books.png',
-                description: 'Класичний роман про кохання, зраду та суспільні норми в Росії XIX століття.'
-            },
-            {
-                id: 21,
-                title: 'Війна і мир',
-                author: 'Лев Толстой',
-                genre: 'Художня література',
-                price: 680,
-                rating: 5,
-                image: 'assets/slideshow/books.png',
-                description: 'Епічний роман про російське суспільство під час наполеонівських воєн. Один з найбільших творів світової літератури.'
-            },
-            {
-                id: 22,
-                title: 'Пригоди Тома Сойєра',
-                author: 'Марк Твен',
-                genre: 'Пригоди',
-                price: 320,
-                rating: 4,
-                image: 'assets/slideshow/books.png',
-                description: 'Захоплюючі пригоди хлопчика Тома Сойєра та його друга Гекльберрі Фінна на Міссісіпі.'
-            },
-            {
-                id: 23,
-                title: 'Гра престолів',
-                author: 'Джордж Р. Р. Мартін',
-                genre: 'Фентезі',
-                price: 560,
-                rating: 5,
-                image: 'assets/slideshow/books.png',
-                description: 'Перша книга серії "Пісня льоду та полум\'я" про боротьбу за залізний трон у вигаданому світі Вестеросу.'
-            },
-            {
-                id: 24,
-                title: 'Дюна',
-                author: 'Френк Герберт',
-                genre: 'Наукова фантастика',
-                price: 540,
-                rating: 5,
-                image: 'assets/slideshow/books.png',
-                description: 'Епічний науково-фантастичний роман про пустельну планету Арракіс та боротьбу за контроль над спецією.'
-            }
-        ];
 
         // Get unique genres for filter
         const genres = [...new Set(window.catalogBooks.map(book => book.genre))].sort();
@@ -661,22 +661,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 const bookCard = document.createElement('div');
                 bookCard.classList.add('book-card');
                 bookCard.setAttribute('data-description', book.description);
+                const isFavorite = typeof authSystem !== 'undefined' && authSystem.isFavorite(book.id);
+                const heartIcon = '<svg viewBox="0 0 24 24" class="heart-icon"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+                const activeClass = isFavorite ? 'active' : '';
+
                 bookCard.innerHTML = `
                 <a href="book.html?id=${book.id}" class="book-card-link">
                     <img src="${book.image}" alt="${book.title}" class="book-image">
+                    <h3>${book.title}</h3>
+                    <p class="book-author">${book.author}</p>
                     <p class="book-price">${book.price} грн</p>
                     <div class="book-rating-card">
                         <span class="book-rating-stars">${'⭐'.repeat(Math.round(bookRating))}</span>
                         <span class="book-rating-value">${bookRating.toFixed(1)}</span>
                     </div>
-                    <h3>${book.title}</h3>
-                    <p class="book-author">${book.author}</p>
                 </a>
-                <button data-book-id="${book.id}">В КОШИК</button>
+                <div class="card-actions">
+                     <button class="add-to-cart-btn" data-book-id="${book.id}">В КОШИК</button>
+                     <button class="favorite-btn ${activeClass}" data-book-id="${book.id}" aria-label="Add to favorites">
+                        ${heartIcon}
+                    </button>
+                </div>
             `;
 
                 // Add to cart button handler
-                const addToCartBtn = bookCard.querySelector('button');
+                const addToCartBtn = bookCard.querySelector('.add-to-cart-btn');
                 addToCartBtn.addEventListener('click', function (e) {
                     e.stopPropagation();
                     e.preventDefault();
@@ -688,6 +697,33 @@ document.addEventListener('DOMContentLoaded', function () {
                         description: book.description
                     };
                     addToCart(bookData);
+                });
+
+                // Favorite button handler
+                const favBtn = bookCard.querySelector('.favorite-btn');
+                favBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+
+                    if (typeof authSystem === 'undefined') return;
+
+                    const result = authSystem.toggleFavorite(book.id);
+                    if (result.success) {
+                        const isNowFavorite = result.action === 'added';
+                        // Do NOT change innerHTML, just toggle class
+                        if (isNowFavorite) {
+                            this.classList.add('active');
+                        } else {
+                            this.classList.remove('active');
+                        }
+                        // Optional: Show toast
+                    } else {
+                        alert(result.message);
+                        if (result.message.includes('увійдіть')) {
+                            const loginUrl = 'login.html?redirect=' + encodeURIComponent(window.location.pathname);
+                            window.location.href = loginUrl;
+                        }
+                    }
                 });
 
                 catalogGrid.appendChild(bookCard);
@@ -828,4 +864,92 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     }
+
+    // --- Newsletter Form Validation ---
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+
+            // Name validation
+            if (name.length < 2) {
+                alert('Будь ласка, введіть коректне повне ім\'я (мінімум 2 символи).');
+                nameInput.focus();
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Будь ласка, введіть коректну адресу електронної пошти.');
+                emailInput.focus();
+                return;
+            }
+
+            // Success
+            alert('Дякуємо за підписку!');
+            newsletterForm.reset();
+        });
+    }
+
+    // --- Global Favorite Buttons Initialization (for static pages like index.html or book.html) ---
+    function initFavoriteButtons() {
+        const favButtons = document.querySelectorAll('.favorite-btn');
+        favButtons.forEach(btn => {
+            // Skip if already has listener (though this function should ideally run once or be careful)
+            // But for static elements, we can just checking if handled.
+            // Actually, cleanest is to just re-apply state and ensure listener is attached.
+            // But renderCatalog attaches its own.
+            // We can target buttons that are NOT inside the catalog grid if we want to distinguish.
+
+            const bookId = btn.getAttribute('data-book-id');
+            if (bookId && typeof authSystem !== 'undefined') {
+                const isFavorite = authSystem.isFavorite(bookId);
+                // Ensure SVG is present if empty (though we populated in HTML, safety check)
+                if (!btn.innerHTML.includes('<svg')) {
+                    btn.innerHTML = heartSvg;
+                }
+
+                if (isFavorite) btn.classList.add('active');
+                else btn.classList.remove('active');
+
+                if (!btn.dataset.initialized) {
+                    btn.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+
+                        if (typeof authSystem === 'undefined') return;
+
+                        const result = authSystem.toggleFavorite(bookId);
+                        if (result.success) {
+                            const isNowFavorite = result.action === 'added';
+                            // Only toggle class
+                            if (isNowFavorite) {
+                                this.classList.add('active');
+                            } else {
+                                this.classList.remove('active');
+                            }
+                        } else {
+                            alert(result.message);
+                            if (result.message.includes('увійдіть')) {
+                                const loginUrl = 'login.html?redirect=' + encodeURIComponent(window.location.pathname);
+                                window.location.href = loginUrl;
+                            }
+                        }
+                    });
+                    btn.dataset.initialized = 'true';
+                }
+            }
+        });
+    }
+
+    // Initialize on load
+    initFavoriteButtons();
+
 });

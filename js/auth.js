@@ -17,7 +17,7 @@ class AuthSystem {
     // Register a new user
     register(userData) {
         const users = this.getUsers();
-        
+
         // Check if email already exists
         if (users.find(user => user.email === userData.email)) {
             return { success: false, message: 'Користувач з таким email вже існує' };
@@ -36,6 +36,7 @@ class AuthSystem {
             fullName: userData.fullName,
             phone: userData.phone || '',
             address: userData.address || '',
+            favorites: [], // Initialize empty favorites list
             createdAt: new Date().toISOString()
         };
 
@@ -146,6 +147,64 @@ class AuthSystem {
         localStorage.setItem(this.usersKey, JSON.stringify(users));
 
         return { success: true, message: 'Пароль змінено!' };
+    }
+
+    // --- Favorites Management ---
+
+    // Toggle favorite
+    toggleFavorite(bookId) {
+        // Ensure ID is a number if that's what we use, or string. Consistency is key.
+        // Catalog uses numbers for IDs.
+        const id = parseInt(bookId);
+        const currentUser = this.getCurrentUser();
+
+        if (!currentUser) {
+            return { success: false, message: 'Будь ласка, увійдіть до облікового запису' };
+        }
+
+        const users = this.getUsers();
+        const userIndex = users.findIndex(u => u.id === currentUser.id);
+
+        if (userIndex === -1) return { success: false, message: 'User not found' };
+
+        if (!users[userIndex].favorites) {
+            users[userIndex].favorites = [];
+        }
+
+        const favorites = users[userIndex].favorites;
+        const index = favorites.indexOf(id);
+
+        let action = '';
+        if (index === -1) {
+            favorites.push(id);
+            action = 'added';
+        } else {
+            favorites.splice(index, 1);
+            action = 'removed';
+        }
+
+        // Save users
+        localStorage.setItem(this.usersKey, JSON.stringify(users));
+
+        // Update current user session
+        const updatedUser = { ...users[userIndex] };
+        delete updatedUser.password;
+        localStorage.setItem(this.currentUserKey, JSON.stringify(updatedUser));
+
+        return { success: true, action: action, favorites: favorites };
+    }
+
+    // Get favorites
+    getFavorites() {
+        const currentUser = this.getCurrentUser();
+        if (!currentUser || !currentUser.favorites) return [];
+        return currentUser.favorites;
+    }
+
+    // Check if book is favorite
+    isFavorite(bookId) {
+        const favorites = this.getFavorites();
+        return favorites.includes(parseInt(bookId));
     }
 }
 

@@ -364,6 +364,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const averageRating = bookDetailsSystem.calculateAverageRating(bookId);
     const displayRating = averageRating ? parseFloat(averageRating) : book.rating;
 
+    // Check favorite status
+    const isFavorite = typeof authSystem !== 'undefined' && authSystem.isFavorite(bookId);
+    const heartIcon = '<svg viewBox="0 0 24 24" class="heart-icon"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+    const activeClass = isFavorite ? 'active' : '';
+
     const bookDetailsHTML = `
         <div class="book-details-main">
             <div class="book-details-image">
@@ -382,12 +387,44 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
                 <p class="book-details-price">${book.price} грн</p>
                 <p class="book-details-description">${book.description}</p>
-                <button id="addToCartBtn" class="add-to-cart-btn">Додати до кошика</button>
+                <div class="action-buttons">
+                    <button id="addToCartBtn" class="add-to-cart-btn">Додати до кошика</button>
+                    <button id="bookDetailFavBtn" class="favorite-btn ${activeClass}" data-book-id="${book.id}" aria-label="Add to favorites">
+                        ${heartIcon}
+                    </button>
+                </div>
             </div>
         </div>
     `;
 
     document.getElementById('bookDetails').innerHTML = bookDetailsHTML;
+
+    // Favorite button logic
+    const favBtn = document.getElementById('bookDetailFavBtn');
+    if (favBtn) {
+        favBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            if (typeof authSystem === 'undefined') return;
+
+            const result = authSystem.toggleFavorite(bookId);
+            if (result.success) {
+                const isNowFavorite = result.action === 'added';
+                if (isNowFavorite) {
+                    this.classList.add('active');
+                } else {
+                    this.classList.remove('active');
+                }
+            } else {
+                alert(result.message);
+                if (result.message.includes('увійдіть')) {
+                    const loginUrl = 'login.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
+                    window.location.href = loginUrl;
+                }
+            }
+        });
+    }
 
     // Add to cart button
     const addToCartBtn = document.getElementById('addToCartBtn');

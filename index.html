@@ -11,7 +11,7 @@
         href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
@@ -82,46 +82,75 @@
                     data-description="Збірка віршів видатного українського поета Тараса Шевченка. 'Кобзар' є символом боротьби українського народу за свободу і незалежність, втіленням народної мудрості та духовності."
                     data-book-id="1">
                     <a href="book.html?id=1" class="book-card-link">
-                        <img src="assets/kobzar.png" alt="Book Cover 1" class="book-image">
+                        <img src="assets/kobzar.png" alt="Кобзар" class="book-image">
+                        <h3>Кобзар</h3>
+                        <p class="book-author">Тарас Шевченко</p>
                         <p class="book-price">300 грн</p>
                         <div class="book-rating-card">
                             <span class="book-rating-stars">⭐⭐⭐⭐⭐</span>
                             <span class="book-rating-value">5.0</span>
                         </div>
-                        <h3>Кобзар</h3>
-                        <p class="book-author">Т. Шевченко</p>
                     </a>
-                    <button>В КОШИК</button>
+                    <div class="card-actions">
+                        <button class="add-to-cart-btn" data-book-id="1">В КОШИК</button>
+                        <button class="favorite-btn" data-book-id="1" aria-label="Add to favorites">
+                            <svg viewBox="0 0 24 24" class="heart-icon">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
                 <div class="book-card"
                     data-description="Соціально-побутова повість Івана Нечуя-Левицького про непросте життя селянської родини. Гумористичний та водночас драматичний твір, що розкриває традиції та звичаї українського села XIX століття."
                     data-book-id="2">
                     <a href="book.html?id=2" class="book-card-link">
-                        <img src="assets/book2.png" alt="Book Cover 2" class="book-image">
+                        <img src="assets/book2.png" alt="Кайдашева сім'я" class="book-image">
+                        <h3>Кайдашева сім'я</h3>
+                        <p class="book-author">Іван Нечуй-Левицький</p>
                         <p class="book-price">450 грн</p>
                         <div class="book-rating-card">
                             <span class="book-rating-stars">⭐⭐⭐⭐</span>
                             <span class="book-rating-value">4.0</span>
                         </div>
-                        <h3>Кайдашева сім'я</h3>
-                        <p class="book-author">І. Нечуй-Левицький</p>
                     </a>
-                    <button>В КОШИК</button>
+                    <div class="card-actions">
+                        <button class="add-to-cart-btn" data-book-id="2">В КОШИК</button>
+                        <button class="favorite-btn" data-book-id="2" aria-label="Add to favorites">
+                            <svg viewBox="0 0 24 24" class="heart-icon">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
                 <div class="book-card"
                     data-description="Іван Котляревський створив травестійну поему на основі 'Енеїди' Вергілія. Це перший твір написаний живою українською мовою, що поклав початок новій українській літературі. Гумористичний твір про пригоди троянців."
                     data-book-id="3">
                     <a href="book.html?id=3" class="book-card-link">
-                        <img src="assets/book3.png" alt="Book Cover 3" class="book-image">
+                        <img src="assets/book3.png" alt="Енеїда" class="book-image">
+                        <h3>Енеїда</h3>
+                        <p class="book-author">Іван Котляревський</p>
                         <p class="book-price">249 грн</p>
                         <div class="book-rating-card">
                             <span class="book-rating-stars">⭐⭐⭐⭐⭐</span>
                             <span class="book-rating-value">5.0</span>
                         </div>
-                        <h3>Енеїда</h3>
-                        <p class="book-author">І. Котляревський</p>
                     </a>
-                    <button>В КОШИК</button>
+                    <div class="card-actions">
+                        <button class="add-to-cart-btn" data-book-id="3">В КОШИК</button>
+                        <button class="favorite-btn" data-book-id="3" aria-label="Add to favorites">
+                            <svg viewBox="0 0 24 24" class="heart-icon">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="view-more-container">
+                <div class="button-container">
+                    <a href="catalog.html"><button class="view-more-btn">Переглянути більше книг</button></a>
                 </div>
             </div>
         </section>
@@ -338,8 +367,8 @@
         </div>
     </footer>
 
-    <script src="auth.js"></script>
-    <script src="script.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

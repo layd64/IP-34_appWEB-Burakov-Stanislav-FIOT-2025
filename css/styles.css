@@ -331,7 +331,7 @@ main {
 .book-author {
     font-size: 0.875rem;
     color: #666;
-    margin-bottom: 1.25rem;
+
 }
 
 .book-rating-card {
@@ -353,7 +353,10 @@ main {
     color: #F7A823;
 }
 
-.book-card button {
+/* .book-card button style replacement */
+.add-to-cart-btn,
+.book-card>button:not(.favorite-btn) {
+    /* Keeps backward compatibility if any button missed class, but excludes favorite */
     background-color: #F7A823;
     color: white;
     border: none;
@@ -365,7 +368,32 @@ main {
     transition: background-color 0.3s ease;
 }
 
-.book-card button:hover {
+.add-to-cart-btn:hover,
+.book-card>button:not(.favorite-btn):hover {
+    background-color: #e6951f;
+}
+
+/* View More Button */
+.view-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+}
+
+.view-more-btn {
+    background-color: #F7A823;
+    color: white;
+    border: none;
+    padding: 0.9375rem 1.875rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.view-more-btn:hover {
     background-color: #e6951f;
 }
 
@@ -1150,9 +1178,10 @@ footer {
 
 /* Cart Modal Specific Styles */
 .cart-modal-content {
-    max-width: 160rem;
-    height: 70vh;
-    max-height: 70vh;
+    width: 90vw;
+    max-width: 90vw;
+    height: 85vh;
+    max-height: 85vh;
     display: flex;
     flex-direction: column;
 }
@@ -1175,7 +1204,7 @@ footer {
 .cart-items-container {
     flex-grow: 1;
     overflow-y: auto;
-    max-height: 50vh;
+    max-height: 65vh;
     margin-bottom: 1.5rem;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
@@ -1559,7 +1588,6 @@ footer {
 #saveButtons {
     display: flex;
     gap: 1rem;
-    margin-top: 1rem;
 }
 
 .cancel-btn {
@@ -1737,7 +1765,6 @@ footer {
     font-size: 0.875rem;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 0.25rem;
     transition: background-color 0.3s ease;
     white-space: nowrap;
 }
@@ -2334,4 +2361,346 @@ footer {
     padding: 2rem;
     background-color: #f9f9f9;
     border-radius: 0.5rem;
+}
+
+/* Favorite Button */
+.favorite-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    transition: all 0.3s ease;
+    font-size: 1.8rem;
+    color: #ccc;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.favorite-btn.active {
+    color: #e74c3c;
+}
+
+.book-card {
+    position: relative;
+    /* Ensure absolute positioning works relative to card */
+}
+
+/* Favorites Grid in Profile */
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+/* Detail Page Favorite Button */
+.detail-fav-btn {
+    top: 1rem;
+    right: 1rem;
+    width: 4rem;
+    height: 4rem;
+    font-size: 2rem;
+}
+
+.book-details-image {
+    position: relative;
+    /* For absolute positioning of favorite button */
+}
+
+/* Ensure favorites are visible in profile */
+.no-favorites {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    grid-column: 1 / -1;
+}
+
+/* Profile Favorites Section */
+.favorites-section-container {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.favorites-section-container h3 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+}
+
+/* Ensure book cards look good in profile grid */
+/* .favorites-grid .book-card overrides removed to match catalog exactly */
+
+/* .favorites-grid .book-card img override removed */
+/* .add-to-cart-btn-profile override removed */
+
+/* Card Actions Container */
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+/* Update Favorite Button Styles */
+.favorite-btn {
+    position: static;
+    /* Remove absolute positioning */
+    width: 3rem;
+    /* Make it square-ish */
+    height: auto;
+    /* Match height of other button */
+    aspect-ratio: 1;
+    /* Ensure square */
+    border-radius: 0.25rem;
+    /* Match other button radius */
+    padding: 0;
+    font-size: 1.2rem;
+    background-color: #f0f0f0;
+    /* Light background for inactive */
+    color: #ccc;
+    box-shadow: none;
+    transform: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+}
+
+.favorite-btn:hover {
+    transform: none;
+    background-color: #e0e0e0;
+    box-shadow: none;
+}
+
+.favorite-btn.active {
+    color: #e74c3c;
+    background-color: #ffeaea;
+    border-color: #e74c3c;
+}
+
+/* Add to cart button flex grow */
+.add-to-cart-btn {
+    flex: 1;
+}
+
+/* Ensure book card flex column */
+.book-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.book-card-link {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Detail page favorite button override */
+.detail-fav-btn {
+    position: absolute;
+    /* Keep absolute for detail page if desired, or change based on request. User said "card", so maybe detail page is fine? */
+    /* Let's keep detail page as is for now, or check if user meant detail page too. 
+       User said "card", implies catalog/home. But detail page has a button too.
+       If detail page button breaks, we fix it.
+       The class .detail-fav-btn uses top/right.
+    */
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+/* Profile add to cart specific fix to match */
+.add-to-cart-btn-profile {
+    flex: 1;
+    background-color: #F7A823;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0;
+    /* Override generic margins if any */
+}
+
+.add-to-cart-btn-profile:hover {
+    background-color: #e6951f;
+}
+
+/* Favorite Button Icon Styles */
+.favorite-btn {
+    background-color: #F7A823 !important;
+    /* Always orange, override previous logic if any */
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.favorite-btn:hover {
+    background-color: #e6951f !important;
+}
+
+.heart-icon {
+    width: 24px;
+    height: 24px;
+    stroke: white;
+    stroke-width: 2;
+    fill: transparent;
+    /* Silhouette (outline) by default */
+    transition: fill 0.3s ease;
+}
+
+.favorite-btn.active .heart-icon {
+    fill: white;
+    /* Filled when active */
+}
+
+/* Ensure detail page button also follows this, might need size adjustment */
+.detail-fav-btn .heart-icon {
+    width: 32px;
+    height: 32px;
+}
+
+/* Action Buttons on Detail Page */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.action-buttons .add-to-cart-btn {
+    flex: 1;
+}
+
+.action-buttons .favorite-btn {
+    width: 3.5rem;
+    /* Match height of add to cart usually around 3.5rem, or 56px */
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 0.5rem;
+}
+
+/* Cleanup old detail fav btn style if it exists or override it */
+.detail-fav-btn {
+    display: none;
+    /* Just in case */
+}
+
+/* Profile Settings Grid */
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Ensure profile info matches action card height/style if needed */
+.profile-info {
+    margin-bottom: 0;
+    /* Remove margin as grid handles gap */
+    height: 100%;
+    /* Stretch to match */
+    display: flex;
+    /* Flex to push footer/buttons down if needed, or just keep as block */
+    flex-direction: column;
+}
+
+.action-card {
+    height: 100%;
+}
+
+@media (max-width: 1024px) {
+    .settings-grid {
+        grid-template-columns: 1fr;
+        /* Stack on smaller screens */
+    }
+}
+
+/* Edit Icon Style */
+.edit-btn {
+    background-color: transparent;
+    color: #666;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    /* Optional: circular hover effect */
+}
+
+.edit-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    /* Light gray background on hover */
+    color: #F7A823;
+}
+
+.edit-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: currentColor;
+}
+
+/* Ensure Profile Header Layout */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Vertically center */
+    gap: 1rem;
+    /* Space between title and icon */
+    border-bottom: 2px solid #F7A823;
+    /* Matching the orange underline logic usually, or keep existing */
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: nowrap;
+    /* Prevent wrapping if possible, or handle it gracefully */
+}
+
+.profile-header h3 {
+    margin: 0;
+    line-height: 1.2;
+    /* Optional: Ensure title doesn't break awkwardly if too long, though 'Personal Info' is short */
+}
+
+/* Update previous .edit-btn style override just in case it was defining background-color: orange */
+/* This block is intentionally placed after to ensure it overrides if appended, 
+   but since we are appending to main file, we should verify specificities.
+   The previous rule had .edit-btn. Using the same selector will override if later in file.
+*/
+/* Disabled Auth Button Style */
+.auth-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.auth-btn:disabled:hover {
+    background-color: #ccc;
+    /* No hover effect */
 }

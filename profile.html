@@ -11,7 +11,7 @@
         href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
@@ -61,11 +61,16 @@
             <div class="profile-container">
                 <h2>Мій профіль</h2>
 
-                <div id="profileContent">
+                <div id="profileContent" class="settings-grid">
                     <div class="profile-info">
                         <div class="profile-header">
                             <h3>Особиста інформація</h3>
-                            <button id="editBtn" class="edit-btn">Редагувати</button>
+                            <button id="editBtn" class="edit-btn" aria-label="Редагувати">
+                                <svg viewBox="0 0 24 24" class="edit-icon">
+                                    <path
+                                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                                </svg>
+                            </button>
                         </div>
 
                         <form id="profileForm" class="profile-form">
@@ -92,44 +97,49 @@
                             <div id="errorMessage" class="error-message" style="display: none;"></div>
                             <div id="successMessage" class="success-message" style="display: none;"></div>
 
-                            <div id="saveButtons" style="display: none;">
-                                <button type="submit" class="auth-btn">Зберегти зміни</button>
-                                <button type="button" id="cancelBtn" class="cancel-btn">Скасувати</button>
+                            <div id="saveButtons">
+                                <button type="submit" class="auth-btn" disabled>Зберегти зміни</button>
                             </div>
                         </form>
                     </div>
 
-                    <div class="profile-actions">
-                        <div class="action-card">
-                            <h3>Змінити пароль</h3>
-                            <form id="passwordForm" class="profile-form">
-                                <div class="form-group">
-                                    <label for="oldPassword">Поточний пароль</label>
-                                    <input type="password" id="oldPassword" name="oldPassword" required>
-                                </div>
+                    <div class="action-card">
+                        <h3>Змінити пароль</h3>
+                        <form id="passwordForm" class="profile-form">
+                            <div class="form-group">
+                                <label for="oldPassword">Поточний пароль</label>
+                                <input type="password" id="oldPassword" name="oldPassword" required>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="newPassword">Новий пароль</label>
-                                    <input type="password" id="newPassword" name="newPassword" required minlength="6">
-                                </div>
+                            <div class="form-group">
+                                <label for="newPassword">Новий пароль</label>
+                                <input type="password" id="newPassword" name="newPassword" required minlength="6">
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="confirmNewPassword">Підтвердження нового пароля</label>
-                                    <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
-                                </div>
+                            <div class="form-group">
+                                <label for="confirmNewPassword">Підтвердження нового пароля</label>
+                                <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+                            </div>
 
-                                <div id="passwordErrorMessage" class="error-message" style="display: none;"></div>
-                                <div id="passwordSuccessMessage" class="success-message" style="display: none;"></div>
+                            <div id="passwordErrorMessage" class="error-message" style="display: none;"></div>
 
-                                <button type="submit" class="auth-btn">Змінити пароль</button>
-                            </form>
-                        </div>
+                            <button type="submit" class="auth-btn">Змінити пароль</button>
+                            <div id="passwordSuccessMessage" class="success-message"
+                                style="display: none; margin-top: 1rem;"></div>
+                        </form>
+                    </div>
 
-                        <div class="action-card">
-                            <h3>Обліковий запис</h3>
-                            <p class="account-info">Дата реєстрації: <span id="createdAt"></span></p>
-                            <button id="logoutBtn" class="logout-btn">Вийти з облікового запису</button>
-                        </div>
+                    <div class="action-card">
+                        <h3>Обліковий запис</h3>
+                        <p class="account-info">Дата реєстрації: <span id="createdAt"></span></p>
+                        <button id="logoutBtn" class="logout-btn">Вийти</button>
+                    </div>
+                </div>
+
+                <div class="favorites-section-container">
+                    <h3>Мої Улюблені Книги</h3>
+                    <div id="favoritesGrid" class="favorites-grid">
+                        <!-- Favorites will be loaded here -->
                     </div>
                 </div>
 
@@ -186,8 +196,8 @@
         </div>
     </footer>
 
-    <script src="auth.js"></script>
-    <script src="script.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const currentUser = authSystem.getCurrentUser();
@@ -209,70 +219,77 @@
                 document.getElementById('createdAt').textContent = date.toLocaleDateString('uk-UA');
             }
 
-            // Edit profile
-            let isEditing = false;
+            // Profile Form Handling
             const editBtn = document.getElementById('editBtn');
-            const cancelBtn = document.getElementById('cancelBtn');
-            const profileForm = document.getElementById('profileForm');
             const saveButtons = document.getElementById('saveButtons');
-            const inputs = profileForm.querySelectorAll('input[type="text"], input[type="tel"]');
+            const saveBtn = saveButtons.querySelector('button[type="submit"]');
+            const profileInputs = document.querySelectorAll('#profileForm input');
+            let isEditing = false;
+
+            // Icons
+            const pencilIcon = '<svg viewBox="0 0 24 24" class="edit-icon"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>';
+            const closeIcon = '<svg viewBox="0 0 24 24" class="edit-icon"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>';
 
             editBtn.addEventListener('click', function () {
                 isEditing = !isEditing;
-                inputs.forEach(input => {
-                    input.readOnly = !isEditing;
+
+                profileInputs.forEach(input => {
+                    if (input.id !== 'email') { // Email usually read-only
+                        input.readOnly = !isEditing;
+                    }
                 });
-                saveButtons.style.display = isEditing ? 'flex' : 'none';
-                editBtn.textContent = isEditing ? 'Скасувати' : 'Редагувати';
+
+                if (isEditing) {
+                    saveBtn.disabled = false;
+                    profileInputs[0].focus();
+                    this.innerHTML = closeIcon;
+                    this.setAttribute('aria-label', 'Скасувати редагування');
+                } else {
+                    saveBtn.disabled = true;
+                    this.innerHTML = pencilIcon;
+                    this.setAttribute('aria-label', 'Редагувати');
+                    // Optional: Reset values if cancelled? 
+                    // User didn't ask, but "cancel" implies reset. 
+                    // For now, just disabling edit mode.
+                }
             });
 
-            cancelBtn.addEventListener('click', function () {
-                isEditing = false;
-                inputs.forEach(input => {
-                    input.readOnly = true;
-                });
-                saveButtons.style.display = 'none';
-                editBtn.textContent = 'Редагувати';
-
-                // Reset values
-                document.getElementById('fullName').value = currentUser.fullName || '';
-                document.getElementById('phone').value = currentUser.phone || '';
-                document.getElementById('address').value = currentUser.address || '';
-            });
-
-            profileForm.addEventListener('submit', function (e) {
+            // Form Submit
+            document.getElementById('profileForm').addEventListener('submit', function (e) {
                 e.preventDefault();
 
-                const errorMessage = document.getElementById('errorMessage');
-                const successMessage = document.getElementById('successMessage');
+                const fullName = document.getElementById('fullName').value;
+                const phone = document.getElementById('phone').value;
+                const address = document.getElementById('address').value;
 
-                errorMessage.style.display = 'none';
-                successMessage.style.display = 'none';
+                const result = authSystem.updateProfile({
+                    fullName,
+                    phone,
+                    address
+                });
 
-                const updatedData = {
-                    fullName: document.getElementById('fullName').value,
-                    phone: document.getElementById('phone').value,
-                    address: document.getElementById('address').value
-                };
-
-                const result = authSystem.updateProfile(updatedData);
+                const errorMsg = document.getElementById('errorMessage');
+                // const successMsg = document.getElementById('successMessage'); // Removed per request
 
                 if (result.success) {
-                    successMessage.textContent = result.message;
-                    successMessage.style.display = 'block';
-                    isEditing = false;
-                    inputs.forEach(input => {
-                        input.readOnly = true;
-                    });
-                    saveButtons.style.display = 'none';
-                    editBtn.textContent = 'Редагувати';
+                    // successMsg.textContent = result.message;
+                    // successMsg.style.display = 'block';
+                    errorMsg.style.display = 'none';
 
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1500);
+                    // Immediately exit edit mode
+                    isEditing = false;
+                    profileInputs.forEach(input => input.readOnly = true);
+
+                    // Reset UI
+                    saveBtn.disabled = true;
+                    editBtn.innerHTML = pencilIcon;
+                    editBtn.setAttribute('aria-label', 'Редагувати');
+
+                    // No timeout, just instant update view
                 } else {
-                    errorMessage.textContent = result.message;
-                    errorMessage.style.display = 'block';
+                    errorMsg.textContent = result.message;
+                    errorMsg.style.display = 'block';
+                    // successMsg.style.display = 'none';
                 }
             });
 
@@ -303,6 +320,10 @@
                     successMessage.textContent = result.message;
                     successMessage.style.display = 'block';
                     passwordForm.reset();
+
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 3000);
                 } else {
                     errorMessage.textContent = result.message;
                     errorMessage.style.display = 'block';
@@ -316,6 +337,99 @@
                     window.location.href = 'index.html';
                 }
             });
+
+            // Render Favorites
+            function renderFavorites() {
+                const favorites = authSystem.getFavorites();
+                const favoritesGrid = document.getElementById('favoritesGrid');
+
+                if (!favoritesGrid) return;
+
+                if (favorites.length === 0) {
+                    favoritesGrid.innerHTML = '<p class="no-favorites">У вас поки немає улюблених книг.</p>';
+                    return;
+                }
+
+                favoritesGrid.innerHTML = '';
+
+                if (!window.catalogBooks) {
+                    favoritesGrid.innerHTML = '<p class="error-message">Не вдалося завантажити список книг.</p>';
+                    return;
+                }
+
+                favorites.forEach(bookId => {
+                    const book = window.catalogBooks.find(b => b.id === parseInt(bookId));
+                    if (book) {
+                        const bookCard = document.createElement('div');
+                        bookCard.classList.add('book-card');
+                        bookCard.setAttribute('data-description', book.description); // Ensure data attributes match
+
+                        // Exact match logic from script.js renderCatalog
+                        // Note: script.js uses getBookRating helper, here we might need to access that or simple math
+                        const bookRating = book.rating || 5.0;
+                        const heartIcon = '<svg viewBox="0 0 24 24" class="heart-icon"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+
+                        // In favorites, it IS favorite, so active
+                        const activeClass = 'active';
+
+                        bookCard.innerHTML = `
+                            <a href="book.html?id=${book.id}" class="book-card-link">
+                                <img src="${book.image}" alt="${book.title}" class="book-image">
+                                <h3>${book.title}</h3>
+                                <p class="book-author">${book.author}</p>
+                                <p class="book-price">${book.price} грн</p>
+                                <div class="book-rating-card">
+                                    <span class="book-rating-stars">${'⭐'.repeat(Math.round(bookRating))}</span>
+                                    <span class="book-rating-value">${bookRating.toFixed(1)}</span>
+                                </div>
+                            </a>
+                            <div class="card-actions">
+                                 <button class="add-to-cart-btn" data-book-id="${book.id}">В КОШИК</button>
+                                 <button class="favorite-btn ${activeClass}" data-book-id="${book.id}" aria-label="Remove from favorites">
+                                    ${heartIcon}
+                                </button>
+                            </div>
+                        `;
+
+                        const favBtn = bookCard.querySelector('.favorite-btn');
+                        favBtn.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const res = authSystem.toggleFavorite(book.id);
+                            if (res.success) {
+                                renderFavorites();
+                            }
+                        });
+
+                        const cartBtn = bookCard.querySelector('.add-to-cart-btn');
+                        cartBtn.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+
+                            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                            const bookData = {
+                                image: book.image,
+                                price: `${book.price} грн`,
+                                title: book.title,
+                                author: book.author,
+                                description: book.description
+                            };
+                            cart.push(bookData);
+                            localStorage.setItem('cart', JSON.stringify(cart));
+                            alert(`Книгу "${book.title}" додано до кошика!`);
+
+                            const countEl = document.getElementById('cartCount');
+                            const mobileCountEl = document.getElementById('mobileCartCount');
+                            if (countEl) countEl.textContent = cart.length;
+                            if (mobileCountEl) mobileCountEl.textContent = `(${cart.length})`;
+                        });
+
+                        favoritesGrid.appendChild(bookCard);
+                    }
+                });
+            }
+
+            renderFavorites();
         });
     </script>
 </body>

@@ -263,8 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (path.endsWith('index.html') || path === '/' || path.endsWith('/')) {
         renderHomePageCategories();
-        // Featured books logic (if needed, but they are hardcoded currently. 
-        // Could also make them dynamic later, but sticking to request scope)
+        initHomePage();
     } else if (path.endsWith('catalog.html')) {
         initCatalog();
     }
@@ -430,6 +429,13 @@ function initCatalog() {
                             price: '${book.price} грн',
                             image: '${book.image}'
                          })">В КОШИК</button>
+                         <button class="favorite-btn ${isFavorite(book.id) ? 'active' : ''}" 
+                                 onclick="const btn = this; const isAdded = toggleFavorite(${book.id}); isAdded ? btn.classList.add('active') : btn.classList.remove('active');" 
+                                 aria-label="Toggle favorite">
+                            <svg viewBox="0 0 24 24" class="heart-icon">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
             `).join('');
@@ -531,7 +537,7 @@ function initCart() {
                     <div class="cart-item-info">
                         <h4>${item.title}</h4>
                         <p>${item.price}</p>
-                        <button class="remove-btn" onclick="removeFromCart(${index})">Видалити</button>
+                        <button class="cart-item-remove" onclick="removeFromCart(${index})">Видалити</button>
                     </div>
                 </div>
             `;
@@ -547,3 +553,84 @@ function initCart() {
         renderCartItems();
     };
 }
+
+/**
+ * Initialize Home Page Logic
+ */
+function initHomePage() {
+    // Add to Cart Buttons
+    const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
+    addToCartBtns.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            const bookId = parseInt(this.getAttribute('data-book-id'));
+            const book = window.catalogBooks.find(b => b.id === bookId);
+            if (book) {
+                addToCart({
+                    id: book.id,
+                    title: book.title,
+                    price: book.price + ' грн',
+                    image: book.image
+                });
+            }
+        });
+    });
+
+    // Favorite Buttons
+    const favBtns = document.querySelectorAll('.favorite-btn');
+    favBtns.forEach(btn => {
+        // Initialize state
+        const bookId = parseInt(btn.getAttribute('data-book-id'));
+        if (isFavorite(bookId)) {
+            btn.classList.add('active');
+        }
+
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const isAdded = toggleFavorite(bookId);
+            if (isAdded) {
+                this.classList.add('active');
+            } else {
+                this.classList.remove('active');
+            }
+        });
+    });
+}
+
+/**
+ * Check if book is favorite
+ */
+function isFavorite(bookId) {
+    if (typeof authSystem !== 'undefined' && authSystem.isAuthenticated()) {
+        return authSystem.isFavorite(bookId);
+    }
+    const favorites = JSON.parse(localStorage.getItem('bookstore_favorites')) || [];
+    return favorites.includes(bookId);
+}
+
+/**
+ * Toggle Favorite
+ */
+window.toggleFavorite = function (bookId) {
+    if (typeof authSystem !== 'undefined' && authSystem.isAuthenticated()) {
+        const result = authSystem.toggleFavorite(bookId);
+        return result.success && result.action === 'added';
+    }
+
+    let favorites = JSON.parse(localStorage.getItem('bookstore_favorites')) || [];
+    let added = false;
+
+    if (!favorites.includes(bookId)) {
+        favorites.push(bookId);
+        added = true;
+    } else {
+        favorites = favorites.filter(id => id !== bookId);
+        added = false;
+    }
+
+    localStorage.setItem('bookstore_favorites', JSON.stringify(favorites));
+    return added;
+    // Alerts removed as per request
+};
+
+// For backward compatibility if needed, or just remove old function
+window.addToFavorites = window.toggleFavorite;

@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 2. Auth state updates (header, etc.)
     updateAuthUI();
 
-    // 3. Cart functionality (simple placeholder logic or real if implemented)
+    // 3. Cart functionality
     initCart();
 
     // 4. Newsletter form
@@ -301,7 +301,40 @@ document.addEventListener('DOMContentLoaded', function () {
     } else if (path.endsWith('catalog.html')) {
         initCatalog();
     }
+
+    // 6. Password Toggle
+    initPasswordToggles();
 });
+
+/**
+ * Initialize Password Toggles
+ */
+function initPasswordToggles() {
+    const toggleBtns = document.querySelectorAll('.password-toggle-btn');
+
+    const eyeOpenPath = "M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z";
+    const eyeClosedPath = "M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-4.01.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z";
+
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            const input = this.previousElementSibling;
+            if (input && input.tagName === 'INPUT') {
+                const isPassword = input.getAttribute('type') === 'password';
+                const type = isPassword ? 'text' : 'password';
+                input.setAttribute('type', type);
+
+                // Toggle Icon
+                const svgPath = this.querySelector('path');
+                if (svgPath) {
+                    svgPath.setAttribute('d', isPassword ? eyeOpenPath : eyeClosedPath);
+                }
+
+                // Update aria-label
+                this.setAttribute('aria-label', isPassword ? 'Приховати пароль' : 'Показати пароль');
+            }
+        });
+    });
+}
 
 /**
  * Mobile Menu
@@ -401,7 +434,7 @@ function renderHomePageCategories() {
 
     // Render list
     categoriesList.innerHTML = genres.map(genre => `
-        <li><a href="catalog.html?category=${encodeURIComponent(genre)}">${genre}</a></li>
+        <li><a href="catalog.html?category=${encodeURIComponent(genre)}#catalog-title">${genre}</a></li>
     `).join('');
 }
 
@@ -693,6 +726,11 @@ function initCart() {
     const checkoutBtn = document.querySelector('.checkout-btn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', function () {
+            if (typeof authSystem === 'undefined' || !authSystem.isAuthenticated()) {
+                toast.error('Будь ласка, увійдіть до облікового запису, щоб оформити замовлення');
+                return;
+            }
+
             if (cart.length === 0) {
                 toast.warning('Ваш кошик порожній');
                 return;
@@ -716,6 +754,11 @@ function initCart() {
 
     // Global add to cart function
     window.addToCart = function (book) {
+        if (typeof authSystem === 'undefined' || !authSystem.isAuthenticated()) {
+            toast.error('Будь ласка, увійдіть до облікового запису, щоб додати книгу до кошика');
+            return;
+        }
+
         cart.push(book);
         localStorage.setItem('bookstore_cart', JSON.stringify(cart));
         updateCartCount();
@@ -841,8 +884,7 @@ function isFavorite(bookId) {
     if (typeof authSystem !== 'undefined' && authSystem.isAuthenticated()) {
         return authSystem.isFavorite(bookId);
     }
-    const favorites = JSON.parse(localStorage.getItem('bookstore_favorites')) || [];
-    return favorites.includes(bookId);
+    return false;
 }
 
 /**
@@ -866,25 +908,11 @@ window.toggleFavorite = function (bookId) {
         return result.success && result.action === 'added';
     }
 
-    let favorites = JSON.parse(localStorage.getItem('bookstore_favorites')) || [];
-    let added = false;
-
-    if (!favorites.includes(bookId)) {
-        favorites.push(bookId);
-        added = true;
-        toast.success('Книгу додано до улюблених!');
-    } else {
-        favorites = favorites.filter(id => id !== bookId);
-        added = false;
-        toast.info('Книгу видалено з улюблених');
-    }
-
-    localStorage.setItem('bookstore_favorites', JSON.stringify(favorites));
-    return added;
+    toast.error('Будь ласка, увійдіть до облікового запису, щоб додати книгу до улюблених');
+    return false;
 };
 
-// For backward compatibility if needed, or just remove old function
-window.addToFavorites = window.toggleFavorite;
+
 
 /**
  * Update rating widgets for any book cards present in the given container

@@ -1,7 +1,4 @@
-/**
- * Toast Notification System
- * Красива система сповіщень для заміни alert()
- */
+// toast notification system
 
 class ToastNotification {
     constructor() {
@@ -10,23 +7,18 @@ class ToastNotification {
     }
 
     init() {
-        // Створюємо контейнер для toast повідомлень
+        // create container
         this.container = document.createElement('div');
         this.container.className = 'toast-container';
         document.body.appendChild(this.container);
     }
 
-    /**
-     * Показати toast повідомлення
-     * @param {string} message - Текст повідомлення
-     * @param {string} type - Тип: 'success', 'error', 'warning', 'info'
-     * @param {number} duration - Тривалість показу в мс (за замовчуванням 3000)
-     */
+    // show notification
     show(message, type = 'info', duration = 3000) {
         const toast = document.createElement('div');
         toast.className = `toast toast-${type}`;
-        
-        // Іконки для різних типів
+
+        // status icons
         const icons = {
             success: '✓',
             error: '✕',
@@ -42,21 +34,21 @@ class ToastNotification {
             <button class="toast-close" aria-label="Close">&times;</button>
         `;
 
-        // Додаємо toast в контейнер
+        // add to container
         this.container.appendChild(toast);
 
-        // Анімація появи
+        // animate entry
         setTimeout(() => {
             toast.classList.add('toast-show');
         }, 10);
 
-        // Закриття по кліку на кнопку
+        // close button handler
         const closeBtn = toast.querySelector('.toast-close');
         closeBtn.addEventListener('click', () => {
             this.hide(toast);
         });
 
-        // Автоматичне закриття
+        // auto remove
         if (duration > 0) {
             setTimeout(() => {
                 this.hide(toast);
@@ -66,13 +58,11 @@ class ToastNotification {
         return toast;
     }
 
-    /**
-     * Приховати toast
-     */
+    // hide notification
     hide(toast) {
         toast.classList.remove('toast-show');
         toast.classList.add('toast-hide');
-        
+
         setTimeout(() => {
             if (toast.parentNode) {
                 toast.parentNode.removeChild(toast);
@@ -80,9 +70,7 @@ class ToastNotification {
         }, 300);
     }
 
-    /**
-     * Shorthand методи для різних типів
-     */
+    // helper methods
     success(message, duration = 3000) {
         return this.show(message, 'success', duration);
     }
@@ -99,13 +87,11 @@ class ToastNotification {
         return this.show(message, 'info', duration);
     }
 
-    /**
-     * Confirm dialog з красивим UI
-     */
+    // confirm dialog
     confirm(message, onConfirm, onCancel) {
         const confirmToast = document.createElement('div');
         confirmToast.className = 'toast-confirm';
-        
+
         confirmToast.innerHTML = `
             <div class="toast-confirm-content">
                 <div class="toast-confirm-icon">?</div>
@@ -145,7 +131,7 @@ class ToastNotification {
             if (onConfirm) onConfirm();
         });
 
-        // Закриття по Escape
+        // close on escape
         const handleEscape = (e) => {
             if (e.key === 'Escape') {
                 close();
@@ -159,8 +145,8 @@ class ToastNotification {
     }
 }
 
-// Створюємо глобальний екземпляр toast
+// create global instance
 const toast = new ToastNotification();
 
-// Експортуємо в window для глобального доступу
+// export globally
 window.toast = toast;

@@ -1,9 +1,6 @@
-/**
- * BookStore Pro - Main Script
- * Handles global data, home page logic, and catalog functionality
- */
+// main script
 
-// Global book data source - Single Source of Truth
+// global book data
 window.catalogBooks = [
     {
         id: 1,
@@ -247,13 +244,10 @@ window.catalogBooks = [
     }
 ];
 
-// Reviews storage key used across the app
+// reviews storage key
 const REVIEWS_STORAGE_KEY = 'bookstore_reviews';
 
-/**
- * Get rating data (average + review count) for a book
- * Falls back to the preset rating when there are no reviews
- */
+// get book rating data
 function getBookRatingInfo(bookId, fallbackRating = 0) {
     const reviewsJson = localStorage.getItem(REVIEWS_STORAGE_KEY);
     const allReviews = reviewsJson ? JSON.parse(reviewsJson) : [];
@@ -270,29 +264,27 @@ function getBookRatingInfo(bookId, fallbackRating = 0) {
     return { ratingValue: average, reviewCount: bookReviews.length };
 }
 
-/**
- * Build stars string for a numeric rating
- */
+// build stars string
 function buildRatingStars(ratingValue) {
     const starCount = Math.max(1, Math.round(ratingValue || 0));
     return '⭐'.repeat(starCount);
 }
 
-// Initialize application
+// initialize app
 document.addEventListener('DOMContentLoaded', function () {
-    // 1. Mobile menu toggle
+    // mobile menu
     initMobileMenu();
 
-    // 2. Auth state updates (header, etc.)
+    // auth state updates
     updateAuthUI();
 
-    // 3. Cart functionality
+    // cart setup
     initCart();
 
-    // 4. Newsletter form
+    // newsletter form
     initNewsletter();
 
-    // 5. Page specific logic
+    // page logic
     const path = window.location.pathname;
 
     if (path.endsWith('index.html') || path === '/' || path.endsWith('/')) {
@@ -302,13 +294,11 @@ document.addEventListener('DOMContentLoaded', function () {
         initCatalog();
     }
 
-    // 6. Password Toggle
+    // password toggle
     initPasswordToggles();
 });
 
-/**
- * Initialize Password Toggles
- */
+// init password toggles
 function initPasswordToggles() {
     const toggleBtns = document.querySelectorAll('.password-toggle-btn');
 
@@ -323,28 +313,26 @@ function initPasswordToggles() {
                 const type = isPassword ? 'text' : 'password';
                 input.setAttribute('type', type);
 
-                // Toggle Icon
+                // toggle icon
                 const svgPath = this.querySelector('path');
                 if (svgPath) {
                     svgPath.setAttribute('d', isPassword ? eyeOpenPath : eyeClosedPath);
                 }
 
-                // Update aria-label
+                // update aria-label
                 this.setAttribute('aria-label', isPassword ? 'Приховати пароль' : 'Показати пароль');
             }
         });
     });
 }
 
-/**
- * Mobile Menu
- */
+// mobile menu
 function initMobileMenu() {
     const burgerMenu = document.querySelector('.burger-menu');
     const mobileMenu = document.querySelector('.mobile-menu');
     let overlay = document.querySelector('.menu-overlay');
 
-    // Dynamically add overlay if it doesn't exist (to avoid editing all HTML files)
+    // create overlay if missing
     if (!overlay) {
         overlay = document.createElement('div');
         overlay.className = 'menu-overlay';
@@ -372,23 +360,22 @@ function initMobileMenu() {
     }
 
     if (burgerMenu && mobileMenu) {
-        // Use a wrapper to allow proper removing if re-initialized, 
-        // though strictly replacing the whole function is safer/simpler here.
+        // burger click handler
         burgerMenu.onclick = function (e) {
             e.stopPropagation();
             toggleMenu();
         };
 
-        // Close when clicking overlay (outside area)
+        // close on overlay click
         overlay.addEventListener('click', closeMenu);
 
-        // Close when clicking any link in the menu
+        // close on link click
         const links = mobileMenu.querySelectorAll('a');
         links.forEach(link => {
             link.addEventListener('click', closeMenu);
         });
 
-        // Close menu on resize if switching to desktop view
+        // auto close on resize
         window.addEventListener('resize', function () {
             if (window.innerWidth > 768) {
                 closeMenu();
@@ -397,9 +384,7 @@ function initMobileMenu() {
     }
 }
 
-/**
- * Update Header UI based on Auth State
- */
+// update header ui
 function updateAuthUI() {
     if (typeof authSystem === 'undefined') return;
 
@@ -408,13 +393,13 @@ function updateAuthUI() {
     const mobileLoginLink = document.getElementById('mobileLoginLink');
 
     if (currentUser) {
-        // Desktop
+        // desktop
         if (loginLink) {
             loginLink.textContent = 'Профіль';
             loginLink.href = 'profile.html';
         }
 
-        // Mobile
+        // mobile
         if (mobileLoginLink) {
             mobileLoginLink.textContent = 'Профіль';
             mobileLoginLink.href = 'profile.html';
@@ -422,25 +407,21 @@ function updateAuthUI() {
     }
 }
 
-/**
- * Render Categories on Home Page
- */
+// render home categories
 function renderHomePageCategories() {
     const categoriesList = document.querySelector('.categories-list ul');
     if (!categoriesList) return;
 
-    // Get unique genres
+    // get unique genres
     const genres = [...new Set(window.catalogBooks.map(book => book.genre))].sort();
 
-    // Render list
+    // render list
     categoriesList.innerHTML = genres.map(genre => `
         <li><a href="catalog.html?category=${encodeURIComponent(genre)}#catalog-title">${genre}</a></li>
     `).join('');
 }
 
-/**
- * Initialize Catalog Page
- */
+// init catalog page
 function initCatalog() {
     const catalogGrid = document.getElementById('catalogGrid');
     const genreFilter = document.getElementById('genreFilter');
@@ -458,7 +439,7 @@ function initCatalog() {
     let currentPage = 1;
     let filteredBooks = [];
 
-    // 1. Populate Genre Filter
+    // populate genre filter
     const genres = [...new Set(window.catalogBooks.map(book => book.genre))].sort();
     genres.forEach(genre => {
         const option = document.createElement('option');
@@ -467,39 +448,39 @@ function initCatalog() {
         genreFilter.appendChild(option);
     });
 
-    // 2. Check URL params for initial filter
+    // apply url filters
     const urlParams = new URLSearchParams(window.location.search);
     const categoryParam = urlParams.get('category');
     if (categoryParam && genres.includes(categoryParam)) {
         genreFilter.value = categoryParam;
     }
 
-    // 3. Render function
+    // render function
     function renderBooks() {
-        currentPage = 1; // Reset to first page when filters change
+        currentPage = 1; // reset page
 
-        // Collect filter values
+        // collect filters
         const genreValue = genreFilter.value;
         const ratingValue = parseInt(ratingFilter.value) || 0;
         const priceValue = priceFilter.value;
         const sortValue = sortBy.value;
         const searchValue = searchInput.value.toLowerCase().trim();
 
-        // Enrich books with live rating data
+        // enrich with ratings
         const booksWithRatings = window.catalogBooks.map(book => {
             const { ratingValue: liveRating, reviewCount } = getBookRatingInfo(book.id, book.rating);
             return { ...book, ratingValue: liveRating, reviewCount };
         });
 
-        // Filter books
+        // filter books
         filteredBooks = booksWithRatings.filter(book => {
-            // Genre
+            // genre
             if (genreValue && book.genre !== genreValue) return false;
 
-            // Rating
+            // rating
             if (book.ratingValue < ratingValue) return false;
 
-            // Price
+            // price
             if (priceValue) {
                 const [min, max] = priceValue.split('-').map(v => v === '+' ? Infinity : parseInt(v));
                 if (priceValue.includes('+')) {
@@ -509,7 +490,7 @@ function initCatalog() {
                 }
             }
 
-            // Search
+            // search
             if (searchValue) {
                 const searchMatch = book.title.toLowerCase().includes(searchValue) ||
                     book.author.toLowerCase().includes(searchValue);
@@ -519,7 +500,7 @@ function initCatalog() {
             return true;
         });
 
-        // Sort books
+        // sort books
         if (sortValue === 'rating-desc') {
             filteredBooks.sort((a, b) => b.ratingValue - a.ratingValue);
         } else if (sortValue === 'rating-asc') {
@@ -531,7 +512,7 @@ function initCatalog() {
     }
 
     function renderCurrentPage() {
-        // Render
+        // render grid
         if (filteredBooks.length === 0) {
             catalogGrid.innerHTML = '';
             noResults.style.display = 'block';
@@ -541,7 +522,7 @@ function initCatalog() {
 
         noResults.style.display = 'none';
 
-        // Calculate pagination
+        // calculate pagination
         const startIndex = (currentPage - 1) * BOOKS_PER_PAGE;
         const endIndex = startIndex + BOOKS_PER_PAGE;
         const booksToShow = filteredBooks.slice(startIndex, endIndex);
@@ -579,7 +560,7 @@ function initCatalog() {
             </div>
         `).join('');
 
-        // Scroll to top of catalog
+        // scroll to top
         catalogGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
@@ -598,7 +579,7 @@ function initCatalog() {
 
         let paginationHTML = '<div class="pagination-controls">';
 
-        // Previous button
+        // previous button
         paginationHTML += `
             <button class="pagination-btn" ${currentPage === 1 ? 'disabled' : ''} 
                     onclick="goToPage(${currentPage - 1})">
@@ -606,17 +587,17 @@ function initCatalog() {
             </button>
         `;
 
-        // Page numbers
+        // page numbers
         const maxVisiblePages = 5;
         let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
         let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
-        // Adjust startPage if we're near the end
+        // adjust start page
         if (endPage - startPage < maxVisiblePages - 1) {
             startPage = Math.max(1, endPage - maxVisiblePages + 1);
         }
 
-        // First page
+        // first page
         if (startPage > 1) {
             paginationHTML += `<button class="pagination-btn" onclick="goToPage(1)">1</button>`;
             if (startPage > 2) {
@@ -624,7 +605,7 @@ function initCatalog() {
             }
         }
 
-        // Page numbers
+        // page numbers
         for (let i = startPage; i <= endPage; i++) {
             paginationHTML += `
                 <button class="pagination-btn ${i === currentPage ? 'active' : ''}" 
@@ -634,7 +615,7 @@ function initCatalog() {
             `;
         }
 
-        // Last page
+        // last page
         if (endPage < totalPages) {
             if (endPage < totalPages - 1) {
                 paginationHTML += `<span class="pagination-ellipsis">...</span>`;
@@ -642,7 +623,7 @@ function initCatalog() {
             paginationHTML += `<button class="pagination-btn" onclick="goToPage(${totalPages})">${totalPages}</button>`;
         }
 
-        // Next button
+        // next button
         paginationHTML += `
             <button class="pagination-btn" ${currentPage === totalPages ? 'disabled' : ''} 
                     onclick="goToPage(${currentPage + 1})">
@@ -654,14 +635,14 @@ function initCatalog() {
         paginationContainer.innerHTML = paginationHTML;
     }
 
-    // Global function for page navigation
+    // global navigation
     window.goToPage = function (page) {
         currentPage = page;
         renderCurrentPage();
         renderPagination();
     };
 
-    // 4. Event Listeners
+    // event listeners
     genreFilter.addEventListener('change', renderBooks);
     ratingFilter.addEventListener('change', renderBooks);
     priceFilter.addEventListener('change', renderBooks);
@@ -675,20 +656,18 @@ function initCatalog() {
         sortBy.value = 'none';
         searchInput.value = '';
 
-        // Clear URL param without reload
+        // update url
         const newUrl = window.location.pathname;
         window.history.pushState({ path: newUrl }, '', newUrl);
 
         renderBooks();
     });
 
-    // Initial Render
+    // initial render
     renderBooks();
 }
 
-/**
- * Cart Functionality Placeholder (or simple implementation)
- */
+// cart setup
 function initCart() {
     const cartBtn = document.getElementById('cartBtn');
     const mobileCartBtn = document.getElementById('mobileCartBtn');
@@ -697,11 +676,11 @@ function initCart() {
     const countSpan = document.getElementById('cartCount');
     const mobileCountSpan = document.getElementById('mobileCartCount');
 
-    // Load cart from local storage
+    // load cart
     let cart = JSON.parse(localStorage.getItem('bookstore_cart')) || [];
     updateCartCount();
 
-    // Open Modal
+    // open modal
     function openCart() {
         if (cartModal) {
             cartModal.style.display = 'flex';
@@ -712,7 +691,7 @@ function initCart() {
     if (cartBtn) cartBtn.addEventListener('click', (e) => { e.preventDefault(); openCart(); });
     if (mobileCartBtn) mobileCartBtn.addEventListener('click', (e) => { e.preventDefault(); openCart(); });
 
-    // Close Modal
+    // close modal
     if (closeBtn) closeBtn.addEventListener('click', () => { cartModal.style.display = 'none'; });
     if (cartModal) {
         cartModal.addEventListener('click', (e) => {
@@ -722,7 +701,7 @@ function initCart() {
         });
     }
 
-    // Checkout Logic
+    // checkout logic
     const checkoutBtn = document.querySelector('.checkout-btn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', function () {
@@ -736,23 +715,23 @@ function initCart() {
                 return;
             }
 
-            // Clear Cart
+            // clear cart
             cart = [];
             localStorage.setItem('bookstore_cart', JSON.stringify(cart));
             updateCartCount();
             renderCartItems();
 
-            // Close Modal
+            // close modal
             if (cartModal) {
                 cartModal.style.display = 'none';
             }
 
-            // Show Success Message
+            // show success
             toast.success('Замовлення успішно оформлено! Дякуємо за покупку.');
         });
     }
 
-    // Global add to cart function
+    // global add to cart
     window.addToCart = function (book) {
         if (typeof authSystem === 'undefined' || !authSystem.isAuthenticated()) {
             toast.error('Будь ласка, увійдіть до облікового запису, щоб додати книгу до кошика');
@@ -808,11 +787,9 @@ function initCart() {
     };
 }
 
-/**
- * Initialize Home Page Logic
- */
+// init home page
 function initHomePage() {
-    // Add to Cart Buttons
+    // add to cart buttons
     const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
     addToCartBtns.forEach(btn => {
         btn.addEventListener('click', function (e) {
@@ -829,10 +806,10 @@ function initHomePage() {
         });
     });
 
-    // Favorite Buttons
+    // favorite buttons
     const favBtns = document.querySelectorAll('.favorite-btn');
     favBtns.forEach(btn => {
-        // Initialize state
+        // init state
         const bookId = parseInt(btn.getAttribute('data-book-id'));
         if (isFavorite(bookId)) {
             btn.classList.add('active');
@@ -849,24 +826,21 @@ function initHomePage() {
         });
     });
 
-    // Refresh static card ratings with live averages
+    // update ratings
     updateBookCardRatings();
 
-    // Update category counts on home categories grid
+    // update category counts
     updateCategoryCounts();
 }
 
-/**
- * Newsletter Form Handling
- */
+// newsletter handling
 function initNewsletter() {
     const form = document.querySelector('.newsletter-form');
     if (form) {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Basic validation is handled by HTML5 'required' and 'type=email'
-            // We can add more if needed
+            // validation
 
             const emailInput = form.querySelector('input[name="email"]');
             if (emailInput && emailInput.value) {
@@ -877,9 +851,7 @@ function initNewsletter() {
     }
 }
 
-/**
- * Check if book is favorite
- */
+// check favorite
 function isFavorite(bookId) {
     if (typeof authSystem !== 'undefined' && authSystem.isAuthenticated()) {
         return authSystem.isFavorite(bookId);
@@ -887,14 +859,12 @@ function isFavorite(bookId) {
     return false;
 }
 
-/**
- * Toggle Favorite
- */
+// toggle favorite
 window.toggleFavorite = function (bookId) {
     if (typeof authSystem !== 'undefined' && authSystem.isAuthenticated()) {
         const result = authSystem.toggleFavorite(bookId);
 
-        // Show Toast based on result
+        // show toast
         if (result.success) {
             if (result.action === 'added') {
                 toast.success('Книгу додано до улюблених!');
@@ -914,10 +884,7 @@ window.toggleFavorite = function (bookId) {
 
 
 
-/**
- * Update rating widgets for any book cards present in the given container
- * Useful for static sections like the home page
- */
+// update widgets
 function updateBookCardRatings(container = document) {
     const cards = container.querySelectorAll('.book-card[data-book-id]');
 
@@ -935,9 +902,7 @@ function updateBookCardRatings(container = document) {
     });
 }
 
-/**
- * Populate category cards with dynamic book counts (home page)
- */
+// update counts
 function updateCategoryCounts() {
     const cards = document.querySelectorAll('.category-card[data-genre]');
     if (!cards.length) return;

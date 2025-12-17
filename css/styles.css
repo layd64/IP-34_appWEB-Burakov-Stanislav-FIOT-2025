@@ -1,4 +1,4 @@
-/* Reset and base styles */
+/* reset */
 * {
     margin: 0;
     padding: 0;
@@ -29,7 +29,7 @@ body {
     padding: 0 1.25rem;
 }
 
-/* Header styles */
+/* header */
 header {
     background-color: #FFF6E8;
     padding: 1.25rem 0;
@@ -75,7 +75,7 @@ nav {
     color: #F7A823;
 }
 
-/* Burger menu styles */
+/* burger menu */
 .burger-menu {
     display: none;
     cursor: pointer;
@@ -148,7 +148,7 @@ nav {
     visibility: visible;
 }
 
-/* Mobile menu styles */
+/* mobile menu */
 .mobile-menu {
     display: none;
     position: absolute;
@@ -198,7 +198,7 @@ main {
     flex: 1;
 }
 
-/* Hero section */
+/* hero */
 .hero {
     padding: 3.125rem 0;
     background-color: #FFF6E8;
@@ -292,7 +292,7 @@ main {
     object-fit: cover;
 }
 
-/* Featured books section */
+/* featured books */
 .featured-books {
     padding: 1.875rem 0;
     background-color: #FFF6E8;
@@ -395,7 +395,7 @@ main {
     background-color: #e6951f;
 }
 
-/* View More Button */
+/* view more btn */
 .view-more-container {
     display: flex;
     justify-content: center;
@@ -419,7 +419,7 @@ main {
     background-color: #e6951f;
 }
 
-/* Categories section */
+/* categories */
 .categories {
     padding: 2.5rem 0 3.5rem;
     background: #fff6e8;
@@ -669,7 +669,7 @@ main {
     border-bottom: none;
 }
 
-/* Reading statistics section */
+/* reading stats */
 .reading-stats {
     padding: 1.875rem 0;
     background-color: #FFF6E8;
@@ -715,7 +715,7 @@ main {
     border-bottom: none;
 }
 
-/* Newsletter section */
+/* newsletter */
 .newsletter {
     background-color: #FFF6E8;
     padding: 1.875rem 0 5.625rem 0;
@@ -812,7 +812,7 @@ main {
     background-color: #1d1304;
 }
 
-/* Footer */
+/* footer */
 footer {
     background-color: #382D21;
     color: white;
@@ -868,7 +868,7 @@ footer {
 
 
 
-/* Modal Window Styles */
+/* modal */
 .book-card {
     cursor: pointer;
 }
@@ -1010,7 +1010,7 @@ footer {
     background-color: #e6951f;
 }
 
-/* Modal Animations */
+/* modal animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -1036,7 +1036,7 @@ footer {
 
 
 
-/* Responsive design */
+/* responsive */
 @media (max-width: 1200px) {
     .nav-links {
         gap: 1.5rem;
@@ -1417,7 +1417,7 @@ footer {
 
 
 
-/* Cart Styles */
+/* cart */
 .cart-btn {
     position: relative;
     display: flex;
@@ -1624,7 +1624,7 @@ footer {
     background-color: #f5f5f5;
 }
 
-/* Authentication Styles */
+/* auth */
 .auth-section {
     padding: 3.125rem 0;
     background-color: #FFF6E8;
@@ -1795,7 +1795,7 @@ footer {
     text-align: center;
 }
 
-/* Profile Styles */
+/* profile */
 .profile-section {
     padding: 3.125rem 0;
     background-color: #FFF6E8;
@@ -2003,7 +2003,7 @@ footer {
     }
 }
 
-/* Catalog Section Styles */
+/* catalog */
 .catalog-section {
     padding: 3.125rem 0;
     background-color: #FFF6E8;
@@ -2113,7 +2113,7 @@ footer {
     min-height: 20rem;
 }
 
-/* Catalog Pagination */
+/* catalog pagination */
 .catalog-pagination {
     display: flex;
     justify-content: center;
@@ -2245,7 +2245,7 @@ footer {
     font-size: 1.125rem;
 }
 
-/* Responsive for catalog */
+/* responsive catalog */
 @media (max-width: 1024px) {
     .catalog-filters {
         grid-template-columns: 1fr 1fr;
@@ -2344,7 +2344,7 @@ footer {
     }
 }
 
-/* Book Card Link Styles */
+/* book card link */
 .book-card-link {
     text-decoration: none;
     color: inherit;
@@ -2362,7 +2362,7 @@ footer {
     pointer-events: none;
 }
 
-/* Book Details Page Styles */
+/* book details */
 .book-details-section {
     padding: 3.125rem 0;
     background-color: #FFF6E8;
@@ -2508,7 +2508,7 @@ footer {
     background-color: #e6951f;
 }
 
-/* Reviews Section */
+/* reviews */
 .reviews-section {
     background-color: white;
     border-radius: 0.5rem;
@@ -2692,7 +2692,7 @@ footer {
     margin-left: 0.2rem;
 }
 
-/* Responsive for book details */
+/* responsive book details */
 @media (max-width: 768px) {
     .book-details-main {
         grid-template-columns: 1fr;
@@ -2735,7 +2735,7 @@ footer {
     }
 }
 
-/* Favorites Styles */
+/* favorites */
 .favorite-btn {
     background: none;
     border: none;
@@ -3152,7 +3152,7 @@ footer {
     /* No hover effect */
 }
 
-/* Order History Styles */
+/* order history */
 .orders-section-container {
     padding-top: 2rem;
     border-top: 1px solid #eee;
@@ -3232,7 +3232,7 @@ footer {
     color: #F7A823;
 }
 
-/* Checkout Button in Cart Modal */
+/* checkout btn */
 .cart-modal-footer {
     border-top: 1px solid #eee;
     padding-top: 1.5rem;
@@ -3266,11 +3266,9 @@ footer {
     background-color: #1b5e20;
 }
 
-/* ============================================
-   Toast Notification System Styles
-   ============================================ */
+/* toast system */
 
-/* Toast Container */
+/* toast container */
 .toast-container {
     position: fixed;
     top: 2rem;
@@ -3282,7 +3280,7 @@ footer {
     pointer-events: none;
 }
 
-/* Toast Base Styles */
+/* toast base */
 .toast {
     background: white;
     border-radius: 0.5rem;
@@ -3302,19 +3300,19 @@ footer {
     overflow: hidden;
 }
 
-/* Toast Show Animation */
+/* toast show */
 .toast-show {
     opacity: 1;
     transform: translateX(0);
 }
 
-/* Toast Hide Animation */
+/* toast hide */
 .toast-hide {
     opacity: 0;
     transform: translateX(120%);
 }
 
-/* Toast Icon */
+/* toast icon */
 .toast-icon {
     width: 2.5rem;
     height: 2.5rem;
@@ -3327,7 +3325,7 @@ footer {
     flex-shrink: 0;
 }
 
-/* Toast Content */
+/* toast content */
 .toast-content {
     flex: 1;
     display: flex;
@@ -3342,7 +3340,7 @@ footer {
     font-weight: 500;
 }
 
-/* Toast Close Button */
+/* toast close */
 .toast-close {
     background: transparent;
     border: none;
@@ -3359,7 +3357,7 @@ footer {
     color: #333;
 }
 
-/* Progress Bar */
+/* progress bar */
 .toast::before {
     content: '';
     position: absolute;
@@ -3381,7 +3379,7 @@ footer {
     }
 }
 
-/* Toast Types */
+/* toast types */
 
 /* Success Toast */
 .toast-success .toast-icon {
@@ -3439,7 +3437,7 @@ footer {
     border-left: 0.25rem solid #2196F3;
 }
 
-/* Confirm Dialog Overlay */
+/* confirm dialog */
 .toast-confirm {
     position: fixed;
     top: 0;
@@ -3537,7 +3535,7 @@ footer {
     box-shadow: 0 0.5rem 1rem rgba(247, 168, 35, 0.3);
 }
 
-/* Responsive Toast */
+/* responsive toast */
 @media (max-width: 768px) {
     .toast-container {
         top: 1rem;

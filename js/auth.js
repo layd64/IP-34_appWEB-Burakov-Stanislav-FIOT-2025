@@ -1,4 +1,4 @@
-// Authentication System using localStorage
+// auth system
 
 class AuthSystem {
     constructor() {
@@ -8,48 +8,48 @@ class AuthSystem {
     }
 
     init() {
-        // Initialize users array if it doesn't exist
+        // init users
         if (!localStorage.getItem(this.usersKey)) {
             localStorage.setItem(this.usersKey, JSON.stringify([]));
         }
     }
 
-    // Register a new user
+    // register user
     register(userData) {
         const users = this.getUsers();
 
-        // Check if email already exists
+        // check email
         if (users.find(user => user.email === userData.email)) {
             return { success: false, message: 'Користувач з таким email вже існує' };
         }
 
-        // Validate password length
+        // validate password
         if (userData.password.length < 6) {
             return { success: false, message: 'Пароль повинен містити мінімум 6 символів' };
         }
 
-        // Create new user
+        // create user
         const newUser = {
             id: Date.now().toString(),
             email: userData.email,
-            password: userData.password, // In real app, this should be hashed
+            password: userData.password, // plain text
             fullName: userData.fullName,
             phone: userData.phone || '',
             address: userData.address || '',
-            favorites: [], // Initialize empty favorites list
+            favorites: [], // init favorites
             createdAt: new Date().toISOString()
         };
 
         users.push(newUser);
         localStorage.setItem(this.usersKey, JSON.stringify(users));
 
-        // Auto-login after registration
+        // auto login
         this.login(userData.email, userData.password);
 
         return { success: true, message: 'Реєстрація успішна!', user: newUser };
     }
 
-    // Login user
+    // login
     login(email, password) {
         const users = this.getUsers();
         const user = users.find(u => u.email === email && u.password === password);
@@ -58,7 +58,7 @@ class AuthSystem {
             return { success: false, message: 'Невірний email або пароль' };
         }
 
-        // Store current user (without password)
+        // store session
         const userWithoutPassword = { ...user };
         delete userWithoutPassword.password;
         localStorage.setItem(this.currentUserKey, JSON.stringify(userWithoutPassword));
@@ -66,30 +66,30 @@ class AuthSystem {
         return { success: true, message: 'Вхід успішний!', user: userWithoutPassword };
     }
 
-    // Logout user
+    // logout
     logout() {
         localStorage.removeItem(this.currentUserKey);
         return { success: true, message: 'Вихід успішний!' };
     }
 
-    // Get current user
+    // get current user
     getCurrentUser() {
         const userJson = localStorage.getItem(this.currentUserKey);
         return userJson ? JSON.parse(userJson) : null;
     }
 
-    // Check if user is logged in
+    // check auth
     isAuthenticated() {
         return this.getCurrentUser() !== null;
     }
 
-    // Get all users (for admin purposes, if needed)
+    // get users
     getUsers() {
         const usersJson = localStorage.getItem(this.usersKey);
         return usersJson ? JSON.parse(usersJson) : [];
     }
 
-    // Update user profile
+    // update profile
     updateProfile(updatedData) {
         const currentUser = this.getCurrentUser();
         if (!currentUser) {
@@ -103,7 +103,7 @@ class AuthSystem {
             return { success: false, message: 'Користувач не знайдений' };
         }
 
-        // Update user data (don't update password unless provided)
+        // update data
         if (updatedData.password && updatedData.password.length > 0) {
             if (updatedData.password.length < 6) {
                 return { success: false, message: 'Пароль повинен містити мінімум 6 символів' };
@@ -117,7 +117,7 @@ class AuthSystem {
 
         localStorage.setItem(this.usersKey, JSON.stringify(users));
 
-        // Update current user session
+        // update session
         const updatedUser = { ...users[userIndex] };
         delete updatedUser.password;
         localStorage.setItem(this.currentUserKey, JSON.stringify(updatedUser));
@@ -125,7 +125,7 @@ class AuthSystem {
         return { success: true, message: 'Профіль оновлено!', user: updatedUser };
     }
 
-    // Change password
+    // change password
     changePassword(oldPassword, newPassword) {
         const currentUser = this.getCurrentUser();
         if (!currentUser) {
@@ -149,12 +149,11 @@ class AuthSystem {
         return { success: true, message: 'Пароль змінено!' };
     }
 
-    // --- Favorites Management ---
+    // favors management
 
-    // Toggle favorite
+    // toggle favorite
     toggleFavorite(bookId) {
-        // Ensure ID is a number if that's what we use, or string. Consistency is key.
-        // Catalog uses numbers for IDs.
+        // parse id
         const id = parseInt(bookId);
         const currentUser = this.getCurrentUser();
 
@@ -183,10 +182,10 @@ class AuthSystem {
             action = 'removed';
         }
 
-        // Save users
+        // save users
         localStorage.setItem(this.usersKey, JSON.stringify(users));
 
-        // Update current user session
+        // update session
         const updatedUser = { ...users[userIndex] };
         delete updatedUser.password;
         localStorage.setItem(this.currentUserKey, JSON.stringify(updatedUser));
@@ -194,20 +193,20 @@ class AuthSystem {
         return { success: true, action: action, favorites: favorites };
     }
 
-    // Get favorites
+    // get favorites
     getFavorites() {
         const currentUser = this.getCurrentUser();
         if (!currentUser || !currentUser.favorites) return [];
         return currentUser.favorites;
     }
 
-    // Check if book is favorite
+    // check favorite
     isFavorite(bookId) {
         const favorites = this.getFavorites();
         return favorites.includes(parseInt(bookId));
     }
 }
 
-// Create global instance
+// create instance
 const authSystem = new AuthSystem();
 

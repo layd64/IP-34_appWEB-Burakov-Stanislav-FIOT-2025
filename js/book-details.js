@@ -1,4 +1,4 @@
-// Book Details and Reviews System
+// book details system
 
 class BookDetailsSystem {
     constructor() {
@@ -7,13 +7,12 @@ class BookDetailsSystem {
     }
 
     getAllBooks() {
-        // Get books from catalog if available, otherwise use default list
-        // Try to get from global scope or use default list
+        // try to get from global scope
         if (typeof window !== 'undefined' && window.catalogBooks) {
             return window.catalogBooks;
         }
 
-        // Fallback book list (same as in script.js)
+        // fallback book list
         return [
             {
                 id: 1,
@@ -277,7 +276,7 @@ class BookDetailsSystem {
         const reviewsJson = localStorage.getItem(this.reviewsKey);
         const allReviews = reviewsJson ? JSON.parse(reviewsJson) : [];
 
-        // Check if user already reviewed this book
+        // check if reviewed
         const existingReview = allReviews.find(
             review => review.bookId === parseInt(bookId) && review.userId === currentUser.id
         );
@@ -341,9 +340,9 @@ class BookDetailsSystem {
 // Create global instance (will be initialized after DOM loads)
 let bookDetailsSystem;
 
-// Initialize book details page
+// init book details
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize system after DOM is ready
+    // init system
     bookDetailsSystem = new BookDetailsSystem();
     const urlParams = new URLSearchParams(window.location.search);
     const bookId = urlParams.get('id');
@@ -359,12 +358,12 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    // Display book details
+    // display details
     const reviews = bookDetailsSystem.getReviews(bookId);
     const averageRating = bookDetailsSystem.calculateAverageRating(bookId);
     const displayRating = averageRating ? parseFloat(averageRating) : book.rating;
 
-    // Check favorite status
+    // check favorite
     const isFavorite = typeof authSystem !== 'undefined' && authSystem.isFavorite(bookId);
     const heartIcon = '<svg viewBox="0 0 24 24" class="heart-icon"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
     const activeClass = isFavorite ? 'active' : '';
@@ -399,14 +398,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('bookDetails').innerHTML = bookDetailsHTML;
 
-    // Favorite button logic
+    // favorite button
     const favBtn = document.getElementById('bookDetailFavBtn');
     if (favBtn) {
         favBtn.addEventListener('click', function (e) {
             e.stopPropagation();
             e.preventDefault();
 
-            // Use global function for consistent behavior (toasts + guest favorites)
+            // use global function
             if (typeof window.toggleFavorite === 'function') {
                 const isActive = window.toggleFavorite(bookId);
                 if (isActive) {
@@ -418,7 +417,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Add to cart button
+    // add to cart
     const addToCartBtn = document.getElementById('addToCartBtn');
     if (addToCartBtn && typeof addToCart !== 'undefined') {
         addToCartBtn.addEventListener('click', function () {
@@ -433,22 +432,20 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Display reviews
+    // display reviews
     renderReviews(bookId);
 
-    // Display average rating
+    // display rating
     renderAverageRating(bookId, averageRating, reviews.length);
 
-    // Review form
+    // review form
     const reviewForm = document.getElementById('reviewForm');
     if (reviewForm) {
-        // Add rating input handlers for visual feedback
+        // rating handlers
         const ratingInputs = document.querySelectorAll('input[name="rating"]');
         const ratingLabels = document.querySelectorAll('.rating-input label');
 
-        // Get all labels in visual order (row-reverse means they appear 1,2,3,4,5 left to right)
-        // But in DOM they are: label5, label4, label3, label2, label1
-        // So we need to reverse the array to get visual order
+        // get labels
         const labelsArray = Array.from(ratingLabels).reverse();
 
         function updateRatingDisplay(selectedValue) {
@@ -527,7 +524,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 renderReviews(bookId);
                 renderAverageRating(bookId, bookDetailsSystem.calculateAverageRating(bookId), bookDetailsSystem.getReviews(bookId).length);
 
-                // Update rating in book details
+                // update rating
                 const newAverageRating = bookDetailsSystem.calculateAverageRating(bookId);
                 const displayRating = newAverageRating ? parseFloat(newAverageRating) : book.rating;
                 const ratingDisplay = document.querySelector('.book-rating-display');
@@ -559,7 +556,7 @@ function renderReviews(bookId) {
         return;
     }
 
-    // Sort reviews by date (newest first)
+    // sort reviews
     reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     reviewsList.innerHTML = reviews.map(review => {
@@ -581,7 +578,7 @@ function renderReviews(bookId) {
         `;
     }).join('');
 
-    // Add delete handlers
+    // delete handlers
     const deleteButtons = document.querySelectorAll('.delete-review-btn');
     deleteButtons.forEach(btn => {
         btn.addEventListener('click', function () {
@@ -597,7 +594,7 @@ function renderReviews(bookId) {
                         const reviews = bookDetailsSystem.getReviews(bookId);
                         renderAverageRating(bookId, bookDetailsSystem.calculateAverageRating(bookId), reviews.length);
 
-                        // Update rating in book details
+                        // update rating
                         const book = bookDetailsSystem.getBookById(bookId);
                         const newAverageRating = bookDetailsSystem.calculateAverageRating(bookId);
                         const displayRating = newAverageRating ? parseFloat(newAverageRating) : book.rating;

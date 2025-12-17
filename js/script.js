@@ -247,6 +247,37 @@ window.catalogBooks = [
     }
 ];
 
+// Reviews storage key used across the app
+const REVIEWS_STORAGE_KEY = 'bookstore_reviews';
+
+/**
+ * Get rating data (average + review count) for a book
+ * Falls back to the preset rating when there are no reviews
+ */
+function getBookRatingInfo(bookId, fallbackRating = 0) {
+    const reviewsJson = localStorage.getItem(REVIEWS_STORAGE_KEY);
+    const allReviews = reviewsJson ? JSON.parse(reviewsJson) : [];
+    const id = parseInt(bookId);
+    const bookReviews = allReviews.filter(review => review.bookId === id);
+
+    if (bookReviews.length === 0) {
+        const ratingValue = parseFloat(fallbackRating) || 0;
+        return { ratingValue, reviewCount: 0 };
+    }
+
+    const sum = bookReviews.reduce((acc, review) => acc + (parseInt(review.rating) || 0), 0);
+    const average = parseFloat((sum / bookReviews.length).toFixed(1));
+    return { ratingValue: average, reviewCount: bookReviews.length };
+}
+
+/**
+ * Build stars string for a numeric rating
+ */
+function buildRatingStars(ratingValue) {
+    const starCount = Math.max(1, Math.round(ratingValue || 0));
+    return '⭐'.repeat(starCount);
+}
+
 // Initialize application
 document.addEventListener('DOMContentLoaded', function () {
     // 1. Mobile menu toggle
@@ -365,13 +396,19 @@ function initCatalog() {
         const sortValue = sortBy.value;
         const searchValue = searchInput.value.toLowerCase().trim();
 
+        // Enrich books with live rating data
+        const booksWithRatings = window.catalogBooks.map(book => {
+            const { ratingValue: liveRating, reviewCount } = getBookRatingInfo(book.id, book.rating);
+            return { ...book, ratingValue: liveRating, reviewCount };
+        });
+
         // Filter books
-        let filteredBooks = window.catalogBooks.filter(book => {
+        let filteredBooks = booksWithRatings.filter(book => {
             // Genre
             if (genreValue && book.genre !== genreValue) return false;
 
             // Rating
-            if (book.rating < ratingValue) return false;
+            if (book.ratingValue < ratingValue) return false;
 
             // Price
             if (priceValue) {
@@ -395,9 +432,9 @@ function initCatalog() {
 
         // Sort books
         if (sortValue === 'rating-desc') {
-            filteredBooks.sort((a, b) => b.rating - a.rating);
+            filteredBooks.sort((a, b) => b.ratingValue - a.ratingValue);
         } else if (sortValue === 'rating-asc') {
-            filteredBooks.sort((a, b) => a.rating - b.rating);
+            filteredBooks.sort((a, b) => a.ratingValue - b.ratingValue);
         }
         // Add Price sorting if needed (not in HTML select currently but good practice)
 
@@ -416,8 +453,8 @@ function initCatalog() {
                             <p class="book-author">${book.author}</p>
                             <p class="book-genre-small">${book.genre}</p>
                             <div class="book-rating-card">
-                                <span class="book-rating-stars">${'⭐'.repeat(Math.round(book.rating))}</span>
-                                <span class="book-rating-value">${book.rating}</span>
+                                <span class="book-rating-stars">${buildRatingStars(book.ratingValue)}</span>
+                                <span class="book-rating-value">${book.ratingValue.toFixed(1)}</span>
                             </div>
                             <p class="book-price">${book.price} грн</p>
                         </div>
@@ -508,7 +545,7 @@ function initCart() {
         cart.push(book);
         localStorage.setItem('bookstore_cart', JSON.stringify(cart));
         updateCartCount();
-        alert('Книгу додано до кошика!');
+        toast.success('Книгу додано до кошика!');
     };
 
     function updateCartCount() {
@@ -594,6 +631,12 @@ function initHomePage() {
             }
         });
     });
+
+    // Refresh static card ratings with live averages
+    updateBookCardRatings();
+
+    // Update category counts on home categories grid
+    updateCategoryCounts();
 }
 
 /**
@@ -634,3 +677,41 @@ window.toggleFavorite = function (bookId) {
 
 // For backward compatibility if needed, or just remove old function
 window.addToFavorites = window.toggleFavorite;
+
+/**
+ * Update rating widgets for any book cards present in the given container
+ * Useful for static sections like the home page
+ */
+function updateBookCardRatings(container = document) {
+    const cards = container.querySelectorAll('.book-card[data-book-id]');
+
+    cards.forEach(card => {
+        const bookId = parseInt(card.getAttribute('data-book-id'));
+        const book = window.catalogBooks.find(b => b.id === bookId);
+        if (!book) return;
+
+        const { ratingValue } = getBookRatingInfo(bookId, book.rating);
+        const starsEl = card.querySelector('.book-rating-stars');
+        const valueEl = card.querySelector('.book-rating-value');
+
+        if (starsEl) starsEl.textContent = buildRatingStars(ratingValue);
+        if (valueEl) valueEl.textContent = ratingValue.toFixed(1);
+    });
+}
+
+/**
+ * Populate category cards with dynamic book counts (home page)
+ */
+function updateCategoryCounts() {
+    const cards = document.querySelectorAll('.category-card[data-genre]');
+    if (!cards.length) return;
+
+    cards.forEach(card => {
+        const genre = card.getAttribute('data-genre');
+        const countEl = card.querySelector('.category-count');
+        if (!genre || !countEl) return;
+
+        const count = window.catalogBooks.filter(book => book.genre === genre).length;
+        countEl.textContent = count > 0 ? `${count} книг` : 'Новинки';
+    });
+}

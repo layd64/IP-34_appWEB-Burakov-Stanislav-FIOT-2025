@@ -417,7 +417,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     this.classList.remove('active');
                 }
             } else {
-                alert(result.message);
+                toast.error(result.message);
                 if (result.message.includes('увійдіть')) {
                     const loginUrl = 'login.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
                     window.location.href = loginUrl;
@@ -594,31 +594,35 @@ function renderReviews(bookId) {
     deleteButtons.forEach(btn => {
         btn.addEventListener('click', function () {
             const reviewId = this.getAttribute('data-review-id');
-            if (confirm('Ви впевнені, що хочете видалити цей відгук?')) {
-                const result = bookDetailsSystem.deleteReview(reviewId);
-                if (result.success) {
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const bookId = urlParams.get('id');
-                    renderReviews(bookId);
-                    const reviews = bookDetailsSystem.getReviews(bookId);
-                    renderAverageRating(bookId, bookDetailsSystem.calculateAverageRating(bookId), reviews.length);
+            toast.confirm(
+                'Ви впевнені, що хочете видалити цей відгук?',
+                () => {
+                    const result = bookDetailsSystem.deleteReview(reviewId);
+                    if (result.success) {
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const bookId = urlParams.get('id');
+                        renderReviews(bookId);
+                        const reviews = bookDetailsSystem.getReviews(bookId);
+                        renderAverageRating(bookId, bookDetailsSystem.calculateAverageRating(bookId), reviews.length);
 
-                    // Update rating in book details
-                    const book = bookDetailsSystem.getBookById(bookId);
-                    const newAverageRating = bookDetailsSystem.calculateAverageRating(bookId);
-                    const displayRating = newAverageRating ? parseFloat(newAverageRating) : book.rating;
-                    const ratingDisplay = document.querySelector('.book-rating-display');
-                    if (ratingDisplay) {
-                        ratingDisplay.innerHTML = `
-                            <span class="rating-stars">${'⭐'.repeat(Math.round(displayRating))}</span>
-                            <span class="rating-value">${displayRating}</span>
-                            ${reviews.length > 0 ? `<span class="rating-count">(${reviews.length} ${reviews.length === 1 ? 'відгук' : reviews.length < 5 ? 'відгуки' : 'відгуків'})</span>` : ''}
-                        `;
+                        // Update rating in book details
+                        const book = bookDetailsSystem.getBookById(bookId);
+                        const newAverageRating = bookDetailsSystem.calculateAverageRating(bookId);
+                        const displayRating = newAverageRating ? parseFloat(newAverageRating) : book.rating;
+                        const ratingDisplay = document.querySelector('.book-rating-display');
+                        if (ratingDisplay) {
+                            ratingDisplay.innerHTML = `
+                                <span class="rating-stars">${'⭐'.repeat(Math.round(displayRating))}</span>
+                                <span class="rating-value">${displayRating}</span>
+                                ${reviews.length > 0 ? `<span class="rating-count">(${reviews.length} ${reviews.length === 1 ? 'відгук' : reviews.length < 5 ? 'відгуки' : 'відгуків'})</span>` : ''}
+                            `;
+                        }
+                        toast.success('Відгук видалено!');
+                    } else {
+                        toast.error(result.message);
                     }
-                } else {
-                    alert(result.message);
                 }
-            }
+            );
         });
     });
 }

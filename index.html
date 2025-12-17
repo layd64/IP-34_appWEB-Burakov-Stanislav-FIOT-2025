@@ -76,7 +76,10 @@
         </section>
 
         <section id="books" class="featured-books">
-            <h2>Рекомендовані книги</h2>
+            <div class="section-heading">
+                <h2>Рекомендовані книги</h2>
+                <p class="section-subtitle">Добірка, яку ми радимо переглянути першою.</p>
+            </div>
             <div class="books-grid">
                 <div class="book-card"
                     data-description="Збірка віршів видатного українського поета Тараса Шевченка. 'Кобзар' є символом боротьби українського народу за свободу і незалежність, втіленням народної мудрості та духовності."
@@ -156,70 +159,123 @@
         </section>
 
         <section id="categories" class="categories">
-            <h2>Категорії книг</h2>
-            <div class="categories-content">
-                <div class="categories-list">
-                    <h3>Популярні жанри</h3>
-                    <ul>
-                        <li><a href="#">Художня література</a></li>
-                        <li><a href="#">Наукова фантастика</a></li>
-                        <li><a href="#">Детективи та трилери</a></li>
-                        <li><a href="#">Романтика</a></li>
-                        <li><a href="#">Біографії</a></li>
-                        <li><a href="#">Саморозвиток</a></li>
-                    </ul>
+            <div class="section-heading">
+                <h2>Категорії книг</h2>
+                <p class="section-subtitle">Підберіть ідеальну книгу за темою, настроєм чи форматом читання.</p>
+            </div>
+
+            <div class="categories-grid">
+                <div class="category-card" data-genre="Художня література">
+                    <div class="category-header">
+                        <div class="category-icon">📚</div>
+                        <h3>Художня література</h3>
+                    </div>
+                    <div class="category-content">
+                        <p>Романи та повісті, що занурюють у нові світи й героїв.</p>
+                        <div class="category-meta">
+                            <a class="pill-link" href="catalog.html?category=Художня література">Переглянути</a>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="bestsellers-table">
-                    <h3>Бестселери цього місяця</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>РЕЙТИНГ</th>
-                                <th>НАЗВА</th>
-                                <th>АВТОР</th>
-                                <th>ОЦІНКА</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Код майбутнього</td>
-                                <td>Сара Джонсон</td>
-                                <td>⭐⭐⭐⭐⭐</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Таємниця океану</td>
-                                <td>Майкл Чен</td>
-                                <td>⭐⭐⭐⭐</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Цифрова революція</td>
-                                <td>Емма Девіс</td>
-                                <td>⭐⭐⭐⭐⭐</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Код майбутнього</td>
-                                <td>Сара Джонсон</td>
-                                <td>⭐⭐⭐⭐</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Космічна одіссея</td>
-                                <td>Роберт Вілсон</td>
-                                <td>⭐⭐⭐⭐</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="category-card" data-genre="Наукова фантастика">
+                    <div class="category-header">
+                        <div class="category-icon">🚀</div>
+                        <h3>Наукова фантастика</h3>
+                    </div>
+                    <div class="category-content">
+                        <p>Подорожі у майбутнє, інновації та сміливі ідеї.</p>
+                        <div class="category-meta">
+                            <a class="pill-link" href="catalog.html?category=Наукова фантастика">Переглянути</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-card" data-genre="Детектив">
+                    <div class="category-header">
+                        <div class="category-icon">🕵️</div>
+                        <h3>Детективи та трилери</h3>
+                    </div>
+                    <div class="category-content">
+                        <p>Сюжети з інтригою, загадками та неочікуваними фіналами.</p>
+                        <div class="category-meta">
+                            <a class="pill-link" href="catalog.html?category=Детектив">Переглянути</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-card" data-genre="Романтика">
+                    <div class="category-header">
+                        <div class="category-icon">💛</div>
+                        <h3>Романтика</h3>
+                    </div>
+                    <div class="category-content">
+                        <p>Історії про кохання, почуття та сильні емоції.</p>
+                        <div class="category-meta">
+                            <a class="pill-link" href="catalog.html?category=Романтика">Переглянути</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-card" data-genre="Біографія">
+                    <div class="category-header">
+                        <div class="category-icon">🎬</div>
+                        <h3>Біографії</h3>
+                    </div>
+                    <div class="category-content">
+                        <p>Шлях видатних людей, мотиваційні історії та факти.</p>
+                        <div class="category-meta">
+                            <a class="pill-link" href="catalog.html?category=Біографія">Переглянути</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-card" data-genre="Саморозвиток">
+                    <div class="category-header">
+                        <div class="category-icon">🎯</div>
+                        <h3>Саморозвиток</h3>
+                    </div>
+                    <div class="category-content">
+                        <p>Поради, методики та практики для зростання щодня.</p>
+                        <div class="category-meta">
+                            <a class="pill-link" href="catalog.html?category=Саморозвиток">Переглянути</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-card" data-genre="Поезія">
+                    <div class="category-header">
+                        <div class="category-icon">📝</div>
+                        <h3>Поезія</h3>
+                    </div>
+                    <div class="category-content">
+                        <p>Вірші та поеми, що передають найтонші емоції та образи.</p>
+                        <div class="category-meta">
+                            <a class="pill-link" href="catalog.html?category=Поезія">Переглянути</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-card" data-genre="Фентезі">
+                    <div class="category-header">
+                        <div class="category-icon">🐉</div>
+                        <h3>Фентезі</h3>
+                    </div>
+                    <div class="category-content">
+                        <p>Магічні світи, легенди та захопливі пригоди героїв.</p>
+                        <div class="category-meta">
+                            <a class="pill-link" href="catalog.html?category=Фентезі">Переглянути</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="reading-stats">
-            <h2>Статистика читання</h2>
+            <div class="section-heading">
+                <h2>Статистика читання</h2>
+                <p class="section-subtitle">Короткий зріз того, що читають найчастіше.</p>
+            </div>
             <div class="stats-content">
                 <h3>Країни-лідери за читанням</h3>
 
@@ -259,6 +315,8 @@
             <div class="newsletter-container">
                 <form class="newsletter-form" action="#" method="POST">
                     <h2>Залишайтеся в курсі</h2>
+                    <p class="section-subtitle" style="color: white; margin-bottom: 1rem;">Отримуйте свіжі новини та
+                        добірки книжок на e-mail.</p>
                     <h3>Підпишіться на нашу розсилку</h3>
                     <div class="form-group">
                         <label for="name">Повне ім'я</label>
@@ -367,6 +425,7 @@
         </div>
     </footer>
 
+    <script src="js/toast.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/script.js"></script>
 </body>

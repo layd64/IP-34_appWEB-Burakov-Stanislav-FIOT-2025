@@ -52,7 +52,7 @@ window.catalogBooks = [
         genre: 'Наукова фантастика',
         price: 550,
         rating: 4,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/код_майбутнього.jpeg',
         description: 'Захоплюючий роман про штучний інтелект та майбутнє технологій. Головний герой намагається розгадати таємницю коду, який може змінити світ.'
     },
     {
@@ -62,7 +62,7 @@ window.catalogBooks = [
         genre: 'Детектив',
         price: 480,
         rating: 4,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/таємниця_океану.jpg',
         description: 'Загадковий детектив про зникнення корабля та таємниці глибин океану. Детектив намагається розкрити правду про загадкову подію.'
     },
     {
@@ -72,7 +72,7 @@ window.catalogBooks = [
         genre: 'Наукова фантастика',
         price: 520,
         rating: 5,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/цифрова революція.jpg',
         description: 'Футуристичний роман про технологічну революцію, яка змінює суспільство. Автор досліджує етичні питання майбутнього.'
     },
     {
@@ -82,7 +82,7 @@ window.catalogBooks = [
         genre: 'Наукова фантастика',
         price: 600,
         rating: 4,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/космічна_одісея.jpg',
         description: 'Епічна космічна сага про подорож до далеких галактик. Герої стикаються з невідомими цивілізаціями та викликами космосу.'
     },
     {
@@ -92,7 +92,7 @@ window.catalogBooks = [
         genre: 'Детектив',
         price: 380,
         rating: 4,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/тайна_старого_замку.webp',
         description: 'Детективна історія про таємниці старого замку та зниклі скарби. Читач разом з героями розгадує загадки минулого.'
     },
     {
@@ -102,7 +102,7 @@ window.catalogBooks = [
         genre: 'Саморозвиток',
         price: 350,
         rating: 3,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/шлях_до_успіху.jpg',
         description: 'Практичний посібник з саморозвитку та досягнення цілей. Автор ділиться досвідом та ефективними стратегіями успіху.'
     },
     {
@@ -112,7 +112,7 @@ window.catalogBooks = [
         genre: 'Біографія',
         price: 420,
         rating: 4,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/життя_видатних_людей.jpg',
         description: 'Збірка біографій видатних особистостей, які змінили світ. Натхненні історії про досягнення та подолання перешкод.'
     },
     {
@@ -122,7 +122,7 @@ window.catalogBooks = [
         genre: 'Романтика',
         price: 290,
         rating: 3,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/романтика_вічності.jpg',
         description: 'Романтична історія про кохання, яке долає всі перешкоди. Емоційний твір про вічні почуття та пристрасть.'
     },
     {
@@ -132,7 +132,7 @@ window.catalogBooks = [
         genre: 'Художня література',
         price: 380,
         rating: 5,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/захар_беркут.webp',
         description: 'Історична повість про боротьбу українського народу за незалежність. Епічний твір про мужність та патріотизм.'
     },
     {
@@ -142,7 +142,7 @@ window.catalogBooks = [
         genre: 'Художня література',
         price: 340,
         rating: 5,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/тіні_забутих_предків.jpg',
         description: 'Поетична повість про життя гуцулів, їхні традиції та звичаї. Твір про кохання, смерть та вічність.'
     },
     {
@@ -152,7 +152,7 @@ window.catalogBooks = [
         genre: 'Художня література',
         price: 520,
         rating: 5,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/майстер_і_маргарита.webp',
         description: 'Філософський роман про добро і зло, кохання та жертву. Один з найвизначніших творів світової літератури.'
     },
     {
@@ -162,7 +162,7 @@ window.catalogBooks = [
         genre: 'Антиутопія',
         price: 450,
         rating: 5,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/1984.jpg',
         description: 'Класичний роман-антиутопія про тоталітарне суспільство та боротьбу за свободу думки.'
     },
     {
@@ -172,7 +172,7 @@ window.catalogBooks = [
         genre: 'Фентезі',
         price: 480,
         rating: 5,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/гаррі_поттер_і_філософський_камень.jpg',
         description: 'Перша книга про пригоди юного чарівника Гаррі Поттера у світі магії та чарівництва.'
     },
     {
@@ -182,7 +182,7 @@ window.catalogBooks = [
         genre: 'Фентезі',
         price: 550,
         rating: 5,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/володар_перснів.jpg',
         description: 'Епічна трилогія про боротьбу добра зі злом у вигаданому світі Середзем\'я.'
     },
     {
@@ -192,7 +192,7 @@ window.catalogBooks = [
         genre: 'Детектив',
         price: 420,
         rating: 5,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/шерлок_холмс.jpg',
         description: 'Збірка детективних оповідань про знаменитого детектива Шерлока Холмса та його друга доктора Ватсона.'
     },
     {
@@ -202,7 +202,7 @@ window.catalogBooks = [
         genre: 'Художня література',
         price: 490,
         rating: 5,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/анна_кареніна.jpg',
         description: 'Класичний роман про кохання, зраду та суспільні норми в Росії XIX століття.'
     },
     {
@@ -212,7 +212,7 @@ window.catalogBooks = [
         genre: 'Художня література',
         price: 680,
         rating: 5,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/війна_і_мир.jpg',
         description: 'Епічний роман про російське суспільство під час наполеонівських воєн. Один з найбільших творів світової літератури.'
     },
     {
@@ -222,7 +222,7 @@ window.catalogBooks = [
         genre: 'Пригоди',
         price: 320,
         rating: 4,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/пригоди_тома_сойєра.jpg',
         description: 'Захоплюючі пригоди хлопчика Тома Сойєра та його друга Гекльберрі Фінна на Міссісіпі.'
     },
     {
@@ -232,7 +232,7 @@ window.catalogBooks = [
         genre: 'Фентезі',
         price: 560,
         rating: 5,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/гра_престолів.jpg',
         description: 'Перша книга серії "Пісня льоду та полум\'я" про боротьбу за залізний трон у вигаданому світі Вестеросу.'
     },
     {
@@ -242,7 +242,7 @@ window.catalogBooks = [
         genre: 'Наукова фантастика',
         price: 540,
         rating: 5,
-        image: 'assets/slideshow/books.png',
+        image: 'assets/books_part2/дюна.jpg',
         description: 'Епічний науково-фантастичний роман про пустельну планету Арракіс та боротьбу за контроль над спецією.'
     }
 ];
@@ -289,7 +289,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // 3. Cart functionality (simple placeholder logic or real if implemented)
     initCart();
 
-    // 4. Page specific logic
+    // 4. Newsletter form
+    initNewsletter();
+
+    // 5. Page specific logic
     const path = window.location.pathname;
 
     if (path.endsWith('index.html') || path === '/' || path.endsWith('/')) {
@@ -306,11 +309,57 @@ document.addEventListener('DOMContentLoaded', function () {
 function initMobileMenu() {
     const burgerMenu = document.querySelector('.burger-menu');
     const mobileMenu = document.querySelector('.mobile-menu');
+    let overlay = document.querySelector('.menu-overlay');
+
+    // Dynamically add overlay if it doesn't exist (to avoid editing all HTML files)
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'menu-overlay';
+        document.body.appendChild(overlay);
+    }
+
+    function closeMenu() {
+        if (mobileMenu) mobileMenu.classList.remove('active');
+        if (burgerMenu) burgerMenu.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        document.body.classList.remove('menu-open');
+    }
+
+    function toggleMenu() {
+        if (!mobileMenu) return;
+        const isActive = mobileMenu.classList.contains('active');
+        if (isActive) {
+            closeMenu();
+        } else {
+            mobileMenu.classList.add('active');
+            burgerMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.classList.add('menu-open');
+        }
+    }
 
     if (burgerMenu && mobileMenu) {
-        burgerMenu.addEventListener('click', function () {
-            mobileMenu.classList.toggle('active');
-            burgerMenu.classList.toggle('active');
+        // Use a wrapper to allow proper removing if re-initialized, 
+        // though strictly replacing the whole function is safer/simpler here.
+        burgerMenu.onclick = function (e) {
+            e.stopPropagation();
+            toggleMenu();
+        };
+
+        // Close when clicking overlay (outside area)
+        overlay.addEventListener('click', closeMenu);
+
+        // Close when clicking any link in the menu
+        const links = mobileMenu.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Close menu on resize if switching to desktop view
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 768) {
+                closeMenu();
+            }
         });
     }
 }
@@ -368,8 +417,13 @@ function initCatalog() {
     const searchInput = document.getElementById('searchInput');
     const resetBtn = document.getElementById('resetFilters');
     const noResults = document.getElementById('noResults');
+    const paginationContainer = document.getElementById('catalogPagination');
 
     if (!catalogGrid) return;
+
+    const BOOKS_PER_PAGE = 15;
+    let currentPage = 1;
+    let filteredBooks = [];
 
     // 1. Populate Genre Filter
     const genres = [...new Set(window.catalogBooks.map(book => book.genre))].sort();
@@ -389,6 +443,8 @@ function initCatalog() {
 
     // 3. Render function
     function renderBooks() {
+        currentPage = 1; // Reset to first page when filters change
+
         // Collect filter values
         const genreValue = genreFilter.value;
         const ratingValue = parseInt(ratingFilter.value) || 0;
@@ -403,7 +459,7 @@ function initCatalog() {
         });
 
         // Filter books
-        let filteredBooks = booksWithRatings.filter(book => {
+        filteredBooks = booksWithRatings.filter(book => {
             // Genre
             if (genreValue && book.genre !== genreValue) return false;
 
@@ -436,48 +492,141 @@ function initCatalog() {
         } else if (sortValue === 'rating-asc') {
             filteredBooks.sort((a, b) => a.ratingValue - b.ratingValue);
         }
-        // Add Price sorting if needed (not in HTML select currently but good practice)
 
+        renderCurrentPage();
+        renderPagination();
+    }
+
+    function renderCurrentPage() {
         // Render
         if (filteredBooks.length === 0) {
             catalogGrid.innerHTML = '';
             noResults.style.display = 'block';
-        } else {
-            noResults.style.display = 'none';
-            catalogGrid.innerHTML = filteredBooks.map(book => `
-                <div class="book-card" data-book-id="${book.id}">
-                    <a href="book.html?id=${book.id}" class="book-card-link">
-                        <img src="${book.image}" alt="${book.title}" class="book-image">
-                        <div class="book-info">
-                            <h3>${book.title}</h3>
-                            <p class="book-author">${book.author}</p>
-                            <p class="book-genre-small">${book.genre}</p>
-                            <div class="book-rating-card">
-                                <span class="book-rating-stars">${buildRatingStars(book.ratingValue)}</span>
-                                <span class="book-rating-value">${book.ratingValue.toFixed(1)}</span>
-                            </div>
-                            <p class="book-price">${book.price} грн</p>
-                        </div>
-                    </a>
-                    <div class="card-actions">
-                         <button class="add-to-cart-btn" onclick="addToCart({
-                            id: ${book.id},
-                            title: '${book.title.replace(/'/g, "\\'")}',
-                            price: '${book.price} грн',
-                            image: '${book.image}'
-                         })">В КОШИК</button>
-                         <button class="favorite-btn ${isFavorite(book.id) ? 'active' : ''}" 
-                                 onclick="const btn = this; const isAdded = toggleFavorite(${book.id}); isAdded ? btn.classList.add('active') : btn.classList.remove('active');" 
-                                 aria-label="Toggle favorite">
-                            <svg viewBox="0 0 24 24" class="heart-icon">
-                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            `).join('');
+            paginationContainer.innerHTML = '';
+            return;
         }
+
+        noResults.style.display = 'none';
+
+        // Calculate pagination
+        const startIndex = (currentPage - 1) * BOOKS_PER_PAGE;
+        const endIndex = startIndex + BOOKS_PER_PAGE;
+        const booksToShow = filteredBooks.slice(startIndex, endIndex);
+
+        catalogGrid.innerHTML = booksToShow.map(book => `
+            <div class="book-card" data-book-id="${book.id}">
+                <a href="book.html?id=${book.id}" class="book-card-link">
+                    <img src="${book.image}" alt="${book.title}" class="book-image">
+                    <div class="book-info">
+                        <h3>${book.title}</h3>
+                        <p class="book-author">${book.author}</p>
+                        <p class="book-genre-small">${book.genre}</p>
+                        <div class="book-rating-card">
+                            <span class="book-rating-stars">${buildRatingStars(book.ratingValue)}</span>
+                            <span class="book-rating-value">${book.ratingValue.toFixed(1)}</span>
+                        </div>
+                        <p class="book-price">${book.price} грн</p>
+                    </div>
+                </a>
+                <div class="card-actions">
+                     <button class="add-to-cart-btn" onclick="addToCart({
+                        id: ${book.id},
+                        title: '${book.title.replace(/'/g, "\\'")}',
+                        price: '${book.price} грн',
+                        image: '${book.image}'
+                     })">В КОШИК</button>
+                     <button class="favorite-btn ${isFavorite(book.id) ? 'active' : ''}" 
+                             onclick="const btn = this; const isAdded = toggleFavorite(${book.id}); isAdded ? btn.classList.add('active') : btn.classList.remove('active');" 
+                             aria-label="Toggle favorite">
+                        <svg viewBox="0 0 24 24" class="heart-icon">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+
+        // Scroll to top of catalog
+        catalogGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+
+    function renderPagination() {
+        if (filteredBooks.length === 0) {
+            paginationContainer.innerHTML = '';
+            return;
+        }
+
+        const totalPages = Math.ceil(filteredBooks.length / BOOKS_PER_PAGE);
+
+        if (totalPages <= 1) {
+            paginationContainer.innerHTML = '';
+            return;
+        }
+
+        let paginationHTML = '<div class="pagination-controls">';
+
+        // Previous button
+        paginationHTML += `
+            <button class="pagination-btn" ${currentPage === 1 ? 'disabled' : ''} 
+                    onclick="goToPage(${currentPage - 1})">
+                ← Попередня
+            </button>
+        `;
+
+        // Page numbers
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+        // Adjust startPage if we're near the end
+        if (endPage - startPage < maxVisiblePages - 1) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+
+        // First page
+        if (startPage > 1) {
+            paginationHTML += `<button class="pagination-btn" onclick="goToPage(1)">1</button>`;
+            if (startPage > 2) {
+                paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+            }
+        }
+
+        // Page numbers
+        for (let i = startPage; i <= endPage; i++) {
+            paginationHTML += `
+                <button class="pagination-btn ${i === currentPage ? 'active' : ''}" 
+                        onclick="goToPage(${i})">
+                    ${i}
+                </button>
+            `;
+        }
+
+        // Last page
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+            }
+            paginationHTML += `<button class="pagination-btn" onclick="goToPage(${totalPages})">${totalPages}</button>`;
+        }
+
+        // Next button
+        paginationHTML += `
+            <button class="pagination-btn" ${currentPage === totalPages ? 'disabled' : ''} 
+                    onclick="goToPage(${currentPage + 1})">
+                Наступна →
+            </button>
+        `;
+
+        paginationHTML += '</div>';
+        paginationContainer.innerHTML = paginationHTML;
+    }
+
+    // Global function for page navigation
+    window.goToPage = function (page) {
+        currentPage = page;
+        renderCurrentPage();
+        renderPagination();
+    };
 
     // 4. Event Listeners
     genreFilter.addEventListener('change', renderBooks);
@@ -540,6 +689,31 @@ function initCart() {
         });
     }
 
+    // Checkout Logic
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', function () {
+            if (cart.length === 0) {
+                toast.warning('Ваш кошик порожній');
+                return;
+            }
+
+            // Clear Cart
+            cart = [];
+            localStorage.setItem('bookstore_cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCartItems();
+
+            // Close Modal
+            if (cartModal) {
+                cartModal.style.display = 'none';
+            }
+
+            // Show Success Message
+            toast.success('Замовлення успішно оформлено! Дякуємо за покупку.');
+        });
+    }
+
     // Global add to cart function
     window.addToCart = function (book) {
         cart.push(book);
@@ -574,8 +748,8 @@ function initCart() {
                     <div class="cart-item-info">
                         <h4>${item.title}</h4>
                         <p>${item.price}</p>
-                        <button class="cart-item-remove" onclick="removeFromCart(${index})">Видалити</button>
                     </div>
+                    <button class="cart-item-remove" onclick="removeFromCart(${index})" aria-label="Видалити">&times;</button>
                 </div>
             `;
         }).join('');
@@ -640,6 +814,27 @@ function initHomePage() {
 }
 
 /**
+ * Newsletter Form Handling
+ */
+function initNewsletter() {
+    const form = document.querySelector('.newsletter-form');
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Basic validation is handled by HTML5 'required' and 'type=email'
+            // We can add more if needed
+
+            const emailInput = form.querySelector('input[name="email"]');
+            if (emailInput && emailInput.value) {
+                toast.success('Дякуємо за підписку! Ми надіслали підтвердження на вашу пошту.');
+                form.reset();
+            }
+        });
+    }
+}
+
+/**
  * Check if book is favorite
  */
 function isFavorite(bookId) {
@@ -656,6 +851,18 @@ function isFavorite(bookId) {
 window.toggleFavorite = function (bookId) {
     if (typeof authSystem !== 'undefined' && authSystem.isAuthenticated()) {
         const result = authSystem.toggleFavorite(bookId);
+
+        // Show Toast based on result
+        if (result.success) {
+            if (result.action === 'added') {
+                toast.success('Книгу додано до улюблених!');
+            } else {
+                toast.info('Книгу видалено з улюблених');
+            }
+        } else {
+            toast.error(result.message);
+        }
+
         return result.success && result.action === 'added';
     }
 
@@ -665,14 +872,15 @@ window.toggleFavorite = function (bookId) {
     if (!favorites.includes(bookId)) {
         favorites.push(bookId);
         added = true;
+        toast.success('Книгу додано до улюблених!');
     } else {
         favorites = favorites.filter(id => id !== bookId);
         added = false;
+        toast.info('Книгу видалено з улюблених');
     }
 
     localStorage.setItem('bookstore_favorites', JSON.stringify(favorites));
     return added;
-    // Alerts removed as per request
 };
 
 // For backward compatibility if needed, or just remove old function

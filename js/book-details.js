@@ -406,21 +406,13 @@ document.addEventListener('DOMContentLoaded', function () {
             e.stopPropagation();
             e.preventDefault();
 
-            if (typeof authSystem === 'undefined') return;
-
-            const result = authSystem.toggleFavorite(bookId);
-            if (result.success) {
-                const isNowFavorite = result.action === 'added';
-                if (isNowFavorite) {
+            // Use global function for consistent behavior (toasts + guest favorites)
+            if (typeof window.toggleFavorite === 'function') {
+                const isActive = window.toggleFavorite(bookId);
+                if (isActive) {
                     this.classList.add('active');
                 } else {
                     this.classList.remove('active');
-                }
-            } else {
-                toast.error(result.message);
-                if (result.message.includes('увійдіть')) {
-                    const loginUrl = 'login.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
-                    window.location.href = loginUrl;
                 }
             }
         });

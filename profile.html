@@ -94,9 +94,6 @@
                                 <input type="text" id="address" name="address" readonly>
                             </div>
 
-                            <div id="errorMessage" class="error-message" style="display: none;"></div>
-                            <div id="successMessage" class="success-message" style="display: none;"></div>
-
                             <div id="saveButtons">
                                 <button type="submit" class="auth-btn" disabled>Зберегти зміни</button>
                             </div>
@@ -121,11 +118,7 @@
                                 <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
                             </div>
 
-                            <div id="passwordErrorMessage" class="error-message" style="display: none;"></div>
-
                             <button type="submit" class="auth-btn">Змінити пароль</button>
-                            <div id="passwordSuccessMessage" class="success-message"
-                                style="display: none; margin-top: 1rem;"></div>
                         </form>
                     </div>
 
@@ -133,6 +126,7 @@
                         <h3>Обліковий запис</h3>
                         <p class="account-info">Дата реєстрації: <span id="createdAt"></span></p>
                         <button id="logoutBtn" class="logout-btn">Вийти</button>
+                        <button id="logoutClearBtn" class="logout-clear-btn">Вийти та очистити localStorage</button>
                     </div>
                 </div>
 
@@ -185,7 +179,7 @@
                     <li><a href="index.html">Головна</a></li>
                     <li><a href="catalog.html">Каталог</a></li>
                     <li><a href="index.html#categories">Категорії</a></li>
-                    <li><a href="about.html">Про проєкт</a></li>
+                    <li><a href="profile.html">Профіль</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -196,6 +190,7 @@
         </div>
     </footer>
 
+    <script src="js/toast.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/script.js"></script>
     <script>
@@ -268,13 +263,8 @@
                     address
                 });
 
-                const errorMsg = document.getElementById('errorMessage');
-                // const successMsg = document.getElementById('successMessage'); // Removed per request
-
                 if (result.success) {
-                    // successMsg.textContent = result.message;
-                    // successMsg.style.display = 'block';
-                    errorMsg.style.display = 'none';
+                    toast.success(result.message);
 
                     // Immediately exit edit mode
                     isEditing = false;
@@ -284,58 +274,48 @@
                     saveBtn.disabled = true;
                     editBtn.innerHTML = pencilIcon;
                     editBtn.setAttribute('aria-label', 'Редагувати');
-
-                    // No timeout, just instant update view
                 } else {
-                    errorMsg.textContent = result.message;
-                    errorMsg.style.display = 'block';
-                    // successMsg.style.display = 'none';
+                    toast.error(result.message);
                 }
             });
 
             // Change password
+            // Change password
             const passwordForm = document.getElementById('passwordForm');
             passwordForm.addEventListener('submit', function (e) {
                 e.preventDefault();
-
-                const errorMessage = document.getElementById('passwordErrorMessage');
-                const successMessage = document.getElementById('passwordSuccessMessage');
-
-                errorMessage.style.display = 'none';
-                successMessage.style.display = 'none';
 
                 const oldPassword = document.getElementById('oldPassword').value;
                 const newPassword = document.getElementById('newPassword').value;
                 const confirmPassword = document.getElementById('confirmNewPassword').value;
 
                 if (newPassword !== confirmPassword) {
-                    errorMessage.textContent = 'Паролі не співпадають';
-                    errorMessage.style.display = 'block';
+                    toast.error('Паролі не співпадають');
                     return;
                 }
 
                 const result = authSystem.changePassword(oldPassword, newPassword);
 
                 if (result.success) {
-                    successMessage.textContent = result.message;
-                    successMessage.style.display = 'block';
+                    toast.success(result.message);
                     passwordForm.reset();
-
-                    setTimeout(() => {
-                        successMessage.style.display = 'none';
-                    }, 3000);
                 } else {
-                    errorMessage.textContent = result.message;
-                    errorMessage.style.display = 'block';
+                    toast.error(result.message);
                 }
             });
 
             // Logout
+            // Logout
             document.getElementById('logoutBtn').addEventListener('click', function () {
-                if (confirm('Ви впевнені, що хочете вийти?')) {
-                    authSystem.logout();
-                    window.location.href = 'index.html';
-                }
+                authSystem.logout();
+                window.location.href = 'index.html';
+            });
+
+            // Logout and Clear localStorage
+            // Logout and Clear localStorage
+            document.getElementById('logoutClearBtn').addEventListener('click', function () {
+                localStorage.clear();
+                window.location.href = 'index.html';
             });
 
             // Render Favorites
@@ -394,10 +374,10 @@
                         favBtn.addEventListener('click', function (e) {
                             e.preventDefault();
                             e.stopPropagation();
-                            const res = authSystem.toggleFavorite(book.id);
-                            if (res.success) {
-                                renderFavorites();
-                            }
+                            // Use global function which includes toast notifications
+                            window.toggleFavorite(book.id);
+                            // Re-render to remove the item from the list
+                            renderFavorites();
                         });
 
                         const cartBtn = bookCard.querySelector('.add-to-cart-btn');
@@ -405,22 +385,17 @@
                             e.preventDefault();
                             e.stopPropagation();
 
-                            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                            const bookData = {
-                                image: book.image,
-                                price: `${book.price} грн`,
-                                title: book.title,
-                                author: book.author,
-                                description: book.description
-                            };
-                            cart.push(bookData);
-                            localStorage.setItem('cart', JSON.stringify(cart));
-                            alert(`Книгу "${book.title}" додано до кошика!`);
-
-                            const countEl = document.getElementById('cartCount');
-                            const mobileCountEl = document.getElementById('mobileCartCount');
-                            if (countEl) countEl.textContent = cart.length;
-                            if (mobileCountEl) mobileCountEl.textContent = `(${cart.length})`;
+                            if (typeof window.addToCart === 'function') {
+                                window.addToCart({
+                                    id: book.id, // Ensure ID is passed if needed for removal later
+                                    title: book.title,
+                                    price: `${book.price} грн`,
+                                    image: book.image
+                                });
+                            } else {
+                                console.error('addToCart function not found');
+                                toast.error('Помилка додавання до кошика');
+                            }
                         });
 
                         favoritesGrid.appendChild(bookCard);
